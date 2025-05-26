@@ -98,3 +98,76 @@ ion-button {
     }
   }
 }
+ion-menu {
+  --width: 260px;
+
+  ion-toolbar {
+    // Explicit toolbar background
+    --background: #1d4370 !important;
+    background: #1d4370 !important;
+    color: #ffffff !important;
+    background-color: #1d4370;
+
+    ion-title {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  ion-content {
+    --background: #ffffff !important;
+    background-color: #ffffff !important;
+
+    ion-list {
+      ion-item {
+        --background: #ffffff !important;
+        --color: #1d4370 !important;
+        font-size: 15px;
+        font-weight: 500;
+        border-radius: 8px;
+        margin: 0 10px;
+
+        ion-icon {
+          color: #1d4370 !important;
+          font-size: 20px;
+        }
+
+        &:hover {
+          background-color: rgba(13, 44, 84, 0.1);
+        }
+
+        &.item-selected {
+          background-color: rgba(13, 44, 84, 0.15);
+        }
+      }
+    }
+  }
+}
+
+// ✅ Dark Mode Overrides
+@media (prefers-color-scheme: dark) {
+  ion-menu {
+    ion-toolbar {
+      --background: #1d4370 !important;
+      background: #1d4370 !important;
+      color: #ffffff !important;
+    }
+
+    ion-content {
+      --background: #ffffff !important;
+      background-color: #ffffff !important;
+
+      ion-list {
+        ion-item {
+          --background: #ffffff !important;
+          --color: #1d4370 !important;
+
+          ion-icon {
+            color: #1d4370 !important;
+          }
+        }
+      }
+    }
+  }
+}

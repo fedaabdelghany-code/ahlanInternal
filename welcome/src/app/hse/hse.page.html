@@ -1,13 +1,93 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>hse</ion-title>
+<ion-header [translucent]="false">
+  <ion-toolbar class="toolbar-custom">
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="custom-title">Sokhna Plant Companion</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">hse</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+
+<ion-content class="dashboard-content">
+
+<div class="greeting-hero">
+  <img 
+    *ngFor="let image of images; let i = index" 
+    [src]="image.src" 
+    [alt]="image.alt" 
+    class="pyramids-image" 
+    [ngClass]="{ 'active': i === currentImageIndex }"
+  />
+  <div class="image-darken-layer"></div>
+  <div class="greeting-overlay">
+    <h2>{{ images[currentImageIndex].title }}</h2>
+  </div>
+</div>
+
+<br>
+  <!-- Highlights Section -->
+  <section class="plant-highlights-section">
+    <h2 class="section-title">HSE Highlights</h2>
+  <div class="scroll-wrapper">
+    <div class="horizontal-scroll">
+      <ion-card 
+        class="didyou-card" 
+        *ngFor="let fact of didYouKnowFacts; let i = index"
+        [class.expanded]="expandedDidYouIndex === i"
+        (click)="toggleDidYouCard(i)"
+      >
+        <ion-card-content>
+          <ion-icon [name]="fact.icon" size="large"></ion-icon>
+          <p class="dyk-title">{{ fact.title }}</p>
+
+          <ion-icon 
+            [name]="expandedDidYouIndex === i ? 'chevron-up-outline' : 'chevron-down-outline'" 
+            class="expand-icon">
+          </ion-icon>
+
+          <!-- Expanded content -->
+          <div class="expanded-content" *ngIf="expandedDidYouIndex === i">
+            <hr />
+            <div class="subpoint" *ngFor="let sub of fact.texts">
+              {{ sub }}
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  
+
+<!-- "Did You Know?" Section -->
+<section class="did-you-know-section">
+  <h2 class="section-title">Did You Know?</h2>
+<!-- 
+  <div class="scroll-wrapper">
+    <div class="horizontal-scroll">
+      <ion-card 
+        class="didyou-card" 
+        *ngFor="let fact of didYouKnowFacts; let i = index"
+        [class.expanded]="expandedDidYouIndex === i"
+        (click)="toggleDidYouCard(i)"
+      >
+        <ion-card-content>
+          <ion-icon [name]="fact.icon" size="large"></ion-icon>
+          <p class="dyk-title">{{ fact.title }}</p>
+
+          <ion-icon 
+            [name]="expandedDidYouIndex === i ? 'chevron-up-outline' : 'chevron-down-outline'" 
+            class="expand-icon">
+          </ion-icon>
+
+          <div class="expanded-content" *ngIf="expandedDidYouIndex === i">
+            <hr />
+            <div class="subpoint" *ngFor="let sub of fact.texts">
+              {{ sub }}
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div> -->
+</section>
+

@@ -148,32 +148,6 @@
                 </div>
               </div>
 
-<ion-accordion-group>
-  <ion-accordion value="ownerInfo">
-    <ion-item
-      slot="header"
-      class="owner-header compact-header"
-      style="--background: #ffffff; --ion-item-background: #ffffff; --color: #1d4370;"
-    >
-      <ion-icon name="person-circle" slot="start" size="small" style="color:#94c12e"></ion-icon>
-      <ion-label>Owner Information</ion-label>
-    </ion-item>
-    <div
-      class="owner-info compact-info"
-      slot="content"
-      style="background-color: #ffffff; color: #1d4370;"
-    >
-      <ion-avatar>
-        <img [src]="item.owner.image" />
-      </ion-avatar>
-      <div class="owner-details">
-        <p class="owner-name">{{ item.owner.name }}</p>
-        <p class="owner-contact">Email: {{ item.owner.email }}</p>
-        <p class="owner-contact">Mobile: {{ item.owner.mobile }}</p>
-      </div>
-    </div>
-  </ion-accordion>
-</ion-accordion-group>
             </div>
           </ng-container>
         </ng-container>

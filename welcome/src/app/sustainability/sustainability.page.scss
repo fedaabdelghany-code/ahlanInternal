@@ -1,0 +1,215 @@
+.highlight-box {
+  min-width: 220px;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  max-height: 170px;
+}
+.highlight-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 0.5rem;
+  filter: brightness(0) saturate(100%) invert(25%) sepia(42%) saturate(1030%) hue-rotate(172deg) brightness(95%) contrast(95%);
+}
+
+.greeting-hero {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+
+  .pyramids-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+
+  .pyramids-image.active {
+    opacity: 1;
+  }
+
+  .image-darken-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 1;
+  }
+
+  .greeting-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 600;
+  z-index: 2;
+  text-align: center;
+  }
+}
+
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem; // space between cards
+  margin-top: 1rem;
+}
+
+.project-card {
+  width: 300px;               // Make width same as pdf-card max-width
+  max-width: 300px;
+  border-radius: 15px;
+  overflow: hidden; 
+  background:  #f5faff;
+  flex-shrink: 0; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  ion-card-content {
+    text-align: center;       // Center align all text inside project card
+  }
+
+  h4 {
+    font-size: 1rem;       // Slightly bigger title
+    font-weight: 700;        // Bold
+    margin-bottom: 0.5rem;
+    color: #1d4370;
+    font-family: 'Playfair Display', serif;
+  }
+
+p {
+  margin: 0;
+  text-align: center; /* instead of justify */
+  font-size: 1rem;
+  line-height: 1.6; /* increase line height for softness */
+  color: #c0973c;
+  hyphens: none; /* helps break long words */
+}
+
+
+}
+
+.project-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  margin: 0;
+  border-radius: 16px;
+  /* remove border-radius here to avoid double rounding */
+}
+
+ion-button {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+.holcim-gradient-line {
+  border: 0;
+  height: 4px; /* thickness of the line */
+  margin: 1rem 0; /* spacing above and below */
+
+  /* Holcim gradient colors example */
+  background: linear-gradient(to right, #00a9e0, #94c12e);
+  border-radius: 2px;
+}
+
+.projects-powered-section {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+.section-title {
+  font-family: 'Playfair Display', serif; // Elegant serif for heritage feel
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1d4370; // Primary deep blue
+  text-align: center;
+  line-height: 1.3;
+  margin: 0.7rem 0.7rem 0.7rem;
+  position: relative;
+  transition: all 0.6s ease-in-out;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #c0973c, #f2d16b); // Gold accent
+    margin: 1rem auto 0;
+    border-radius: 2px;
+  }
+}
+
+.subtitle-line {
+  display: inline-block;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: #c0973c; // Gold for "Egypt's Fabric"
+  margin-top: 0.3rem;
+  font-family: 'Playfair Display', serif; // Elegant serif for heritage feel
+}
+}
+.expanded-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scaleY(0.9); }
+  to { opacity: 1; transform: scaleY(1); }
+}
+
+.didyou-card.expanded {
+  max-height: 900px; /* taller only when expanded */
+}
+
+.didyou-card {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  max-height: 170px;
+
+  .dyk-title {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .expand-icon {
+    float: right;
+    margin-top: 0.4rem;
+    font-size: 1.2rem;
+  }
+
+  .expanded-content {
+    margin-top: 0.3rem;
+    transition: max-height 0.3s ease;
+    overflow-y: auto;
+
+  }
+
+  .subpoint {
+    background: #ffffff;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    color: #1d4370;
+  }
+}
+.did-you-know-section .dyk-img {
+  max-height: 40px !important;
+  height: 40px !important;
+  width: auto !important;
+  margin-bottom: 1em;
+  object-fit: contain;
+  padding-left: 12px;
+}
