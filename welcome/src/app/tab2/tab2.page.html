@@ -1,0 +1,193 @@
+< <ion-header [translucent]="false">
+  <ion-toolbar class="toolbar-custom">
+    <ion-buttons slot="start">
+      <img src="assets/logoFinal-192.png" alt="Holcim Logo" class="logo-img" />
+    </ion-buttons>
+    <ion-title class="custom-title">Sokhna Plant Companion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="dashboard-content">
+
+<div class="greeting-hero">
+  <img 
+    *ngFor="let image of images; let i = index" 
+    [src]="image.src" 
+    [alt]="image.alt" 
+    class="pyramids-image" 
+    [ngClass]="{ 'active': i === currentImageIndex }"
+  />
+  <div class="image-darken-layer"></div>
+  <div class="greeting-overlay">
+    <h2>{{ images[currentImageIndex].title }}</h2>
+  </div>
+</div>
+
+<br>
+  <!-- Highlights Section -->
+  <section class="plant-highlights-section">
+    <h2 class="section-title">Plant Highlights</h2>
+    <div class="scroll-wrapper">
+      <div class="horizontal-scroll">
+        <ion-card class="highlight-box">
+          <ion-card-content>
+            <ion-icon name="shield-checkmark-outline" size="large"></ion-icon>
+            <h4>World-Class Safety</h4>
+            <p>Zero-LTI focus & proactive training.</p>
+          </ion-card-content>
+        </ion-card>
+        <ion-card class="highlight-box">
+          <ion-card-content>
+            <ion-icon name="flame-outline" size="large"></ion-icon>
+            <h4>Alt-Fuel Pioneer</h4>
+            <p>RDF, biomass & used tires for clean energy.</p>
+          </ion-card-content>
+        </ion-card>
+<ion-card 
+  class="didyou-card" 
+  [class.expanded]="smartOpsCard.expanded" 
+  (click)="toggleSmartOpsCard()"
+>
+  <ion-card-content>
+    <ion-icon [name]="smartOpsCard.icon" size="large"></ion-icon>
+    <p class="dyk-title">{{ smartOpsCard.title }}</p>
+
+    <ion-icon 
+      [name]="smartOpsCard.expanded ? 'chevron-up-outline' : 'chevron-down-outline'" 
+      class="expand-icon">
+    </ion-icon>
+
+    <div class="expanded-content" *ngIf="smartOpsCard.expanded">
+      <hr />
+      <div class="subpoint" *ngFor="let line of smartOpsCard.texts">
+        {{ line }}
+      </div>
+    </div>
+  </ion-card-content>
+</ion-card>
+        <ion-card class="highlight-box">
+          <ion-card-content>
+            <ion-icon name="medal-outline" size="large"></ion-icon>
+            <h4>Regional Leader</h4>
+            <p>Award-winning performance & sustainability.</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+
+<!-- "Did You Know?" Section -->
+<section class="did-you-know-section">
+  <h2 class="section-title">Did You Know?</h2>
+
+  <div class="scroll-wrapper">
+    <div class="horizontal-scroll">
+      <ion-card 
+        class="didyou-card" 
+        *ngFor="let fact of didYouKnowFacts; let i = index"
+        [class.expanded]="expandedDidYouIndex === i"
+        (click)="toggleDidYouCard(i)"
+      >
+        <ion-card-content>
+          <ion-icon [name]="fact.icon" size="large"></ion-icon>
+          <p class="dyk-title">{{ fact.title }}</p>
+
+          <ion-icon 
+            [name]="expandedDidYouIndex === i ? 'chevron-up-outline' : 'chevron-down-outline'" 
+            class="expand-icon">
+          </ion-icon>
+
+          <!-- Expanded content -->
+          <div class="expanded-content" *ngIf="expandedDidYouIndex === i">
+            <hr />
+            <div class="subpoint" *ngFor="let sub of fact.texts">
+              {{ sub }}
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</section>
+
+
+      <hr class="holcim-gradient-line" />
+
+
+    <!-- Projects Powered by Sokhna Section -->
+<section class="projects-powered-section">
+<h2 class="section-title">
+  Weaving Progress<br />
+  <span class="subtitle-line">into <br /> Egypt's Fabric</span>
+</h2>
+  
+  <div class="cards-container">
+    <ion-card class="project-card funky-card">
+      <ion-card-content>
+        <img src="assets/grand.webp" alt="Grand Egyptian Museum" class="project-img" />
+        <h4>Grand Egyptian Museum</h4>
+        <p>Set to open in July 2025, the world’s largest museum dedicated to a single civilization showcases Egypt’s legacy in iconic form. Lafarge supplied over 320,000 m³ of ultra-durable concrete, including white concrete, to ensure both beauty and longevity.</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="project-card funky-card">
+      <ion-card-content>
+        <img src="assets/iconic.jpg" alt="Monorail" class="project-img" />
+        <h4>Iconic Tower</h4>
+        <p>As Africa's tallest skyscraper, the Iconic Tower utilized Lafarge's Hydrocem Plus cement, known for its low heat of hydration and extended durability, ensuring structural integrity during its massive foundation pour</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="project-card funky-card">
+      <ion-card-content>
+        <img src="assets/metro.jpg" alt="New Alamein" class="project-img" />
+        <h4>Metro Line 3</h4>
+        <p>Enhancing Cairo's transportation, Lafarge contributed over 900,000 m³ of concrete to Metro Line 3, facilitating daily commutes for millions.  </p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</section>
+
+  <hr class="holcim-gradient-line" />
+
+<!-- Plant Map Section -->
+<div *ngIf="showMap" class="map-section-outer">
+  <div class="map-wrapper">
+
+<!-- Lafarge Operational Map Card -->
+<ion-card class="map-card" *ngIf="showMap">
+  <ion-card-header>
+          <h4 style="color: #1d4370;font-weight: 700;">Lafarge's Operational Map</h4>
+
+    <p>Explore Lafarge Egypt's operational map, highlighting the Sokhna cement plant, ReadyMix batch plants, and key completed projects nationwide.</p>
+  </ion-card-header>
+
+<iframe src="https://www.google.com/maps/d/embed?mid=1MXZFOJe1RG9W_WVeQbwhVFYb1_cT074&ehbc=2E312F&noprof=1&hl=en" width="640" height="480"></iframe>
+</ion-card>
+    
+  </div>
+  <!-- <hr class="holcim-gradient-line" />
+
+
+<ion-card class="highlight-box pdf-card">
+  <ion-card-content class="pdf-card-content">
+    <div class="pdf-icon-column">
+      <img src="assets/safety.png" class="highlight-icon" alt="Safety Icon" />
+    </div>
+    <div class="pdf-text-column">
+      <h4>Health, Safety & Environment</h4>
+      <p>View or download the official plant HSE brochure.</p>
+      <ion-button
+        size="small"
+        fill="outline"
+        href="https://drive.google.com/file/d/1xGfuyltummjKJLHFfoeSJ5cpS8DF7FOW/view?usp=sharing"
+        target="_blank"
+      >
+        View PDF
+      </ion-button>
+    </div>
+  </ion-card-content> -->
+
+
+
+</div>
+-->

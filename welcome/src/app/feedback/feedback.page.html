@@ -1,0 +1,206 @@
+<ion-header translucent>
+  <ion-toolbar color="primary">
+  </ion-toolbar>
+</ion-header>
+<!-- 
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Thank You!</ion-card-title>
+      <ion-card-subtitle>You’re part of our first run 🎉</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        We built this app in-house to make your trip smoother and more enjoyable.
+        Now we’d love to hear your thoughts — what worked, what didn’t, and what could be better.
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Overall Experience</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>How would you rate your overall experience using the <strong>Ahlan Lafarge Egypt</strong> app?</p>
+      <ion-segment value="5">
+        <ion-segment-button value="1"><ion-label>⭐</ion-label></ion-segment-button>
+        <ion-segment-button value="2"><ion-label>⭐⭐</ion-label></ion-segment-button>
+        <ion-segment-button value="3"><ion-label>⭐⭐⭐</ion-label></ion-segment-button>
+        <ion-segment-button value="4"><ion-label>⭐⭐⭐⭐</ion-label></ion-segment-button>
+        <ion-segment-button value="5"><ion-label>⭐⭐⭐⭐⭐</ion-label></ion-segment-button>
+      </ion-segment>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ease of Use</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-radio-group>
+        <ion-item><ion-radio slot="start" value="very_easy"></ion-radio><ion-label>Very easy</ion-label></ion-item>
+        <ion-item><ion-radio slot="start" value="somewhat_easy"></ion-radio><ion-label>Somewhat easy</ion-label></ion-item>
+        <ion-item><ion-radio slot="start" value="neutral"></ion-radio><ion-label>Neutral</ion-label></ion-item>
+        <ion-item><ion-radio slot="start" value="somewhat_difficult"></ion-radio><ion-label>Somewhat difficult</ion-label></ion-item>
+        <ion-item><ion-radio slot="start" value="very_difficult"></ion-radio><ion-label>Very difficult</ion-label></ion-item>
+      </ion-radio-group>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Technical Issues</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-radio-group>
+        <ion-item><ion-radio slot="start" value="yes"></ion-radio><ion-label>Yes</ion-label></ion-item>
+        <ion-item><ion-radio slot="start" value="no"></ion-radio><ion-label>No</ion-label></ion-item>
+      </ion-radio-group>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>More Feedback</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-textarea
+        placeholder="Tell us what you liked, what could be improved, or anything else!"
+        auto-grow="true"
+      ></ion-textarea>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" color="success" class="ion-margin-top">
+    Submit Feedback
+  </ion-button>
+</ion-content>
+ -->
+<ion-content [fullscreen]="true" class="dashboard-content">
+  <div class="content-wrapper">
+
+    <!-- Intro Card -->
+    <div class="intro-card">
+      <div class="intro-title">Egypt's Industrial Best Practices</div>
+      <div class="intro-description">
+        A showcase of innovative solutions from Egypt's Sokhna Plant — enhancing efficiency, safety, and sustainability through smart engineering and localized execution.
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <ion-searchbar
+      [(ngModel)]="searchQuery"
+      placeholder="Search Best Practices"
+      debounce="300"
+      show-clear-button="always">
+    </ion-searchbar>
+
+    <!-- Check if there are any matches -->
+    <ng-container *ngIf="hasMatches(); else noResults">
+
+      <!-- Grouped Cards by Department -->
+      <div *ngFor="let department of departmentKeys">
+        <ng-container *ngIf="groupedData[department] | filterByName: searchQuery as filteredItems">
+          <ng-container *ngIf="filteredItems.length > 0">
+            <h2 class="department-header">{{ department }}</h2>
+
+            <div class="bp-card" *ngFor="let item of filteredItems">
+              <!-- Card Contents -->
+              <div class="bp-header">
+                <!-- <div class="bp-meta-left">{{ item.department }}</div> -->
+                <div class="bp-title">{{ item.bp_name }}</div>
+                <!-- <div class="bp-meta-right">Created: {{ item.creation_date }}</div> -->
+              </div>
+
+<div class="image-gallery" [ngClass]="{ 'single-image': item.images.length === 1 }">
+  <ion-img *ngFor="let img of item.images" [src]="img" (click)="enlargeImage(img)"></ion-img>
+</div>
+
+              <div class="description" style="font-size: 0.85rem">
+                <h3>Description</h3>
+                <p style="color: rgb(80, 80, 80);">{{ item.description }}</p>
+              </div>
+
+              <div class="steps">
+                <h3>Solution Steps</h3>
+                <div class="steps-scroll">
+                  <ion-chip style="background-color: #f5faff;" *ngFor="let step of item.solution_steps " >
+                    <ion-label style="color: rgb(80, 80, 80);" >{{ step }}</ion-label>
+                  </ion-chip>
+                </div>
+              </div>
+
+              <div class="kpi-section">
+                <h3>KPI Impact</h3>
+                <div class="kpi-grid">
+                  <div class="kpi-card">
+                    <ion-label>{{ item.kpi_impacted }}</ion-label>
+                    <h2>{{ item.impact_value ?? 'N/A' }} ({{ item.kpi_units }})</h2>
+                  </div>
+                </div>
+              </div>
+
+<ion-accordion-group>
+  <ion-accordion value="ownerInfo">
+    <ion-item
+      slot="header"
+      class="owner-header compact-header"
+      style="--background: #ffffff; --ion-item-background: #ffffff; --color: #1d4370;"
+    >
+      <ion-icon name="person-circle" slot="start" size="small" style="color:#94c12e"></ion-icon>
+      <ion-label>Owner Information</ion-label>
+    </ion-item>
+    <div
+      class="owner-info compact-info"
+      slot="content"
+      style="background-color: #ffffff; color: #1d4370;"
+    >
+      <ion-avatar>
+        <img [src]="item.owner.image" />
+      </ion-avatar>
+      <div class="owner-details">
+        <p class="owner-name">{{ item.owner.name }}</p>
+        <p class="owner-contact">Email: {{ item.owner.email }}</p>
+        <p class="owner-contact">Mobile: {{ item.owner.mobile }}</p>
+      </div>
+    </div>
+  </ion-accordion>
+</ion-accordion-group>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </ng-container>
+
+<!-- No Results Template -->
+<ng-template #noResults>
+  <div class="no-results">
+    <img src="assets/no-results.png" alt="No Results" />
+    <h3>No matches found</h3>
+    <p>Try a different search term to discover more best practices.</p>
+  </div>
+</ng-template>
+
+<!-- ✅ Correctly placed image-only cards -->
+<!-- Image-Only Cards Section (Full-Width, Vertically Stacked) -->
+<div class="image-cards-section full-width-stack">
+  <h2 class="department-header">Personal</h2>
+  <div class="stacked-image-card" *ngFor="let img of imageOnlyCards">
+    <ion-img [src]="img" (click)="enlargeImage(img)"></ion-img>
+  </div>
+</div>
+
+<!-- Fullscreen Image Modal -->
+<ion-modal [isOpen]="showModal" (didDismiss)="showModal = false">
+  <ng-template>
+    <ion-content fullscreen>
+      <ion-button fill="clear" color="dark" (click)="closeModal()" class="close-btn" shape="round">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
+      </ion-button>
+      <div class="modal-img-wrapper">
+        <img [src]="selectedImage" class="modal-image" />
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>

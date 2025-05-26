@@ -1,0 +1,165 @@
+.intro-card {
+  background: linear-gradient(135deg, #00a9e0, #94c12e); /* Holcim gradient */
+  color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 24px;
+  font-family: sans-serif;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.intro-card:hover {
+  transform: scale(1.01);
+}
+
+.intro-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.intro-description {
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.4;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.map-card ion-card-header {
+  display: flex;
+  flex-direction: column; /* Force correct order */
+  gap: 6px;
+  padding: 12px 16px;
+  background-color: #ffffff;
+}
+
+.map-card ion-card-header h4 {
+  order: 1;
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 500;
+
+}
+
+.map-card ion-card-header p {
+  order: 2;
+  margin: 0;
+  font-size: 0.95rem;
+  color:#000000
+}
+
+
+.map-card ion-card-content {
+  padding: 0 !important; /* ✅ Removes inner spacing for the map */
+}
+
+.map-wrapper {
+  width: 100%;
+  height: 100%;
+    background-color: #ffffff;
+
+}
+
+.map-wrapper iframe {
+  display: flex;
+  width: 100%;
+  height: 380px;
+  border: none;
+  border-radius: 0; /* ✅ Full edge-to-edge inside the card */
+    background-color: #ffffff ;
+
+}
+
+.day-header h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 20px;
+  color: #1e3a8a;
+}
+
+.schedule-date {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.itinerary-section {
+  padding: 16px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #222;
+}
+
+.itinerary-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.itinerary-card {
+  border-left: 4px solid #04bbf1;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  max-height: 120px;
+}
+
+
+.day-header-card {
+  background: #04bbf1; /* Holcim Blue Variant */
+  border-radius: 16px;
+  margin: 16px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-family: sans-serif;
+  text-transform: uppercase;
+  --ion-text-color: #fff; /* Ensure Ionic uses white text */
+}
+
+.day-header-card ion-card-header {
+  padding: 16px;
+}
+
+.day-header-card ion-card-title,
+.day-header-card ion-card-subtitle {
+  color: #fff !important; /* Force override if necessary */
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+.itinerary-card ion-card-title {
+  color: #000000 !important; /* Force override if necessary */
+    font-size: 0.9rem;
+
+}
+
+
+.footer-text {
+  text-align: center;
+  font-size: 10px;
+  color: #6c757d;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-text .heart {
+  margin-left: 4px;
+  font-size: 8px;
+}
+.holcim-gradient-line {
+  border: 0;
+  height: 4px; /* thickness of the line */
+  margin: 1rem 0; /* spacing above and below */
+
+  /* Holcim gradient colors example */
+  background: linear-gradient(to right, #00a9e0, #94c12e);
+  border-radius: 2px;
+}
+
+

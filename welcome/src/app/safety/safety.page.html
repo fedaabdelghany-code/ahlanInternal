@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar-custom">
+
+    <!-- Logo on the left -->
+    <ion-buttons slot="start">
+      <img src="assets/logoFinal-192.png" alt="Holcim Logo" class="logo-img" />
+    </ion-buttons>
+
+    <!-- Title centered -->
+    <ion-title class="custom-title">
+      Sokhna Companion
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Welcome to Egypt 🇪🇬</ion-card-title>
+      <ion-card-subtitle>Please complete this safety induction</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>Your safety is our top priority during your visit to the Sokhna Plant. Please read the following:</p>
+
+      <ion-list>
+        <ion-item>
+          <ion-icon name="shield-checkmark-outline" slot="start"></ion-icon>
+          <ion-label>Always wear PPE when on site</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="walk-outline" slot="start"></ion-icon>
+          <ion-label>Stay within designated visitor paths</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+          <ion-label>Report any unsafe behavior or accidents</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="call-outline" slot="start"></ion-icon>
+          <ion-label>Emergency contact: +20 100 123 4567</ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-item lines="none">
+        <ion-checkbox slot="start" [(ngModel)]="acknowledged"></ion-checkbox>
+        <ion-label>I have read and understood the safety guidelines.</ion-label>
+      </ion-item>
+
+      <ion-button expand="block" shape="round" color="holcim-blue" class="custom-button" [disabled]="!acknowledged" (click)="completeSafety()">
+        Continue to App
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

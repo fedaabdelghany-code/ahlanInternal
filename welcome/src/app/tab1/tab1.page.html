@@ -1,0 +1,122 @@
+<ion-header [translucent]="false">
+  <ion-toolbar class="toolbar-custom">
+    <ion-buttons slot="start">
+      <img src="assets/logoFinal-192.png" alt="Holcim Logo" class="logo-img" />
+    </ion-buttons>
+    <ion-title class="custom-title">Sokhna Plant Companion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="dashboard-content">
+
+<!-- Hero Section -->
+<div class="greeting-hero">
+  <img 
+    *ngFor="let image of images; let i = index" 
+    [src]="image.src" 
+    [alt]="image.alt" 
+    class="pyramids-image" 
+    [ngClass]="{ 'active': i === currentImageIndex }"
+  />
+  <div class="image-darken-layer"></div>
+  <div class="greeting-overlay">
+<h2>{{ getGreetingByCountry(country) }}, {{firstName}}!</h2>
+  </div>
+
+
+</div>
+  <!-- Row for Weather and Currency Cards -->
+  <div class="card-row">
+    <ion-card class="weather-card">
+      <ion-card-content class="weather-content">
+        <img [src]="iconUrl" alt="{{ condition }}" class="weather-icon" />
+        <p class="weather-temp">{{ temperature }}°C</p>
+        <p class="weather-info">{{ condition }} in {{ city }}</p>
+      </ion-card-content>
+    </ion-card>
+
+   <ion-card class="highlight-card local-card local-card-currency">
+      <ion-card-content class="highlight-content">
+        <!--  <div class="currency-display">
+          <p class="currency-label top">1 CHF</p>
+          <p class="currency-value">{{ exchangeRates['CHF'] | number:'1.2-2' }}</p>
+          <p class="currency-label bottom">EGP</p>
+        </div>-->
+<a href="https://drive.google.com/drive/folders/1fbrq-zquH-Mdx_EBD30zP8aYMi31dSi7?usp=sharing" target="_blank" style="text-decoration: none;">
+    <ion-card-content class="highlight-content">
+      <img src="assets/photos.png" alt="Album Cover" style="width: 50%; max-width: 100px; margin: 0 auto; display: block;" />
+    </ion-card-content>
+                  <h3 style="color:#0074a6; margin-top: -10px;" >Photos</h3>
+
+</a>
+
+      </ion-card-content>
+      
+    </ion-card> 
+
+    
+  </div>
+
+<div class="app-intro">
+  <img src="assets/guy.png" alt="Excited Sticker" class="sticker-img" />
+  <div class="speech-bubble">
+    <h5 class="intro-title" style="color: #1d4370">Ahlan!</h5>
+    <p>
+In Arabic, “Ahlan” means “welcome,” and “Ahlan wa sahlan” adds, “may your arrival be easy.” Like the greeting, this app is here to make your visit easy — with quick access to your schedule, local info, and more.
+    </p>
+  </div>
+</div>
+
+      <hr class="holcim-gradient-line" />
+
+<!-- <ion-button *ngIf="showEnableButton" (click)="enableNotifications()">
+  Enable Notifications
+</ion-button>
+ -->
+
+<!-- Schedule Header -->
+<div class="schedule-header" >
+  <h4>Today's Schedule</h4>
+<div style="height: 5px;"></div>
+  <p class="schedule-date">
+    {{ selectedDate | date: 'fullDate' }}
+  <!-- </p>
+    <p class="schedule-date">
+    Kefren Conference Room, 5th Floor
+  </p> -->
+
+</div>
+
+<!-- Schedule Cards --> 
+<div class="schedule-section" *ngIf="scheduleData[selectedDate]?.length; else noEvents">
+  <ion-card
+    *ngFor="let item of scheduleData[selectedDate]; let i = index"
+    [class]="['highlight-card', item.color, expandedIndex === i ? 'expanded' : ''].join(' ')"
+    (click)="toggleCard(i)"
+  >
+    <ion-card-content>
+      <h3>{{ item.title }}</h3>
+      <p>
+        <ion-icon name="time-outline"></ion-icon>
+        {{ item.time }} 
+      </p>
+        <!-- <ion-icon 
+          [name]="expandedIndex === i ? 'chevron-up-outline' : 'chevron-down-outline'" 
+          class="expand-icon">
+        </ion-icon> -->
+      <!-- <div class="expanded-content" *ngIf="expandedIndex === i">
+        <hr>
+        <p>{{ item.description || 'No details available.' }}</p>
+      </div> -->
+    </ion-card-content>
+  </ion-card>
+</div>
+
+
+<ng-template #noEvents>
+  <div class="no-events-container">
+    <img src="assets/explore.png" alt="Holcim Logo" class="explore-img" />
+<p class="no-events-text">All clear today — thank you for dropping by!</p>
+  </div>
+</ng-template>
+

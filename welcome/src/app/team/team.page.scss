@@ -1,0 +1,93 @@
+
+
+.team-intro {
+  background: linear-gradient(135deg, #00a9e0, #94c12e); /* Holcim gradient */
+  color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 24px;
+  font-family: sans-serif;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+
+.team-intro:hover {
+  transform: scale(1.01);
+}
+
+.team-intro h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.team-intro p {
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.4;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+
+/* TEAM SECTION */
+.team-section {
+  margin-bottom: 32px;
+}
+
+.team-group-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #00a9e0;
+  margin-left: 12px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  font-family: sans-serif;
+}
+
+.team-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* TEAM CARDS */
+.team-card {
+  background: #f5faff;
+  border-radius: 16px;
+  width: 160px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+}
+
+.team-card ion-card-content {
+  padding: 16px;
+}
+
+.profile-icon {
+  font-size: 48px;
+  color: #94c12e;
+  margin-bottom: 8px;
+  border-radius: 15px; 
+}
+
+.team-card h4 {
+  margin: 8px 0 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0074a6;
+}
+
+.team-card p {
+  font-size: 0.9rem;
+  color: #333;
+  margin: 0;
+}

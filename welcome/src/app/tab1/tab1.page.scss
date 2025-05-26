@@ -1,0 +1,315 @@
+/* Hero Section */
+.greeting-hero {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  border-radius: 0 0 16px 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.pyramids-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-darken-layer {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.greeting-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 600;
+  z-index: 2;
+  text-align: center;
+}
+
+.schedule-header {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+.schedule-header h4 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #1d4370;
+}
+
+.schedule-date {
+  font-size: 0.95rem;
+  color: #888;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.schedule-date + .schedule-date {
+  margin-top: 5px;
+  margin-bottom: auto;
+}
+
+/* Highlight + Schedule Cards */
+.highlight-card {
+  margin: 12px 16px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.highlight-card:hover {
+  transform: scale(1.01);
+}
+
+.gradient-blue-green {
+  background: linear-gradient(to right, #00a9e0, #94c12e);
+}
+
+.schedule-blue {
+  background: #00a9e0;
+}
+
+.schedule-green {
+  background: #94c12e;
+}
+
+.schedule-darkBlue {
+  background: #1d4370;
+}
+
+.highlight-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.highlight-content {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+/* Container & Card Base */
+.card-row {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 0 16px;
+
+  ion-card {
+    flex: 1 1 45%;
+    max-width: 45%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin: 12px 0;
+
+    /* unified light background for both cards */
+    --background: #f5faff;
+    background: #f5faff;
+  }
+}
+
+/* 3‑row flex layout for both cards */
+.weather-content,
+.highlight-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* top / middle / bottom */
+  align-items: center;
+  height: 100%;
+  padding: 12px 0;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Make the currency inner wrapper match the same 3‑row fill */
+.highlight-content .currency-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+/* TOP ROW: icon or “1 USD” */
+
+.currency-label.top {
+  font-size: 0.9rem;
+  line-height: 1;
+  margin: 0;
+  color: #0074a6;
+}
+.weather-icon {
+  width: 2rem;
+  height: 2rem;
+  margin: -7px;
+  object-fit: contain;
+}
+
+/* MIDDLE ROW: big, bold value */
+
+.currency-value {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin: 0;
+  color: #94c12e;
+  line-height: 1.1;
+}
+
+.weather-temp {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin: -8px 0 0; // pulls it up slightly
+  color: #94c12e;
+  line-height: 1.1;
+}
+
+
+/* BOTTOM ROW: small descriptor */
+.currency-label.bottom {
+  font-size: 0.9rem;
+  margin: 0;
+  color: #0074a6;
+  line-height: 1;
+}
+
+.weather-info {
+    font-size: 0.9rem;
+  margin: -10px 0 0 ;
+  color: #0074a6;
+  line-height: 1.4;
+
+}
+
+.greeting-hero {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+
+  .pyramids-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+
+  .pyramids-image.active {
+    opacity: 1;
+  }
+
+  .image-darken-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 1;
+  }
+
+  .greeting-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 600 !important;
+  z-index: 2;
+  text-align: center;
+  }
+}
+
+.highlight-card {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+
+  &.expanded {
+    transform: scale(1.01);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  ion-card-content {
+    transition: padding 0.3s ease-in-out;
+  }
+
+  .expanded-content {
+    margin-top: 0px;
+    animation: fadeIn 0.3s ease-in-out;
+  text-align: center;
+
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.app-intro {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 1rem 16px;
+}
+
+.sticker-img {
+  width: 80px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+/* Speech bubble style */
+.speech-bubble {
+  position: relative;
+  background: #f5faff;
+  border-radius: 16px;
+  padding-left: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  max-width: 400px;
+  color: #222;
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+/* The "tail" of the speech bubble on the left */
+.speech-bubble::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: -20px;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-right-color: #f0f4f8;
+}
+
+.holcim-gradient-line {
+  border: 0;
+  height: 4px; /* thickness of the line */
+  margin: 1rem 0; /* spacing above and below */
+
+  /* Holcim gradient colors example */
+  background: linear-gradient(to right, #00a9e0, #94c12e);
+  border-radius: 2px;
+}

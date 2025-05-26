@@ -1,0 +1,15 @@
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+/* Force light mode variables */
+:root {
+  --ion-background-color: #ffffff;
+  /* Add more if needed */
+}
+
+/* Optional: completely override dark mode styles */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-background-color: #ffffff !important;
+    /* Add other vars you want to lock */
+  }
+}

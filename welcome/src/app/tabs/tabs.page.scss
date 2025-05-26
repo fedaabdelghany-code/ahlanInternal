@@ -1,0 +1,32 @@
+.multi-tab-overlay {
+  position: fixed;
+  bottom: 70px; // avoid overlapping tab bar
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  pointer-events: none; // by default, no interactions
+}
+
+.multi-tab-container {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  gap: 16px;
+  pointer-events: auto; // allow interactions only in the visible container
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

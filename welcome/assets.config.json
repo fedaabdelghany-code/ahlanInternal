@@ -1,0 +1,9 @@
+{
+  "resourcesDirectory": "resources",
+  "assets": {
+    "splash": {
+      "source": "splash.png",
+      "backgroundColor": "#ffffff"
+    }
+  }
+}

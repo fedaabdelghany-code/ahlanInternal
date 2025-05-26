@@ -1,0 +1,123 @@
+.login-page {
+  --background: #f5faff;
+  position: relative;      /* ensure full‐height container */
+  height: 100%;            /* fill ion-content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 360px;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.input-item {
+  --background: #ffffff;           // White background
+  --color: #000000;                // Black label/input text
+  --placeholder-color: #666666;   // Optional: dark grey placeholder
+  --highlight-color-focused: #1d4370; // Highlight color (e.g., primary brand color)
+
+  ion-label {
+    color: #000000 !important;
+  }
+
+  ion-input {
+    color: #000000 !important;
+
+    input::placeholder {
+      color: #666666 !important;
+    }
+  }
+
+  &.item-has-focus {
+    --highlight-color-focused: #1d4370;
+  }
+
+  // Optional: border color override
+  --border-color: #ccc;
+  --border-width: 1px;
+}
+
+.login-btn {
+  margin-top: 12px;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --background: #002b45;
+  --background-hover: #00456e;
+  --color: #fff;
+}
+::ng-deep .custom-loading {
+  --background: transparent;
+  box-shadow: none;
+
+  .loading-wrapper {
+    background: rgba(0, 0, 0, 0.5) !important; // Soft dark backdrop for contrast
+    border-radius: 12px;
+    padding: 20px;
+    min-width: 80px;
+    min-height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+}
+
+::ng-deep .custom-loading .loading-spinner {
+  width: 40px;
+  height: 40px;
+  color: white; // Better contrast against dark background
+}
+
+// Smooth fade-in animation
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+::ng-deep .custom-loading .loading-content {
+  color: white;
+  font-size: 14px;
+  margin-top: 8px;
+  text-align: center;
+}
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  margin-top: 65px;
+}
+
+.logo-image {
+  max-width: 130px;
+  width: 100%;
+  height: auto;
+}

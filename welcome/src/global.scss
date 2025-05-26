@@ -1,0 +1,464 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+@import 'swiper/swiper-bundle.css';
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+.custom-title {
+  display: flex;
+  align-items: center; /* Vertically centers the content */
+  justify-content: center; /* Horizontally centers the content */
+  text-align: center;
+  font-weight: 600;
+  font-family: sans-serif;
+  font-size: 1rem; /* Scalable font size */
+  padding: 0 10px; /* Add side padding to help spacing */
+  height: 100%; /* Ensure the container has a height */
+  color: #1d4370;
+}
+
+
+.logo-img {
+  height: 1.5em;       /* smaller, relative to text size */
+}
+
+.toolbar-custom {
+  --background: #ffffff !important; /* force white background */
+  --color: #000000 !important;      /* force black text */
+  --padding-start: 0.5em;
+  --padding-end: 0.5em;
+}
+
+
+:root {
+  --ion-color-holcim-blue: #00A3E0;
+  --ion-color-holcim-blue-rgb: 0, 163, 224;
+  --ion-color-holcim-blue-contrast: #ffffff;
+  --ion-color-holcim-blue-contrast-rgb: 255, 255, 255;
+  --ion-color-holcim-blue-shade: #008ec4;
+  --ion-color-holcim-blue-tint: #1ab1e6;
+}
+
+.ion-color-holcim-blue {
+  --ion-color-base: var(--ion-color-holcim-blue);
+  --ion-color-base-rgb: var(--ion-color-holcim-blue-rgb);
+  --ion-color-contrast: var(--ion-color-holcim-blue-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-holcim-blue-contrast-rgb);
+  --ion-color-shade: var(--ion-color-holcim-blue-shade);
+  --ion-color-tint: var(--ion-color-holcim-blue-tint);
+}
+
+// Horizontal padding utility
+.padded-x {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+
+.dashboard-content {
+  background: #f6f8fa;
+}
+
+// // Hero image section (no padding)
+// .greeting-top {
+//   margin: 0;
+//   padding: 0;
+// }
+
+// .greeting-hero {
+//   position: relative;
+//   width: 100%;
+//   margin: 0;
+//   padding: 0;
+
+//   .pyramids-image {
+//     width: 100%;
+//     height: auto;
+//     display: block;
+//   }
+
+//   .image-darken-layer {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     background: rgba(0, 0, 0, 0.3); // 30% black overlay
+//     z-index: 1;
+//   }
+
+//   .greeting-overlay {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     color: white;
+//     text-align: center;
+//     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+//     z-index: 2; // Ensure it’s above the dark layer
+
+//     h2 {
+//       font-size: 2rem;
+//       font-weight: 600;
+//       margin: 0;
+//     }
+
+//     p {
+//       font-size: 1.2rem;
+//       margin: 0.2rem 0 0 0;
+//     }
+//   }
+// }
+
+
+// Force ion-content to always allow scrolling
+ion-content {
+  --overflow: auto !important;
+  overflow: auto !important;
+}
+
+// Ensure these elements don't block scrolling
+html, body, ion-app {
+  overflow: auto !important;
+}
+
+// Greeting and weather section
+.greeting-section {
+      @extend .padded-x;
+
+  padding: 1rem;
+  text-align: center;
+
+  .greeting-title {
+    
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .greeting-subtitle {
+    font-size: 1.1rem;
+    color: #444;
+    margin-top: 0.2rem;
+  }
+
+  .weather-box {
+
+    background: linear-gradient(135deg, #ffde59, #ff914d);
+    color: #000;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .weather-icon {
+      font-size: 1.3rem;
+      margin-right: 0.5rem;
+    }
+
+    .weather-info {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+  }
+}
+
+// Schedule card styling
+.highlight-card {
+  background: linear-gradient(135deg, #94C12E, #04BBF1);
+  color: white;
+  border-radius: 1rem;
+  box-shadow: none;
+  padding: 0.2rem 0.2rem;
+}
+
+.highlight-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
+
+.highlight-content {
+  font-size: 0.95rem;
+  padding: 0 1rem 1rem 1rem;
+  text-align: center;
+}
+
+// Schedule section headers
+.schedule-header {
+      @extend .padded-x;
+
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+
+  h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .schedule-date {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.2rem;
+  }
+}
+
+// Schedule card formatting
+
+.schedule-green {
+  background: #94C12E;
+}
+
+.schedule-blue {
+  background: #04BBF1;
+}
+
+.schedule-darkBlue {
+    background: #1d4370;
+}
+
+.schedule-section {
+          @extend .padded-x;
+
+
+  display: flex;
+  flex-direction: column;
+
+  .highlight-card {
+    
+    ion-card-content {
+      padding: 0.75rem;
+
+      h3 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin: 0.2rem 0;
+      }
+
+      ion-icon {
+        font-size: 1.1rem;
+        color: white;
+      }
+    }
+  }
+}
+
+/* Section Titles */
+.section-title {
+  color: #1d4370;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.section-title {
+  margin: 0.75rem 0 0 1rem; // top, right, bottom, left
+}
+
+.did-you-know-section,
+.plant-highlights-section {
+  margin-bottom: 0.5rem; // tighten spacing between sections
+}
+
+.horizontal-scroll {
+  display: flex;
+  gap: 0.5rem; // reduced from larger gaps
+  padding-inline: 0.5rem; // reduce side padding
+}
+.didyou-card,
+.highlight-box {
+  margin-right: 0.5rem; // space between cards
+}
+
+
+/* Card basics */
+.didyou-card,
+.highlight-box {
+  flex: 0 0 200px;
+  border-radius: 12px;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background: linear-gradient(135deg, #94C12E 0%, #04BBF1 100%);
+}
+ion-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+.didyou-card ion-icon,
+.highlight-box ion-icon {
+  font-size: 1.5rem;
+}
+.highlight-box h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.didyou-card p,
+.highlight-box p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+
+/* Horizontal scroll area */
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 0 1rem;
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+.pyramids-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.image-darken-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 200px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.greeting-hero {
+  position: relative;
+  width: 100%;
+}
+
+.greeting-overlay {
+  position: absolute;
+  bottom: 10px;
+  left: 16px;
+  color: white;
+  z-index: 10;
+}
+
+
+.scroll-wrapper {
+  position: relative;
+  padding-left: 16px;
+  padding-bottom: 8px;
+}
+
+.horizontal-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  padding-bottom: 10px;
+}
+
+
+ion-tab-bar {
+  --background: #ffffff !important;       // force light background
+  --color: #8e8e93 !important;            // grey icon/text by default
+  --color-selected: #1d4370 !important;   // blue when active (Ionic default blue)
+}
+
+.image-cards-section.full-width-stack {
+  padding: 1rem 0;
+
+  .department-header {
+    padding: 0 1rem;
+    font-size: 1.2rem;
+    color: #1d4370;
+  }
+
+  .stacked-image-card {
+    width: 100%;
+    margin-bottom: 1rem;
+
+    ion-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
+  }
+}
+.no-events-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.explore-img {
+  width: 40%;
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.no-events-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #1d4370;
+}

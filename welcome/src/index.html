@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8"/>
+  <title>Ahlan!</title>
+
+  <base href="/"/>
+  <link rel="manifest" href="manifest.webmanifest"/>
+  <link rel="icon" type="image/png" href="assets/logoFinal-192.png"/>
+
+  <meta name="color-scheme" content="light"/>
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="format-detection" content="telephone=no"/>
+  <meta name="msapplication-tap-highlight" content="no"/>
+  <meta name="theme-color" content="#1d4370"/>
+
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(function(OneSignal) {
+    OneSignal.init({
+      appId: "4a9a23c3-b08e-40da-b275-7d01565ac7f3",
+      notifyButton: {
+        enable: true,
+      },
+    });
+  });
+</script>
+
+   <!-- iOS home screen icon -->
+<link rel="apple-touch-icon" href="assets/logoFinal.png">
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="Ahlan Lafarge"/>
+  <meta name="theme-color" content="#1976d2">
+  <meta name="theme-color" content="#1976d2">
+</head>
+
+<body>
+  <app-root></app-root>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+</body>
+
+</html>

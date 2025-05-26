@@ -1,0 +1,47 @@
+:host ::ng-deep ion-popover {
+  --width: 600px !important;
+  --max-width: 700px !important;
+  --min-width: 550px !important;
+  --height: auto !important;
+  --max-height: none !important;
+}
+
+:host ::ng-deep .popover-content {
+  padding: 0.6rem;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 14px;
+  background: #ffffff !important;
+  color: #000000 !important;
+
+  p {
+    margin: 0.5rem 0;
+  }
+
+  a {
+    color: #555 !important;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #007acc !important;
+      text-decoration: underline;
+    }
+  }
+
+  ion-content,
+  ion-card,
+  ion-text {
+    background: #ffffff !important;
+    color: #000000 !important;
+    width: 100%;
+  }
+}
+@media (max-width: 640px) {
+  :host ::ng-deep ion-popover {
+    --width: 90vw !important;
+    --max-width: 90vw !important;
+  }
+}
