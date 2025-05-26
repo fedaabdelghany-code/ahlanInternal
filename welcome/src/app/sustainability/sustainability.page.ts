@@ -12,7 +12,7 @@ export class SustainabilityPage implements OnInit {
 
   ngOnInit() {
   }
-didYouKnowFacts: { title: string; icon: string; texts: string[] }[] = [
+didYouKnow: { title: string; icon: string; texts: string[] }[] = [
 
  {
     "title": "Critical Risks",
@@ -57,52 +57,25 @@ didYouKnowFacts: { title: string; icon: string; texts: string[] }[] = [
     ]
   },
   
-    {
-    "title": "Medical & Health",
-    "icon": "medkit-outline",
+
+];
+
+highlights: { title: string; icon: string; texts: string[] }[] = [
+
+ {
+    "title": "Critical Risks",
+    "icon": "alert-circle-outline",
     "texts": [
-      "COMING IN FROM ZERO IN 2022",
-      "1206 General Medical Checks",
-      "Early Detection & Recovery of: 15 Critical Cases, 140 Moderate, 200 Minor",
-      "2181 Specific Medical Checks (Audiometry, Occupational, Respiratory)",
-      "2487 Fit-to-Access Tests",
-      "14 AEDs Distributed on All Sites",
-      "Clinic Rehabilitation – 2nd Tier"
+      "PSM",
+      "82 Closed Findings ",
+      ">1.750 MCHF Total Spent since 2022",
+      "Zero Overdue Findings",
+      "426 Closed on Time",
+      "100% Verifications",
+      "71% Compliant",
+      "119 Critical Controls"
     ]
   },
-
-{
-  "title": "ENVIRONMENT",
-  "icon": "leaf-outline",
-  "texts": [
-    "ACROSS 7 PROJECTS",
-    "6000 m³ Water Discharge Reduction / Year – Equivalent to 2.5 Olympic-sized Pools",
-    "72 tCO₂ Emission Reduction / Year – Equivalent to 1305 Cars Running for a Year",
-    "150 T Hazardous Waste Reduction / Year – Equivalent to 2 Fully Loaded Trucks"
-  ]
-}, 
-  {
-    "title": "ENERGY ISOLATION",
-    "icon": "flash-off-outline",
-    "texts": [
-      "1808 EI Procedures",
-      "18 Training Sessions",
-      "2M EGP Budget set for 2025",
-      "Prototype EI Booth 2-Year Action Plan Set"
-    ]
-  },
-
-   {
-    "title": "Contractor Management",
-    "icon": "briefcase-outline",
-    "texts": [
-      "4041 Contractors Assessed (50% Rejected)",
-      "696 Violations",
-      "65 Corrective Actions Identified",
-      "37 Post-Job Evaluations"
-    ]
-  },
-
 ];
 
 smartOpsCard = {
@@ -122,16 +95,49 @@ toggleSmartOpsCard() {
 
 
 expandedDidYouIndex: number | null = null;
+expandedHighlightIndex: number | null = null;
 
 toggleDidYouCard(index: number) {
   this.expandedDidYouIndex = this.expandedDidYouIndex === index ? null : index;
 }
 
+toggleHighlightCard(index: number) {
+  this.expandedHighlightIndex = this.expandedHighlightIndex === index ? null : index;
+}
+
 images = [
-  { src: 'assets/sokhna.jpg', alt: 'Sokhna Plant', title: 'Sustainability Means Geocycle' },
-  { src: 'assets/sokhna2.JPG', alt: 'Second View', title: 'Sustainability Means Geocycle' },
-  // { src: 'assets/sokhna3.JPG', alt: 'Third View', title: 'Welcome to Sokhna Plant' }
+  { src: 'assets/sokhna.jpg', alt: 'Sokhna Plant', title: 'Sustainability Starts with Geocycle' },
+  { src: 'assets/sokhna2.JPG', alt: 'Second View', title: 'Sustainability Starts with Geocycle' },
 ];
+
+geocycleScenes = [
+  {
+    image: 'assets/Sustainabiliy Commitee.JPG',
+    title: 'Sustainability Committee',
+    caption: 'A quarterly initiative led by Adham El Mahdy to align teams, share updates, and drive unified sustainability efforts across functions.'
+  },
+  {
+    image: 'assets/Nile Clean-up.jpg',
+    title: 'Nile Clean-Up',
+    caption: 'Geocycle’s commitment to protecting the Nile through organized waste collection, awareness campaigns, and sustainable action in Egypt’s lifeline river.'
+  },
+  {
+    image: 'assets/AUC talk.jpg',
+    title: 'AUC Sustainability Talk',
+    caption: 'An impactful session by Adham El Mahdy at the American University in Cairo, empowering students with real-world sustainability practices and environmental action.'
+  },
+  {
+    image: 'assets/school.png',
+    title: 'School Initiatives',
+    caption: 'Educational outreach programs designed to instill awareness about sustainability and waste management among the younger generation.'
+  },
+   {
+    image: 'assets/app.png', 
+    title: 'Geocycle B2C App',
+    caption: 'Currently in its testing phase, this is a sneak peek of our upcoming recycling app! Users earn points for recycling and help us turn waste into energy — sustainability made rewarding.'
+  }
+];
+
 
 currentImageIndex = 0;
 

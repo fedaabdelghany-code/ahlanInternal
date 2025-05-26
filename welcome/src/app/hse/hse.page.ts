@@ -13,7 +13,7 @@ export class HsePage implements OnInit {
   ngOnInit() {
   }
 
-didYouKnowFacts: { title: string; icon: string; texts: string[] }[] = [
+highlights: { title: string; icon: string; texts: string[] }[] = [
 
  {
     "title": "Critical Risks",
@@ -121,11 +121,40 @@ toggleSmartOpsCard() {
   this.smartOpsCard.expanded = !this.smartOpsCard.expanded;
 }
 
+didYouKnow: { title: string; icon: string; texts: string[] }[] = [
+
+ {
+    "title": "HSE School",
+    "icon": "alert-circle-outline",
+    "texts": [
+      "PSM",
+"Broaden training scope to cover diverse competencies",
+"Elevate training quality through updated curricula and expert facilitation",
+"Integrate hands-on practical training to reinforce skill application" 
+    ]
+  },
+   {
+    "title": "AI Violation Detection",
+    "icon": "people-outline",
+    "texts": [
+"Smart Camera safety violations tracker.","Inside cam  for drivers behavior.",
+"HSE training platform.",
+"HSE performance dashboard."
+  ]
+  },
+  
+
+]
 
 expandedDidYouIndex: number | null = null;
+expandedHighlightIndex: number | null = null;
 
 toggleDidYouCard(index: number) {
   this.expandedDidYouIndex = this.expandedDidYouIndex === index ? null : index;
+}
+
+toggleHighlightCard(index: number) {
+  this.expandedHighlightIndex = this.expandedHighlightIndex === index ? null : index;
 }
 
 images = [

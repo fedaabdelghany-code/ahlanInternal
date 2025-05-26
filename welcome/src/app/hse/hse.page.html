@@ -25,28 +25,27 @@
 </div>
 
 <br>
-  <!-- Highlights Section -->
-  <section class="plant-highlights-section">
-    <h2 class="section-title">HSE Highlights</h2>
+<!-- Highlights Section -->
+<section class="plant-highlights-section">
+  <h2 class="section-title">HSE Highlights</h2>
   <div class="scroll-wrapper">
     <div class="horizontal-scroll">
       <ion-card 
         class="didyou-card" 
-        *ngFor="let fact of didYouKnowFacts; let i = index"
-        [class.expanded]="expandedDidYouIndex === i"
-        (click)="toggleDidYouCard(i)"
+        *ngFor="let fact of highlights; let i = index"
+        [class.expanded]="expandedHighlightIndex === i"
+        (click)="toggleHighlightCard(i)"
       >
         <ion-card-content>
           <ion-icon [name]="fact.icon" size="large"></ion-icon>
-          <p class="dyk-title">{{ fact.title }}</p>
+          <p class="highlight-title">{{ fact.title }}</p>
 
           <ion-icon 
-            [name]="expandedDidYouIndex === i ? 'chevron-up-outline' : 'chevron-down-outline'" 
+            [name]="expandedHighlightIndex === i ? 'chevron-up-outline' : 'chevron-down-outline'" 
             class="expand-icon">
           </ion-icon>
 
-          <!-- Expanded content -->
-          <div class="expanded-content" *ngIf="expandedDidYouIndex === i">
+          <div class="expanded-content" *ngIf="expandedHighlightIndex === i">
             <hr />
             <div class="subpoint" *ngFor="let sub of fact.texts">
               {{ sub }}
@@ -56,17 +55,16 @@
       </ion-card>
     </div>
   </div>
-  
+</section>
 
 <!-- "Did You Know?" Section -->
 <section class="did-you-know-section">
   <h2 class="section-title">Did You Know?</h2>
-<!-- 
   <div class="scroll-wrapper">
     <div class="horizontal-scroll">
       <ion-card 
         class="didyou-card" 
-        *ngFor="let fact of didYouKnowFacts; let i = index"
+        *ngFor="let fact of didYouKnow; let i = index"
         [class.expanded]="expandedDidYouIndex === i"
         (click)="toggleDidYouCard(i)"
       >
@@ -88,6 +86,5 @@
         </ion-card-content>
       </ion-card>
     </div>
-  </div> -->
+  </div> 
 </section>
-
