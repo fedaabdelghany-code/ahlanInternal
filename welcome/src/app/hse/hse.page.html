@@ -7,6 +7,21 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-modal [isOpen]="isImageModalOpen" (didDismiss)="isImageModalOpen = false">
+  <ng-template>
+    <ion-content>
+      <ion-toolbar>
+        <ion-buttons slot="end">
+          <ion-button (click)="isImageModalOpen = false">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <div class="modal-image-wrapper">
+        <img [src]="zoomedImageSrc" class="modal-image" />
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
 
 <ion-content class="dashboard-content">
 
@@ -87,4 +102,21 @@
       </ion-card>
     </div>
   </div> 
+</section>
+        <hr class="holcim-gradient-line" />
+
+<!-- Plant Layout Section -->
+<section class="plant-layout-section">
+  <h2 class="section-title">Plant Layout</h2>
+  <p class="layout-description">
+    A visual overview of our facility layout designed to optimize material flow, safety, and operational efficiency.
+  </p>
+  <div class="layout-image-wrapper">
+    <img 
+      src="assets/plantLayout.png" 
+      alt="Plant Layout"
+      class="layout-image"
+      (click)="openImageModal('assets/plantLayout.png')"
+    />
+  </div>
 </section>

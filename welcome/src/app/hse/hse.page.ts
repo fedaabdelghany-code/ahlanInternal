@@ -157,6 +157,15 @@ toggleHighlightCard(index: number) {
   this.expandedHighlightIndex = this.expandedHighlightIndex === index ? null : index;
 }
 
+
+isImageModalOpen = false;
+zoomedImageSrc = '';
+
+openImageModal(src: string) {
+  this.zoomedImageSrc = src;
+  this.isImageModalOpen = true;
+}
+
 images = [
   { src: 'assets/sokhna.jpg', alt: 'Sokhna Plant', title: 'Health, Safety & Environment' },
   { src: 'assets/sokhna2.JPG', alt: 'Second View', title: 'Health, Safety & Environment' },
