@@ -102,16 +102,22 @@ ion-menu {
   --width: 260px;
 
   ion-toolbar {
-    // Explicit toolbar background
     --background: #1d4370 !important;
-    background: #1d4370 !important;
+    background-color: #1d4370 !important;
     color: #ffffff !important;
-    background-color: #1d4370;
 
     ion-title {
       font-size: 16px;
       font-weight: 600;
       letter-spacing: 0.5px;
+      white-space: normal !important; // fixes cutoff issue
+      padding-right: 8px; // spacing for mobile
+  text-align: left !important; // 🔥 this overrides the default center alignment
+  justify-content: flex-start !important; // ensures left flex alignment
+    }
+
+    ion-menu-button {
+      color: #1d4370 !important; // dark blue menu icon
     }
   }
 
@@ -121,11 +127,11 @@ ion-menu {
 
     ion-list {
       ion-item {
-        --background: #ffffff !important;
+        --background: transparent !important;
+        background-color: transparent !important;
         --color: #1d4370 !important;
         font-size: 15px;
         font-weight: 500;
-        margin: 0 10px;
 
         ion-icon {
           color: #1d4370 !important;
@@ -133,23 +139,23 @@ ion-menu {
         }
 
         &:hover {
-          background-color: rgba(13, 44, 84, 0.1);
+          background-color: rgba(13, 44, 84, 0.05);
         }
 
         &.item-selected {
-          background-color: rgba(13, 44, 84, 0.15);
+          background-color: rgba(13, 44, 84, 0.1);
         }
       }
     }
   }
 }
 
-// ✅ Dark Mode Overrides
+// ✅ Dark Mode Fix
 @media (prefers-color-scheme: dark) {
   ion-menu {
     ion-toolbar {
       --background: #1d4370 !important;
-      background: #1d4370 !important;
+      background-color: #1d4370 !important;
       color: #ffffff !important;
     }
 
@@ -159,7 +165,8 @@ ion-menu {
 
       ion-list {
         ion-item {
-          --background: #ffffff !important;
+          --background: white !important;
+          background-color: white !important;
           --color: #1d4370 !important;
 
           ion-icon {

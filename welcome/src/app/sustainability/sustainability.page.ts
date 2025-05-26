@@ -14,66 +14,68 @@ export class SustainabilityPage implements OnInit {
   }
 didYouKnow: { title: string; icon: string; texts: string[] }[] = [
 
+
  {
-    "title": "Critical Risks",
-    "icon": "alert-circle-outline",
-    "texts": [
-      "PSM",
-      "82 Closed Findings ",
-      ">1.750 MCHF Total Spent since 2022",
-      "Zero Overdue Findings",
-      "426 Closed on Time",
-      "100% Verifications",
-      "71% Compliant",
-      "119 Critical Controls"
-    ]
-  },
-   {
-    "title": "ENGAGEMENT",
-    "icon": "people-outline",
-    "texts": [
-      "BOOTS ON GROUND",
-      "1.62 TIFr – 12 Month TIFr Above Target",
-    "Actions Identified: 847 (2022) → 6432 (2023) → 9318 (2024)",
-    "Consequence Mgmt: 70 (2022) → 760 (2023) → 1796 (2024)",
-    "TREASURE HUNT",
-    "2 Ranked Teams Worldwide",
-    "4000 Observations Resolved",
-    "GLOBAL HSE DAYS 2024",
-    "1200 Persons"
-    ]
-  },
-  
+  "title": "Climate (Decarbonization)",
+  "icon": "leaf-outline",
+  "texts": [
+    "Clinker Factor: Reduced from 83.5% to 71% (−12%) in 4 years",
+    "EcoPlant Products: Growth from 11% (2024) to 25% target (2030)",
+    "TSR: Increased from 11% to 35% in 4 years",
+    "AF Consumption: 425 kt (2024), targeting 550 kt (2025)"
+  ]
+},
+
+{
+  "title": "Climate (Scope 2)",
+  "icon": "sunny-outline",
+  "texts": [
+    "SEEC Reduction: 8.5 kWh/t over 4 years (from 107.6 in 2021 to 99.1 by 2025)",
+    "Solar Energy: 17 MWh by End 2027",
+    "Waste Heat Recovery (WHR): 22 MWh by End 2028"
+  ]
+}
+,
   {
-    "title": "TRAINING",
-    "icon": "school-outline",
+    "title": "Circular Economy",
+    "icon": "sync-outline",
     "texts": [
-      "TRAINING HOURS",
-      "3,800 (2022) -> 7,978 (2023) -> 23,966 (2024)",
-      "12941 Training Hours for Contractors",
-      "12 New Internal Trainers Certified",
-      "18 Co-champions Certified (Lifting and WAH)",
-      "HSE School at Sokhna Plant"
+      "EPR: Awareness building for regulation implementation",
+      "10KT successful trial of producing color controlled Calcined Clay in 2024 to scale up to 50 KT in 2025",
+      "CDM Trial: 10% aggregate substitution in RMX"
     ]
   },
-  
+  {
+    "title": "Energy Transition",
+    "icon": "flash-outline",
+    "texts": [
+      "Solar Energy: 17 MW capacity",
+      "WHR Capacity: 22 MW",
+      "TSR Strategy: 32% (2024) → 72% (2030)"
+    ]
+  },
+  {
+    "title": "Nature & People",
+    "icon": "people-circle-outline",
+"texts": [
+  "Bird feeding initiative for migratory birds – The birds you see in the banner above are locally known as Abo Erdan, lovingly nicknamed the farmer's friend!",
+  "There is a chicken and duck farm to promote biodiversity on site.",
+  "We dont use any fresh water in our Sokhna plant",
+  "HSE Programs in Focus",
+  "Commitment to Human Rights"
+]
+  }
+
 
 ];
 
 highlights: { title: string; icon: string; texts: string[] }[] = [
 
  {
-    "title": "Critical Risks",
+    "title": "CO₂ Reduction",
     "icon": "alert-circle-outline",
     "texts": [
-      "PSM",
-      "82 Closed Findings ",
-      ">1.750 MCHF Total Spent since 2022",
-      "Zero Overdue Findings",
-      "426 Closed on Time",
-      "100% Verifications",
-      "71% Compliant",
-      "119 Critical Controls"
+      "17% reduction in emissions — from 720 kg CO₂/t.cm in 2021 to a target of 593 kg CO₂/t.cm by 2025."
     ]
   },
 ];
@@ -106,8 +108,8 @@ toggleHighlightCard(index: number) {
 }
 
 images = [
-  { src: 'assets/sokhna.jpg', alt: 'Sokhna Plant', title: 'Sustainability Starts with Geocycle' },
-  { src: 'assets/sokhna2.JPG', alt: 'Second View', title: 'Sustainability Starts with Geocycle' },
+  { src: 'assets/aboerdan.jpg', alt: 'Sokhna Plant', title: 'Sustainability' },
+  { src: 'assets/aboerdan.jpg', alt: 'Second View', title: 'Sustainability' },
 ];
 
 geocycleScenes = [
@@ -135,7 +137,13 @@ geocycleScenes = [
     image: 'assets/app.png', 
     title: 'Geocycle B2C App',
     caption: 'Currently in its testing phase, this is a sneak peek of our upcoming recycling app! Users earn points for recycling and help us turn waste into energy — sustainability made rewarding.'
-  }
+  },
+    {
+    image: 'assets/solarLens.jpg',
+    title: 'Solar Lenses',
+    caption: 'We are exploring solar lenses as a more efficient alternative to traditional solar cells. This could reduce material use and costs while enhancing solar energy capture in compact or specialized setups.'
+  },
+  
 ];
 
 

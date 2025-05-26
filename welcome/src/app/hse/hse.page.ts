@@ -125,9 +125,8 @@ didYouKnow: { title: string; icon: string; texts: string[] }[] = [
 
  {
     "title": "HSE School",
-    "icon": "alert-circle-outline",
+    "icon": "school-outline",
     "texts": [
-      "PSM",
 "Broaden training scope to cover diverse competencies",
 "Elevate training quality through updated curricula and expert facilitation",
 "Integrate hands-on practical training to reinforce skill application" 
@@ -135,7 +134,7 @@ didYouKnow: { title: string; icon: string; texts: string[] }[] = [
   },
    {
     "title": "AI Violation Detection",
-    "icon": "people-outline",
+    "icon": "hardware-chip-outline",
     "texts": [
 "Smart Camera safety violations tracker.","Inside cam  for drivers behavior.",
 "HSE training platform.",
@@ -167,8 +166,7 @@ openImageModal(src: string) {
 }
 
 images = [
-  { src: 'assets/sokhna.jpg', alt: 'Sokhna Plant', title: 'Health, Safety & Environment' },
-  { src: 'assets/sokhna2.JPG', alt: 'Second View', title: 'Health, Safety & Environment' },
+  { src: 'assets/hse.png', alt: 'Sokhna Plant', title: 'Health, Safety & Environment' },
   // { src: 'assets/sokhna3.JPG', alt: 'Third View', title: 'Welcome to Sokhna Plant' }
 ];
 

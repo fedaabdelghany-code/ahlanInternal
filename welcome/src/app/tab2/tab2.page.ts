@@ -109,8 +109,7 @@ toggleDidYouCard(index: number) {
 }
 
 images = [
-  { src: 'assets/sokhna.jpg', alt: 'Sokhna Plant', title: 'Welcome to Sokhna Plant' },
-  { src: 'assets/sokhna2.JPG', alt: 'Second View', title: 'Welcome to Sokhna Plant' },
+  { src: 'assets/sokhna.jpg', alt: 'Second View', title: 'Welcome to Sokhna Plant' },
   // { src: 'assets/sokhna3.JPG', alt: 'Third View', title: 'Welcome to Sokhna Plant' }
 ];
 

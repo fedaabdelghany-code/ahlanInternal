@@ -89,7 +89,7 @@
 
     <!-- Intro Card -->
     <div class="intro-card">
-      <div class="intro-title">Egypt's Industrial Best Practices</div>
+      <div class="intro-title">Egypt's Best Practices</div>
       <div class="intro-description">
         A showcase of innovative solutions from Egypt's Sokhna Plant — enhancing efficiency, safety, and sustainability through smart engineering and localized execution.
       </div>
@@ -164,22 +164,35 @@
 </ng-template>
 
 <!-- Image-Only Cards Section (Full-Width, Vertically Stacked) -->
-<!-- <div class="image-cards-section full-width-stack">
-  <h2 class="department-header">Personal</h2>
+<div class="image-cards-section full-width-stack">
+  <h2 class="department-header">People</h2>
   <div class="stacked-image-card" *ngFor="let img of imageOnlyCards">
     <ion-img [src]="img" (click)="enlargeImage(img)"></ion-img>
   </div>
-</div> -->
+</div>
 
-<!-- Fullscreen Image Modal -->
-<ion-modal [isOpen]="showModal" (didDismiss)="showModal = false">
+<!-- Fullscreen Image Modal with Zoom -->
+<ion-modal [isOpen]="showModal" (didDismiss)="closeModal()">
   <ng-template>
-    <ion-content fullscreen>
+    <ion-content fullscreen scrollY="false">
       <ion-button fill="clear" color="dark" (click)="closeModal()" class="close-btn" shape="round">
         <ion-icon name="close" slot="icon-only"></ion-icon>
       </ion-button>
-      <div class="modal-img-wrapper">
-        <img [src]="selectedImage" class="modal-image" />
+
+      <!-- Zoomable wrapper -->
+      <div 
+        class="zoom-container" 
+        #zoomWrapper
+        (touchstart)="startTouch($event)" 
+        (touchmove)="moveTouch($event)" 
+        (touchend)="endTouch($event)"
+      >
+        <img 
+          [src]="selectedImage"
+          class="modal-image"
+          [style.transform]="transform"
+          [style.transition]="transition"
+        />
       </div>
     </ion-content>
   </ng-template>

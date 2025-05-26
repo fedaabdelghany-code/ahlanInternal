@@ -1,29 +1,26 @@
 <ion-app>
 
   <!-- Side Menu -->
-  <ion-menu contentId="main-content" type="overlay">
-    <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title>Navigation</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <ion-list>
-        <ion-item routerLink="/tabs/tab3" routerDirection="root">
-          <ion-icon name="map-outline" slot="start"></ion-icon>
-          <ion-label>Itinerary</ion-label>
-        </ion-item>
-        <ion-item routerLink="/tabs/feedback" routerDirection="root">
-          <ion-icon name="calendar-outline" slot="start"></ion-icon>
-          <ion-label>Best Practices</ion-label>
-        </ion-item>
-        <!-- <ion-item routerLink="/tabs/sustainability" routerDirection="root">
-          <ion-icon name="images-outline" slot="start"></ion-icon>
-          <ion-label>Sustainability</ion-label>
-        </ion-item> -->
-      </ion-list>
-    </ion-content>
-  </ion-menu>
+<ion-menu contentId="main-content" type="overlay">
+  <ion-header>
+    <ion-toolbar >
+      <ion-title>Navigation</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item routerLink="/tabs/tab3" routerDirection="root">
+        <ion-icon name="map-outline" slot="start"></ion-icon>
+        <ion-label>Itinerary</ion-label>
+      </ion-item>
+      <ion-item routerLink="/tabs/feedback" routerDirection="root">
+        <ion-icon name="sparkles-outline" slot="start"></ion-icon>
+        <ion-label>Best Practices</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
 
   <!-- Main App Shell -->
   <div class="app-shell">

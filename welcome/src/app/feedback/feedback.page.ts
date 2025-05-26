@@ -17,6 +17,76 @@ export class FeedbackPage {
   'assets/talentSustain2.png',
   'assets/talentSustain1.png'
 ];
+// Define in your component
+
+scale = 1;
+lastScale = 1;
+startX = 0;
+startY = 0;
+moveX = 0;
+moveY = 0;
+
+transform = 'scale(1) translate(0px, 0px)';
+transition = '';
+
+enlargeImage(img: string) {
+  this.selectedImage = img;
+  this.showModal = true;
+  this.resetZoom();
+}
+
+closeModal() {
+  this.showModal = false;
+  this.resetZoom();
+}
+
+resetZoom() {
+  this.scale = this.lastScale = 1;
+  this.moveX = this.moveY = 0;
+  this.updateTransform(true);
+}
+
+startTouch(event: TouchEvent) {
+  if (event.touches.length === 2) {
+    this.transition = '';
+    this.lastScale = this.scale;
+  } else if (event.touches.length === 1) {
+    const touch = event.touches[0];
+    this.startX = touch.pageX - this.moveX;
+    this.startY = touch.pageY - this.moveY;
+  }
+}
+
+moveTouch(event: TouchEvent) {
+  event.preventDefault();
+
+  if (event.touches.length === 2) {
+    const touch1 = event.touches[0];
+    const touch2 = event.touches[1];
+
+    const currentDistance = Math.hypot(
+      touch2.pageX - touch1.pageX,
+      touch2.pageY - touch1.pageY
+    );
+    const initialDistance = 200; // arbitrary baseline
+    this.scale = Math.min(3, Math.max(1, this.lastScale * currentDistance / initialDistance));
+    this.updateTransform();
+  } else if (event.touches.length === 1) {
+    const touch = event.touches[0];
+    this.moveX = touch.pageX - this.startX;
+    this.moveY = touch.pageY - this.startY;
+    this.updateTransform();
+  }
+}
+
+endTouch(event: TouchEvent) {
+  this.lastScale = this.scale;
+}
+
+updateTransform(smooth = false) {
+  this.transform = `scale(${this.scale}) translate(${this.moveX}px, ${this.moveY}px)`;
+  this.transition = smooth ? 'transform 0.3s ease' : '';
+}
 
 
   constructor() {
@@ -90,7 +160,64 @@ export class FeedbackPage {
   "kpi_units": "CHF Invested, Physical Controls Installed",
   "impact_value": "Improved compliance, clarified process ownership, and enhanced accountability",
   "classification": "Critical Risk Control"
+},
+
+{
+  "category": "HSE",
+  "department": "HSE",
+  "creation_date": "2025-05-26",
+  "bp_name": "Scope 2 CO2 Emission Reduction - Solar Power Station",
+  "description": "Reduction of Scope 2 CO2 emissions through installation of an off-grid photovoltaic solar station for the Learning & Development building at Sokhna Plant.",
+  "solution_steps": [
+    "Identified the opportunity to reduce Scope 2 emissions at the Sokhna Plant",
+    "Designed and planned a 154 KWp off-grid solar PV system",
+    "Installed the system to power the Learning & Development building",
+    "Commissioned and integrated the solar station into plant operations"
+  ],
+  "images": [
+    "assets/solar.png",
+    "assets/solar2.png",
+  ],
+  "kpi_impacted": "CO2 Emissions Reduction",
+  "kpi_units": "Tons of CO2/year",
+  "impact_value": "70 tons/year CO2 reduction; 6-year payback on 4.5 MEGP investment",
+  "classification": "Sustainability - Energy Transition"
+},
+
+{
+  "category": "HSE",
+  "department": "HSE",
+  "creation_date": "2025-05-26",
+  "bp_name": "CCM Compliance Journey - Sokhna",
+  "description": "Improved Critical Control Management (CCM) compliance in Sokhna by restructuring ownership, conducting assessments, building capabilities, and implementing risk mitigation actions.",
+  "solution_steps": [
+    "Started year with 64% CCM compliance and identified the need for transformation",
+    "Reviewed PUE owners’ organization and developed capabilities via 8 extensive workshops",
+    "Conducted country-wide CCM gap assessment and identified necessary corrective actions",
+    "Collected financial data and set required budgets for key risk areas",
+    "Established monthly follow-up governance with sponsors",
+    "Reviewed and updated more than 60 procedures",
+    "Implemented validation checks for all verifications",
+    "Held ExCO HSE workshop with country leadership team",
+    "Executed 3 cross-country CCM audits"
+  ],
+  "images": [
+    "assets/ccm1.png",
+    "assets/ccm2.png",
+    "assets/ccm3.png",
+    "assets/ccm4.png",
+    "assets/ccm5.png",
+    "assets/ccm6.png",
+    
+
+  ],
+  "kpi_impacted": "CCM Compliance",
+  "kpi_units": "Compliance %, Man-days, Actions Closed",
+  "impact_value": "96% compliance (from 64%) – 50 people, 270 man-days, 216 actions closed. Structural Collapse (30mEGP): Cooling tower & Elbow K3&4 replaced, 3 stacks reinforced, Tertiary duct at K4 replaced. Hazardous Energy (5.8mEGP): 5800m guards, 8000 clamps, 85 rope switches over 2000m. Fall from Height (4.6mEGP): 3000m mesh, 481 ladder doors, 1500m handrails, 14 life wires. Hot Meal (4.5mEGP), Liquid Fuel Fire (2.7mEGP), Mobile Equipment (2.4mEGP).",
+  "classification": "Critical Risk Control"
 }
+
+
 
 
 
@@ -100,6 +227,7 @@ export class FeedbackPage {
 
   }
 
+  
   hasMatches(): boolean {
   for (const department of this.departmentKeys) {
     const filtered = this.groupedData[department].filter(item =>
@@ -110,16 +238,6 @@ export class FeedbackPage {
   return false;
 }
 
-
-  enlargeImage(image: string) {
-    this.selectedImage = image;
-    this.showModal = true;
-  }
-
-  closeModal() {
-    this.showModal = false;
-    this.selectedImage = null;
-  }
   groupedData: { [key: string]: any[] } = {};
 
 ngOnInit() {

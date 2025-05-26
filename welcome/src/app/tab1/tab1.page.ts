@@ -34,88 +34,7 @@ formatDate(date: Date): string {
   return `${year}-${month}-${day}`; // "YYYY-MM-DD"
 }
 private emailCountryMap: { [email: string]: string } = {
-  // Switzerland
-  'patrick.ebeling@holcim.com': 'Switzerland',
-  'manoj.chhura@holcim.com': 'Switzerland',
-  'david.fauvet@holcim.com': 'Switzerland',
-  'moumita.chakraborty@holcim.com': 'Switzerland',
-  'daniel.reiser@holcim.com': 'Switzerland',
-  'jorge.gamarra@holcim.com': 'Switzerland',
-  'andreas.lochmann@holcim.com': 'Switzerland',
-  'milosz.milojevic@holcim.com': 'Switzerland',
-  'luc.fermin@holcim.com': 'Switzerland',
-  'leonard.luzieux@holcim.com': 'Switzerland',
-  'mohamed.ali@geocycle.com':'Switzerland',
-
-  // United Arab Emirates
-  'arshad.rasheed@lafargeholcim.com': 'United Arab Emirates',
-  'rajaa.ramakrishnan@lafargeholcim.com': 'United Arab Emirates',
-  'khaled.farrag@lafargeholcim.com': 'United Arab Emirates',
-
-  // Morocco
-  'elmostafa.zaimi@lafargeholcim.com': 'Morocco',
-  'mohammed.bensouda@lafargeholcim.com': 'Morocco',
-  'chakib.eloudghiri@lafargeholcim.com': 'Morocco',
-  'salma.tahri@lafargeholcim.com': 'Morocco',
-  'adil.hamimaz@lafargeholcim.com': 'Morocco',
-  'hamid.zadim@lafargeholcim.com': 'Morocco',
-  'mohamed.kharraki@lafargeholcim.com': 'Morocco',
-  'najib.ribi@lafargeholcim.com':'Morocco',
-  
-
-  // Philippines
-  'mario.gereis@holcim.com': 'Philippines',
-  'luningning.donato@holcim.com': 'Philippines',
-
-  // Bangladesh
-  'amitav.singh@lafargeholcim.com': 'Bangladesh',
-
-  // France
-  'mohamed.jouhari@holcim.com': 'France',
-  'sorin.chiriac@holcim.com': 'France',
-  'mohamed.badr@holcim.com':'France',
-
-  // Cameroon
-  'simon.ndo@holcim.com': 'Cameroon',
-  'amine.derridj@holcim.com': 'Cameroon',
-
-  'emily.elias@lafarge.com':'Macedonia',
-
-  // China
-  'liyuan.song@lafargeholcim.com': 'China',
-  'hua-hong.sun@lafargeholcim.com': 'China',
-  'jian-chao.yang@lafargeholcim.com': 'China',
-  'yuhui.yang@lafargeholcim.com': 'China',
-
-  // Jordan
-  'ayman.al-leimoon@lafarge.com': 'Jordan',
-
-  // Algeria
-  'mounir.benmebarek@lafarge.com': 'Algeria',
-  'redouane.djazairi@lafargeholcim.com': 'Algeria',
-  'abdeli.abdelkarim@lafarge.com': 'Algeria',
-  'mohamed.benarmas@lafarge.com': 'Algeria',
-
-  // UK
-  'bhogendra.mishra@holcim.com': 'UK',
-
-  // Iraq
-  'meran.akram@lafarge.com': 'Iraq',
-  'lava.mohamed@lafarge.com': 'Iraq',
-
-  // Azerbaijan
-  'ali.huseynov@holcim.com': 'Azerbaijan',
-
-  // Nigeria
-  'milad.hanna@lafarge.com': 'Nigeria',
-  'philip.anaobi@lafarge.com': 'Nigeria',
-  'y.srinivasarao@lafarge.com': 'Nigeria',
-
-  // Lebanon
-  'samer.mehtar@holcim.com': 'Lebanon',
-
-  // India
-  'gaurav.patel@holcim.com': 'India'
+  'carmen.diaz@holcim.com': 'Spain'
 };
 
  country = this.emailCountryMap[this.email] || 'Egypt';
@@ -364,7 +283,7 @@ scheduleData: { [date: string]: {
     },
     {
       "time": "13:30 - 14:15",
-      "title": "CD, BK & KD Wrap Up - Coffee",
+      "title": "Wrap Up - Coffee",
       "location": "Le Meridien Hotel",
       "color": "schedule-blue",
       "speaker": "CD, BK, KD",
@@ -372,7 +291,7 @@ scheduleData: { [date: string]: {
     },
     {
       "time": "14:30",
-      "title": "CD - Arrival at CAI Airport",
+      "title": "Arrival at CAI Airport",
       "location": "CAI Airport",
       "color": "schedule-darkBlue",
       "speaker": "N/A",
@@ -555,47 +474,9 @@ getGreetingByCountry(country: string): string {
     case 'morocco':
     case 'algeria':
       return 'Azul';
-    
-    case 'united arab emirates':
-    case 'iraq':
-    case 'lebanon':
-    case 'jordan':
-    case 'egypt':
-      return 'Ahlan';
-
-    case 'france':
-      return 'Bonjour';
-
-    case 'switzerland':
-      return 'Grüezi'; // Swiss German
-      // You could also use "Bonjour" or "Buongiorno" depending on region
-
-    case 'philippines':
-      return 'Kumusta';
-
-    case 'bangladesh':
-      return 'Nomoskar'; // Bengali greeting
-
-    case 'cameroon':
-      return 'Bonjour'; // French-speaking region
-
-    case 'china':
-      return 'Nǐ hǎo';
-
-    case 'uk':
-      return 'Hello';
-
-    case 'azerbaijan':
-      return 'Salam';
-
-    case 'macedonia':
-      return 'Zdravo';
-
-    case 'nigeria':
-      return 'Hello';
-
-    case 'india':
-      return 'Namaste';
+  
+    case 'spain':
+      return 'Hola';
 
     default:
       return 'Ahlan';
