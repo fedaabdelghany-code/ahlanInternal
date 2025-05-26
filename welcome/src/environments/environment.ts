@@ -21,6 +21,16 @@ export const environment = {
   }
 };
 
+export const hsefirebaseConfig = {
+  apiKey: "AIzaSyC74fj8Z10HTHuVYeivhiZyrEVckVoN9Eg",
+  authDomain: "hse-onboarding-2.firebaseapp.com",
+  projectId: "hse-onboarding-2",
+  storageBucket: "hse-onboarding-2.firebasestorage.app",
+  messagingSenderId: "444755403252",
+  appId: "1:444755403252:web:326f7c037d341ed9e559a1",
+  measurementId: "G-J9PM2MPNHJ"
+};
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

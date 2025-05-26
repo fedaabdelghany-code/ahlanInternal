@@ -313,4 +313,38 @@
   /* Holcim gradient colors example */
   background: linear-gradient(to right, #00a9e0, #94c12e);
   border-radius: 2px;
+}.error-message {
+  color: #e63946;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.safety-card {
+  margin: 16px;
+  padding: 10px;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.safety-card h3 {
+  color: #1d4370;
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+
+.safety-card p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.safety-card a {
+  color: #0074a6;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.safety-card a:hover {
+  text-decoration: underline;
 }

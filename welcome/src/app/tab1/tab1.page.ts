@@ -3,8 +3,10 @@ import { WeatherService } from '../weather.service';
 import { ExchangeService } from '../exchange.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, take } from 'rxjs';
 // import { OneSignalService } from '../one-signal.service';
+import firebase from 'firebase/compat/app';
+import { hsefirebaseConfig } from '../../environments/environment';
 
 @Component({
   selector: 'app-tab1',
@@ -19,9 +21,11 @@ export class Tab1Page implements OnInit {
   iconUrl: string = '';
   exchangeRates: { [key: string]: number } = {};
   firstName: string = '';
-email: string = '';
+  email: string = '';
   showEnableButton = false;
   showPrompt= false;
+  safetyInductionCompleted: boolean | null = null;
+  safetyInductionLink: string = '';
 
 
 selectedDate: string = this.formatDate(new Date());
@@ -310,14 +314,12 @@ constructor(
   // private oneSignalService: OneSignalService
 ) {}
 
-ngOnInit() {
+  async ngOnInit() {
   console.log('[ngOnInit] Initializing...');
   this.loadWeather();
   this.loadExchangeRates();
-  this.loadUserData(); // ✅ Safe here
-    setInterval(() => {
-    this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
-  }, 4000); // change every 4 seconds
+  await this.loadUserData(); // ✅ Safe here
+  this.checkSafetyInductionStatus(); // Check induction status
 
 }
 
@@ -412,36 +414,67 @@ toggleCard(index: number) {
     });
   }
 
-loadUserData() {
-  console.log('[loadUserData] Attempting to load user data');
+async loadUserData(): Promise<void> {
+  const user = await firstValueFrom(this.afAuth.authState.pipe(take(1)));
+  if (!user) {
+    this.firstName = 'Visitor';
+    return;
+  }
 
-  this.afAuth.authState.subscribe(user => {
-    if (!user) {
-      console.warn('[loadUserData] No authenticated user found');
-      this.firstName = 'Visitor';
-      return;
-    }
+  this.email = user.email ?? '';
+  this.country = this.emailCountryMap[this.email] || 'Egypt';
 
-    this.email = user.email ?? '';
-
-    // Update country AFTER setting email
-    this.country = this.emailCountryMap[this.email] || 'Egypt';
-
-    // Special case override
-    if (this.email.toLowerCase() === 'y.srinivasarao@lafarge.com') {
-      this.firstName = 'Yadagani';
-      return;
-    }
-
-  // Default fallback
-  this.firstName = this.getFirstNameFromEmail(this.email);
-
-
-});
-
-
-
+  this.firstName = this.email.toLowerCase() === 'y.srinivasarao@lafarge.com'
+    ? 'Yadagani'
+    : this.getFirstNameFromEmail(this.email);
 }
+
+async checkSafetyInductionStatus() {
+  console.log('[checkSafetyInductionStatus] Checking safety induction status...');
+  console.log('[checkSafetyInductionStatus] Email used for query:', this.email);
+
+  if (!this.email) {
+    console.warn('[checkSafetyInductionStatus] Email is empty. Skipping Firestore query.');
+    this.safetyInductionCompleted = null;
+    return;
+  }
+
+  const normalizedEmail = this.email.toLowerCase();
+
+  // Check if the HSE app is already initialized
+  let hseApp;
+  if (!firebase.apps.some(app => app.name === 'HSEApp')) {
+    hseApp = firebase.initializeApp(hsefirebaseConfig, 'HSEApp');
+  } else {
+    hseApp = firebase.app('HSEApp');
+  }
+
+  const hseFirestore = hseApp.firestore();
+
+  try {
+    const userDoc = await hseFirestore
+      .collection('userProgress')
+      .where('email', '==', normalizedEmail)
+      .get();
+
+    if (!userDoc.empty) {
+      const userData = userDoc.docs[0].data();
+      this.safetyInductionCompleted = userData['questionnairePassed'];
+      this.safetyInductionLink = this.safetyInductionCompleted
+        ? 'https://hse-onboarding-2.web.app/congratulations.html'
+        : 'https://hse-onboarding-2.web.app/';
+      console.log('[checkSafetyInductionStatus] Status loaded:', this.safetyInductionCompleted);
+    } else {
+      console.warn('[checkSafetyInductionStatus] No user data found for email:', this.email);
+      this.safetyInductionCompleted = false; // Induction not completed
+      this.safetyInductionLink = 'https://hse-onboarding-2.web.app/'; // Link to start induction
+    }
+  } catch (error) {
+    console.error('[checkSafetyInductionStatus] Error fetching safety induction status:', error);
+    this.safetyInductionCompleted = null;
+  }
+}
+
 getFirstNameFromEmail(email: string): string {
   if (!email) return '';
 
@@ -474,7 +507,7 @@ getGreetingByCountry(country: string): string {
     case 'morocco':
     case 'algeria':
       return 'Azul';
-  
+
     case 'spain':
       return 'Hola';
 
