@@ -133,19 +133,254 @@ scheduleData: { [date: string]: {
   location: string;
   color: string;
 }[] } = {
-    '2025-05-19': [
-{
-  "time": "20:00 - 22:00",
-  "title": "Welcome Dinner in Cucina Restaurant",
-  "location": "Cucina Restaurant",
-  "color": "schedule-grey",
-  "speaker": "N/A",
-  "description": "Join us for a warm dinner at Cucina Restaurant—an opportunity to connect with fellow guests in a relaxed and elegant setting."
-}
+  "2025-05-26": [
+    {
+      "time": "19:00",
+      "title": "Arrival to Marriott MENA House",
+      "location": "Marriott MENA House",
+      "color": "schedule-green",
+      "speaker": "N/A",
+      "description": "Check-in and settle at Marriott MENA House."
+    },
+    {
+      "time": "19:30 - 20:30",
+      "title": "Meet Country Leadership Team & Strategy",
+      "location": "Marriott MENA House",
+      "color": "schedule-blue",
+      "speaker": "Country Leadership Team",
+      "description": "Strategic discussion with the local leadership team."
+    },
+    {
+      "time": "20:30 - 22:00",
+      "title": "Dinner with the Leadership Team by the Pyramids",
+      "location": "Marriott MENA House - Outdoor Venue",
+      "color": "schedule-darkBlue",
+      "speaker": "N/A",
+      "description": "Dinner in a scenic setting by the Pyramids with the leadership team."
+    },
+    {
+      "time": "22:00 - 22:50",
+      "title": "Check-In at Dusit Thani Hotel",
+      "location": "Dusit Thani Hotel",
+      "color": "schedule-grey",
+      "speaker": "N/A",
+      "description": "Late-night check-in and rest at Dusit Thani Hotel."
+    }
+  ],
+  "2025-05-27": [
+    {
+      "time": "08:00",
+      "title": "Move to Lafarge Egypt HQ",
+      "location": "Cairo",
+      "color": "schedule-grey",
+      "speaker": "N/A",
+      "description": "Transfer to Lafarge Egypt HQ."
+    },
+    {
+      "time": "08:15 - 08:30",
+      "title": "Arrival to Lafarge Egypt HQ & Meet K.D",
+      "location": "Lafarge Egypt HQ",
+      "color": "schedule-green",
+      "speaker": "K.D",
+      "description": "Welcome to the HQ and meet with K.D."
+    },
+    {
+      "time": "08:30 - 09:30",
+      "title": "Our People Journey: People & Comms Strategy and Roadmap",
+      "location": "Lafarge Egypt HQ",
+      "color": "schedule-blue",
+      "speaker": "People & Comms Team",
+      "description": "Presentation of the People & Communications strategic roadmap."
+    },
+    {
+      "time": "09:30 - 10:00",
+      "title": "Meet GROW & STEP-IN",
+      "location": "Lafarge Egypt HQ",
+      "color": "schedule-darkBlue",
+      "speaker": "Program Leaders",
+      "description": "Introduction to the GROW and STEP-IN programs."
+    },
+    {
+      "time": "10:00 - 10:20",
+      "title": "Floor walkthrough and engagement with HQ people",
+      "location": "Lafarge Egypt HQ",
+      "color": "schedule-green",
+      "speaker": "N/A",
+      "description": "Walkthrough the facility and engage with team members."
+    },
+    {
+      "time": "10:30 - 11:30",
+      "title": "Leading the way for Her: A Mentorship talk with our CPO",
+      "location": "Lafarge Egypt HQ",
+      "color": "schedule-blue",
+      "speaker": "Chief People Officer",
+      "description": "Mentorship session focusing on gender inclusion and leadership."
+    },
+    {
+      "time": "11:30 - 12:00",
+      "title": "Country Sustainability Strategy & Overview",
+      "location": "Lafarge Egypt HQ",
+      "color": "schedule-darkBlue",
+      "speaker": "Sustainability Team",
+      "description": "Presentation on Egypt’s sustainability approach."
+    },
+    {
+      "time": "12:00 - 12:30",
+      "title": "Country HSE Overview",
+      "location": "Lafarge Egypt HQ",
+      "color": "schedule-green",
+      "speaker": "HSE Lead",
+      "description": "Overview of HSE initiatives and achievements."
+    },
+    {
+      "time": "12:30 - 12:45",
+      "title": "From HQ to Dusit Thani Hotel",
+      "location": "Cairo",
+      "color": "schedule-blue",
+      "speaker": "N/A",
+      "description": "Return transfer to Dusit Thani Hotel."
+    },
+    {
+      "time": "12:45 - 14:30",
+      "title": "Break & Lunch",
+      "location": "Dusit Thani Hotel",
+      "color": "schedule-darkBlue",
+      "speaker": "N/A",
+      "description": "Lunch and downtime at the hotel."
+    },
+    {
+      "time": "14:30 - 16:30",
+      "title": "People Talk: Nurturing Future Leaders",
+      "location": "Dusit Thani Hotel",
+      "color": "schedule-green",
+      "speaker": "C.D, B.K, K.D.",
+      "description": "Leadership discussion around talent development and succession."
+    },
+    {
+      "time": "16:30 - 17:15",
+      "title": "Video Call with Miljan",
+      "location": "Dusit Thani Hotel",
+      "color": "schedule-blue",
+      "speaker": "Miljan",
+      "description": "Virtual check-in with Miljan."
+    },
+    {
+      "time": "17:15 - 18:00",
+      "title": "Break",
+      "location": "Dusit Thani Hotel",
+      "color": "schedule-grey",
+      "speaker": "N/A",
+      "description": "Short break before the evening program."
+    },
+    {
+      "time": "18:00 - 19:00",
+      "title": "Move from Dusit to Nile Cruise",
+      "location": "Cairo",
+      "color": "schedule-darkBlue",
+      "speaker": "N/A",
+      "description": "Transport to the Nile cruise venue."
+    },
+    {
+      "time": "19:00 - 21:30",
+      "title": "Dinner with the People Team - Nile Cruise",
+      "location": "Nile River",
+      "color": "schedule-green",
+      "speaker": "N/A",
+      "description": "Dinner cruise with the People Team."
+    }
+  ],
+  "2025-05-28": [
+    {
+      "time": "07:45 - 08:45",
+      "title": "Check-Out & move from Dusit Thani Hotel to SOK Plant",
+      "location": "From Dusit to SOK Plant",
+      "color": "schedule-grey",
+      "speaker": "N/A",
+      "description": "Morning transfer to SOK Plant."
+    },
+    {
+      "time": "08:00",
+      "title": "HSE Virtual Induction (on the road)",
+      "location": "In Transit",
+      "color": "schedule-darkBlue",
+      "speaker": "HSE Team",
+      "description": "Virtual HSE induction during transport."
+    },
+    {
+      "time": "08:45 - 09:00",
+      "title": "Welcome to SOK Plant",
+      "location": "SOK Plant",
+      "color": "schedule-green",
+      "speaker": "Plant Team",
+      "description": "Arrival and welcome session at the SOK Plant."
+    },
+    {
+      "time": "09:00 - 09:15",
+      "title": "Change into PPEs",
+      "location": "SOK Plant",
+      "color": "schedule-blue",
+      "speaker": "N/A",
+      "description": "Preparation for plant tour with safety gear."
+    },
+    {
+      "time": "09:15 - 10:30",
+      "title": "Plant Tour",
+      "location": "SOK Plant",
+      "color": "schedule-darkBlue",
+      "speaker": "Operations Team",
+      "description": "Tour through Maintenance, Warehouse, Platform, Geocycle, CCR, Lab, and Smart Room."
+    },
+    {
+      "time": "10:30 - 11:00",
+      "title": "Meet Plant Excom & Sr. Managers - (SOK Plant & Geocycle Overview)",
+      "location": "SOK Plant",
+      "color": "schedule-green",
+      "speaker": "Plant Excom",
+      "description": "Strategic overview and introduction by plant leaders."
+    },
+    {
+      "time": "11:00 - 12:00",
+      "title": "SOK Plant to Sarai RMX BP",
+      "location": "Cairo",
+      "color": "schedule-blue",
+      "speaker": "N/A",
+      "description": "Transfer from SOK Plant to Sarai RMX BP."
+    },
+    {
+      "time": "12:00 - 13:00",
+      "title": "Sarai RMX BP Tour",
+      "location": "Sarai RMX BP",
+      "color": "schedule-darkBlue",
+      "speaker": "Site Team",
+      "description": "Site visit and operational tour at RMX BP."
+    },
+    {
+      "time": "13:00 - 13:30",
+      "title": "Sarai RMX BP to Le Meridien Hotel at CAI Airport",
+      "location": "Cairo",
+      "color": "schedule-green",
+      "speaker": "N/A",
+      "description": "Travel to Le Meridien Hotel near the airport."
+    },
+    {
+      "time": "13:30 - 14:15",
+      "title": "CD, BK & KD Wrap Up - Coffee",
+      "location": "Le Meridien Hotel",
+      "color": "schedule-blue",
+      "speaker": "CD, BK, KD",
+      "description": "Closing discussion and coffee session."
+    },
+    {
+      "time": "14:30",
+      "title": "CD - Arrival at CAI Airport",
+      "location": "CAI Airport",
+      "color": "schedule-darkBlue",
+      "speaker": "N/A",
+      "description": "CD arrives at Cairo Airport for departure."
+    }
   ]
-
-
-};
+}
+;
 
 
 constructor(

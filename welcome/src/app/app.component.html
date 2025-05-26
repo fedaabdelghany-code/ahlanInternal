@@ -1,65 +1,89 @@
 <ion-app>
-  <ion-header [translucent]="false">
-    <ion-toolbar class="toolbar-custom">
-      <ion-buttons slot="start">
-        <img src="assets/logoFinal-192.png" alt="Holcim Logo" class="logo-img" />
-      </ion-buttons>
 
-      <ion-title class="custom-title">Sokhna Plant Companion</ion-title>
+  <!-- Side Menu -->
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Navigation</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="/tabs/hse" routerDirection="root">
+          <ion-icon name="home-outline" slot="start"></ion-icon>
+          <ion-label>HSE</ion-label>
+        </ion-item>
+        <ion-item routerLink="/tabs/people" routerDirection="root">
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
+          <ion-label>People</ion-label>
+        </ion-item>
+        <ion-item routerLink="/tabs/sustainability" routerDirection="root">
+          <ion-icon name="images-outline" slot="start"></ion-icon>
+          <ion-label>Sustainability</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
 
-      <ion-buttons slot="end">
-        <ion-button (click)="showContactInfo()">
-<ion-icon name="information-circle-outline" class="info-icon"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-  <div *ngIf="showIntro" class="app-intro">
-    <img src="assets/guy.png" alt="Excited Sticker" class="sticker-img" />
-    <div class="speech-bubble">
-      <h5 style="font-size: 0.9rem; font-weight: 700; margin: 5; color:#94C12E">Welcome!</h5>
-      <p>The Sokhna Plant Companion app is your guide for this trip to Egypt — giving you quick access to your schedule, local info, and everything you need during your stay.</p>
+  <!-- Main App Shell -->
+  <div class="app-shell">
+
+    <!-- Global Header -->
+    <ion-header [translucent]="false">
+      <ion-toolbar class="toolbar-custom">
+        <ion-buttons slot="start">
+          <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
+        <ion-title class="custom-title">Sokhna Plant Companion</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="showContactInfo()">
+            <ion-icon name="information-circle-outline" class="info-icon"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <!-- Optional Intro Message -->
+    <div *ngIf="showIntro" class="app-intro">
+      <img src="assets/guy.png" alt="Excited Sticker" class="sticker-img" />
+      <div class="speech-bubble">
+        <h5 style="font-size: 0.9rem; font-weight: 700; margin: 5; color:#94C12E">Welcome!</h5>
+        <p>The Sokhna Plant Companion app is your guide for this trip to Egypt — giving you quick access to your schedule, local info, and everything you need during your stay.</p>
+      </div>
     </div>
+
+    <!-- Main Router Outlet: must have id="main-content" -->
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+
+    <!-- iOS Install Banner -->
+    <div *ngIf="isIos && showInstallButton" class="install-banner ios">
+      <div class="banner-content">
+        <img src="assets/logoFinal-192.png" alt="App Logo" class="logo" />
+        <div class="text">
+          <h3>Install Sokhna Companion</h3>
+          <p>Tap the <strong>Share</strong> icon in Safari, then <strong>Add to Home Screen</strong>.</p>
+        </div>
+        <div class="actions">
+          <button (click)="dismissIosBanner()" class="close">×</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Android Install Banner -->
+    <div *ngIf="!isIos && showInstallButton" class="install-banner">
+      <div class="banner-content">
+        <img src="assets/logoFinal-192.png" alt="App Logo" class="logo" />
+        <div class="text">
+          <h3>Install Sokhna Companion</h3>
+          <p>Add this app to your home screen for a better experience.</p>
+        </div>
+        <div class="actions">
+          <button (click)="installPwa()">Install</button>
+          <button (click)="showInstallButton = false" class="close">×</button>
+        </div>
+      </div>
+    </div>
+
   </div>
-
-
-
-  <ion-router-outlet></ion-router-outlet>
-
-<!-- Custom iOS Install Banner -->
-<div *ngIf="isIos && showInstallButton" class="install-banner ios">
-  <div class="banner-content">
-    <img src="assets/logoFinal-192.png" alt="App Logo" class="logo" />
-    <div class="text">
-      <h3>Install Sokhna Companion</h3>
-      <p>Tap the <strong>Share</strong> icon in Safari, then <strong>Add to Home Screen</strong>.</p>
-    </div>
-    <div class="actions">
-      <button (click)="dismissIosBanner()" class="close">×</button>
-    </div>
-  </div>
-</div>
-
-  <ion-button *ngIf="showInstallButton" (click)="installPwa()">
-  Install App
-</ion-button>
-
-
-  <!-- Custom PWA install banner -->
-<!-- Android-only Install Banner -->
-<div *ngIf="!isIos && showInstallButton" class="install-banner">
-  <div class="banner-content">
-    <img src="assets/logoFinal-192.png" alt="App Logo" class="logo" />
-    <div class="text">
-      <h3>Install Sokhna Companion</h3>
-      <p>Add this app to your home screen for a better experience.</p>
-    </div>
-    <div class="actions">
-      <button (click)="installPwa()">Install</button>
-      <button (click)="showInstallButton = false" class="close">×</button>
-    </div>
-  </div>
-</div>
-
 
 </ion-app>

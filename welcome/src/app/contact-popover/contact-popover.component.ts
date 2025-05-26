@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-contact-popover',
   template: `
     <div class="popover-content">
-      <p>If you have any questions about the workshop, please contact:</p>
+      <p>If you have any questions, please contact:</p>
       <p>
         <strong>General Contact:</strong><br>
         <a href="mailto:emily.elias@lafarge.com">emily.elias&#64;lafarge.com</a><br>

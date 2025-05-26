@@ -1,7 +1,15 @@
-<ion-header translucent>
-  <ion-toolbar color="primary">
+<ion-header [translucent]="false">
+  <ion-toolbar class="toolbar-custom">
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="custom-title">Sokhna Plant Companion</ion-title>
   </ion-toolbar>
 </ion-header>
+
+
+<ion-content class="dashboard-content">
+
 <!-- 
 <ion-content class="ion-padding">
   <ion-card>
@@ -77,7 +85,6 @@
   </ion-button>
 </ion-content>
  -->
-<ion-content [fullscreen]="true" class="dashboard-content">
   <div class="content-wrapper">
 
     <!-- Intro Card -->
@@ -182,14 +189,13 @@
   </div>
 </ng-template>
 
-<!-- ✅ Correctly placed image-only cards -->
 <!-- Image-Only Cards Section (Full-Width, Vertically Stacked) -->
-<div class="image-cards-section full-width-stack">
+<!-- <div class="image-cards-section full-width-stack">
   <h2 class="department-header">Personal</h2>
   <div class="stacked-image-card" *ngFor="let img of imageOnlyCards">
     <ion-img [src]="img" (click)="enlargeImage(img)"></ion-img>
   </div>
-</div>
+</div> -->
 
 <!-- Fullscreen Image Modal -->
 <ion-modal [isOpen]="showModal" (didDismiss)="showModal = false">

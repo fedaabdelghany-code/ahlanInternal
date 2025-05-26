@@ -136,19 +136,19 @@ export class AppComponent implements OnInit {
   }
 
 //   // ✅ OneSignal Setup
-// initializeOneSignal() {
-//   window.OneSignal = window.OneSignal || [];
-//   window.OneSignal.push(() => {
-//     window.OneSignal.SERVICE_WORKER_PATH = 'OneSignalSDKWorker.js';
-//     window.OneSignal.SERVICE_WORKER_UPDATER_PATH = 'OneSignalSDKUpdaterWorker.js';
+initializeOneSignal() {
+  window.OneSignal = window.OneSignal || [];
+  window.OneSignal.push(() => {
+    window.OneSignal.SERVICE_WORKER_PATH = 'OneSignalSDKWorker.js';
+    window.OneSignal.SERVICE_WORKER_UPDATER_PATH = 'OneSignalSDKUpdaterWorker.js';
 
-//     window.OneSignal.init({
-//       appId: 'YOUR-ONESIGNAL-APP-ID',
-//       allowLocalhostAsSecureOrigin: true,
-//       notifyButton: {
-//         enable: true,
-//       },
-//     });
-//   });
-// }
+    window.OneSignal.init({
+      appId: 'YOUR-ONESIGNAL-APP-ID',
+      allowLocalhostAsSecureOrigin: true,
+      notifyButton: {
+        enable: true,
+      },
+    });
+  });
+}
 }
