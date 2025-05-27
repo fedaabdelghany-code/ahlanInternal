@@ -12,11 +12,11 @@
 
 <!-- Hero Section -->
 <div class="greeting-hero">
-  <img 
-    *ngFor="let image of images; let i = index" 
-    [src]="image.src" 
-    [alt]="image.alt" 
-    class="pyramids-image" 
+  <img
+    *ngFor="let image of images; let i = index"
+    [src]="image.src"
+    [alt]="image.alt"
+    class="pyramids-image"
     [ngClass]="{ 'active': i === currentImageIndex }"
   />
   <div class="image-darken-layer"></div>
@@ -36,7 +36,25 @@
       </ion-card-content>
     </ion-card>
 
-   <ion-card class="highlight-card local-card local-card-currency">
+    <ion-card *ngIf="safetyInductionCompleted !== null" class="safety-card">
+      <ion-card-content>
+        <h3>Safety Induction</h3>
+        <p *ngIf="safetyInductionCompleted === false">
+          Welcome! To ensure a safe and smooth visit<br>
+          <a [href]="safetyInductionLink" target="_blank">Click here to complete your safety induction</a>.
+        </p>
+        <p *ngIf="safetyInductionCompleted === true">
+          Great job! You’ve successfully completed your safety induction. <br>
+          <a [href]="safetyInductionLink" target="_blank">Access your visitor permit here</a>.
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+<p *ngIf="safetyInductionCompleted === null" class="error-message">
+  Unable to fetch your safety induction status. Please try again later.
+</p>
+
+  <ion-card class="highlight-card local-card local-card-currency">
       <ion-card-content class="highlight-content">
         <!--  <div class="currency-display">
           <p class="currency-label top">1 CHF</p>
@@ -52,10 +70,10 @@
 </a>
 
       </ion-card-content>
-      
-    </ion-card> 
 
-    
+    </ion-card>
+
+
   </div>
 
 <div class="app-intro">
@@ -84,7 +102,7 @@ In Arabic, “Ahlan” means “welcome,” and “Ahlan wa sahlan” adds, “m
   </p>
 </div>
 
-<!-- Schedule Cards --> 
+<!-- Schedule Cards -->
 <div class="schedule-section" *ngIf="scheduleData[selectedDate]?.length; else noEvents">
   <ion-card
     *ngFor="let item of scheduleData[selectedDate]; let i = index"
@@ -95,10 +113,10 @@ In Arabic, “Ahlan” means “welcome,” and “Ahlan wa sahlan” adds, “m
       <h3>{{ item.title }}</h3>
       <p>
         <ion-icon name="time-outline"></ion-icon>
-        {{ item.time }} 
+        {{ item.time }}
       </p>
-        <!-- <ion-icon 
-          [name]="expandedIndex === i ? 'chevron-up-outline' : 'chevron-down-outline'" 
+        <!-- <ion-icon
+          [name]="expandedIndex === i ? 'chevron-up-outline' : 'chevron-down-outline'"
           class="expand-icon">
         </ion-icon> -->
       <!-- <div class="expanded-content" *ngIf="expandedIndex === i">
