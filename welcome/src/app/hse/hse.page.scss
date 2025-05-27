@@ -61,48 +61,6 @@
   margin-top: 1rem;
 }
 
-.project-card {
-  width: 300px;               // Make width same as pdf-card max-width
-  max-width: 300px;
-  border-radius: 15px;
-  overflow: hidden; 
-  background:  #f5faff;
-  flex-shrink: 0; 
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  
-  ion-card-content {
-    text-align: center;       // Center align all text inside project card
-  }
-
-  h4 {
-    font-size: 1rem;       // Slightly bigger title
-    font-weight: 700;        // Bold
-    margin-bottom: 0.5rem;
-    color: #1d4370;
-    font-family: 'Playfair Display', serif;
-  }
-
-p {
-  margin: 0;
-  text-align: center; /* instead of justify */
-  font-size: 1rem;
-  line-height: 1.6; /* increase line height for softness */
-  color: #c0973c;
-  hyphens: none; /* helps break long words */
-}
-
-
-}
-
-.project-img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  display: block;
-  margin: 0;
-  border-radius: 16px;
-  /* remove border-radius here to avoid double rounding */
-}
 
 ion-button {
   --padding-start: 8px;
@@ -121,44 +79,6 @@ ion-button {
   border-radius: 2px;
 }
 
-.projects-powered-section {
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-
-.section-title {
-  font-family: 'Playfair Display', serif; // Elegant serif for heritage feel
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1d4370; // Primary deep blue
-  text-align: center;
-  line-height: 1.3;
-  margin: 0.7rem 0.7rem 0.7rem;
-  position: relative;
-  transition: all 0.6s ease-in-out;
-
-  &::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(to right, #c0973c, #f2d16b); // Gold accent
-    margin: 1rem auto 0;
-    border-radius: 2px;
-  }
-}
-
-.subtitle-line {
-  display: inline-block;
-  font-size: 1.75rem;
-  font-weight: 400;
-  color: #c0973c; // Gold for "Egypt's Fabric"
-  margin-top: 0.3rem;
-  font-family: 'Playfair Display', serif; // Elegant serif for heritage feel
-}
-}
 .expanded-content {
   animation: fadeIn 0.3s ease-in-out;
 }
@@ -169,7 +89,7 @@ ion-button {
 }
 
 .didyou-card.expanded {
-  max-height: 900px; /* taller only when expanded */
+  max-height: 1200px; /* taller only when expanded */
 }
 
 .didyou-card {
@@ -266,3 +186,4 @@ ion-button {
   margin-left: auto;
   margin-right: auto;
 }
+

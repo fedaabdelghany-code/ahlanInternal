@@ -76,16 +76,12 @@ In Arabic, “Ahlan” means “welcome,” and “Ahlan wa sahlan” adds, “m
  -->
 
 <!-- Schedule Header -->
-<div class="schedule-header" >
-  <h4>Today's Schedule</h4>
-<div style="height: 5px;"></div>
+<div class="schedule-header">
+  <h4>{{ getScheduleHeaderText() }}</h4>
+  <div style="height: 5px;"></div>
   <p class="schedule-date">
     {{ selectedDate | date: 'fullDate' }}
-  <!-- </p>
-    <p class="schedule-date">
-    Kefren Conference Room, 5th Floor
-  </p> -->
-
+  </p>
 </div>
 
 <!-- Schedule Cards --> 

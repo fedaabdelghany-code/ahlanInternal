@@ -33,6 +33,18 @@ formatDate(date: Date): string {
   const day = String(date.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`; // "YYYY-MM-DD"
 }
+
+getScheduleHeaderText(): string {
+  switch (this.selectedDate) {
+    case '2025-05-27':
+      return "It's People & Purpose Day!";
+    case '2025-05-28':
+      return "It's Performance Day!";
+    default:
+      return "Today's Schedule";
+  }
+}
+
 private emailCountryMap: { [email: string]: string } = {
   'carmen.diaz@holcim.com': 'Spain'
 };
@@ -120,18 +132,10 @@ scheduleData: { [date: string]: {
       "description": "Introduction to the GROW and STEP-IN programs."
     },
     {
-      "time": "10:00 - 10:20",
-      "title": "Floor walkthrough and engagement with HQ people",
-      "location": "Lafarge Egypt HQ",
-      "color": "schedule-green",
-      "speaker": "N/A",
-      "description": "Walkthrough the facility and engage with team members."
-    },
-    {
       "time": "10:30 - 11:30",
       "title": "Leading the way for Her: A Mentorship talk with our CPO",
       "location": "Lafarge Egypt HQ",
-      "color": "schedule-blue",
+      "color": "schedule-green",
       "speaker": "Chief People Officer",
       "description": "Mentorship session focusing on gender inclusion and leadership."
     },
@@ -139,7 +143,7 @@ scheduleData: { [date: string]: {
       "time": "11:30 - 12:00",
       "title": "Country Sustainability Strategy & Overview",
       "location": "Lafarge Egypt HQ",
-      "color": "schedule-darkBlue",
+      "color": "schedule-blue",
       "speaker": "Sustainability Team",
       "description": "Presentation on Egypt’s sustainability approach."
     },
@@ -147,12 +151,21 @@ scheduleData: { [date: string]: {
       "time": "12:00 - 12:30",
       "title": "Country HSE Overview",
       "location": "Lafarge Egypt HQ",
-      "color": "schedule-green",
+      "color": "schedule-darkBlue",
       "speaker": "HSE Lead",
       "description": "Overview of HSE initiatives and achievements."
     },
     {
-      "time": "12:30 - 12:45",
+      "time": "12:30 - 12:50",
+      "title": "Floor walkthrough and engagement with HQ people",
+      "location": "Lafarge Egypt HQ",
+      "color": "schedule-green",
+      "speaker": "N/A",
+      "description": "Walkthrough the facility and engage with team members."
+    },
+
+    {
+      "time": "12:50 - 13:05",
       "title": "From HQ to Dusit Thani Hotel",
       "location": "Cairo",
       "color": "schedule-blue",
@@ -160,7 +173,7 @@ scheduleData: { [date: string]: {
       "description": "Return transfer to Dusit Thani Hotel."
     },
     {
-      "time": "12:45 - 14:30",
+      "time": "13:05 - 14:50",
       "title": "Break & Lunch",
       "location": "Dusit Thani Hotel",
       "color": "schedule-darkBlue",
@@ -168,45 +181,54 @@ scheduleData: { [date: string]: {
       "description": "Lunch and downtime at the hotel."
     },
     {
-      "time": "14:30 - 16:30",
+      "time": "14:50 - 16:50",
       "title": "People Talk: Nurturing Future Leaders",
       "location": "Dusit Thani Hotel",
       "color": "schedule-green",
       "speaker": "C.D, B.K, K.D.",
       "description": "Leadership discussion around talent development and succession."
     },
-    {
-      "time": "16:30 - 17:15",
-      "title": "Video Call with Miljan",
-      "location": "Dusit Thani Hotel",
-      "color": "schedule-blue",
-      "speaker": "Miljan",
-      "description": "Virtual check-in with Miljan."
-    },
-    {
-      "time": "17:15 - 18:00",
-      "title": "Break",
-      "location": "Dusit Thani Hotel",
-      "color": "schedule-grey",
-      "speaker": "N/A",
-      "description": "Short break before the evening program."
-    },
-    {
-      "time": "18:00 - 19:00",
-      "title": "Move from Dusit to Nile Cruise",
-      "location": "Cairo",
-      "color": "schedule-darkBlue",
-      "speaker": "N/A",
-      "description": "Transport to the Nile cruise venue."
-    },
-    {
-      "time": "19:00 - 21:30",
-      "title": "Dinner with the People Team - Nile Cruise",
-      "location": "Nile River",
-      "color": "schedule-green",
-      "speaker": "N/A",
-      "description": "Dinner cruise with the People Team."
-    }
+{
+  "time": "14:50 - 16:50",
+  "title": "People Talk: Nurturing Future Leaders",
+  "location": "Dusit Thani Hotel",
+  "color": "schedule-green",
+  "speaker": "C.D, B.K, K.D.",
+  "description": "Leadership discussion around talent development and succession."
+},
+{
+  "time": "16:50 - 17:35",
+  "title": "Video Call with Miljan",
+  "location": "Dusit Thani Hotel",
+  "color": "schedule-blue",
+  "speaker": "Miljan",
+  "description": "Virtual check-in with Miljan."
+},
+{
+  "time": "17:35 - 18:00",
+  "title": "Break",
+  "location": "Dusit Thani Hotel",
+  "color": "schedule-grey",
+  "speaker": "N/A",
+  "description": "Short break before the evening program."
+},
+{
+  "time": "18:00 - 19:00",
+  "title": "Move from Dusit to Nile Cruise",
+  "location": "Cairo",
+  "color": "schedule-darkBlue",
+  "speaker": "N/A",
+  "description": "Transport to the Nile cruise venue."
+},
+{
+  "time": "19:00 - 21:30",
+  "title": "Dinner with the People Team - Nile Cruise",
+  "location": "Nile River",
+  "color": "schedule-green",
+  "speaker": "N/A",
+  "description": "Dinner cruise with the People Team."
+}
+
   ],
   "2025-05-28": [
     {

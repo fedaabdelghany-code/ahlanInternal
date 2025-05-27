@@ -30,7 +30,7 @@ highlights: { title: string; icon: string; texts: string[] }[] = [
     ]
   },
    {
-    "title": "ENGAGEMENT",
+    "title": "Engagement",
     "icon": "people-outline",
     "texts": [
       "BOOTS ON GROUND",
@@ -46,7 +46,7 @@ highlights: { title: string; icon: string; texts: string[] }[] = [
   },
   
   {
-    "title": "TRAINING",
+    "title": "Training",
     "icon": "school-outline",
     "texts": [
       "TRAINING HOURS",
@@ -73,7 +73,7 @@ highlights: { title: string; icon: string; texts: string[] }[] = [
   },
 
 {
-  "title": "ENVIRONMENT",
+  "title": "Environment",
   "icon": "leaf-outline",
   "texts": [
     "ACROSS 7 PROJECTS",
@@ -83,7 +83,7 @@ highlights: { title: string; icon: string; texts: string[] }[] = [
   ]
 }, 
   {
-    "title": "ENERGY ISOLATION",
+    "title": "Energy Isolation",
     "icon": "flash-off-outline",
     "texts": [
       "1808 EI Procedures",
@@ -157,13 +157,6 @@ toggleHighlightCard(index: number) {
 }
 
 
-isImageModalOpen = false;
-zoomedImageSrc = '';
-
-openImageModal(src: string) {
-  this.zoomedImageSrc = src;
-  this.isImageModalOpen = true;
-}
 
 images = [
   { src: 'assets/hse.png', alt: 'Sokhna Plant', title: 'Health, Safety & Environment' },

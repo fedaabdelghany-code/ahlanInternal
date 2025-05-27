@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { PopoverController } from '@ionic/angular';
+import { MenuController, PopoverController } from '@ionic/angular';
 import { ContactPopoverComponent } from './contact-popover/contact-popover.component';
 import { SwUpdate } from '@angular/service-worker';
 
@@ -29,7 +29,9 @@ export class AppComponent implements OnInit {
     private router: Router,
     private afAuth: AngularFireAuth,
     private popoverCtrl: PopoverController,
-    private swUpdate: SwUpdate
+    private swUpdate: SwUpdate,
+      private menuCtrl: MenuController,
+
   ) {}
 
   ngOnInit(): void {
@@ -134,6 +136,10 @@ export class AppComponent implements OnInit {
     });
     await popover.present();
   }
+async navigateTo(path: string) {
+  await this.menuCtrl.close(); // Closes the menu
+  this.router.navigateByUrl(path); // Navigates to the route
+}
 
 //   // ✅ OneSignal Setup
 // initializeOneSignal() {

@@ -16,14 +16,14 @@ didYouKnow: { title: string; icon: string; texts: string[] }[] = [
 
 
  {
-  "title": "Climate (Decarbonization)",
+  "title": "Climate (Scope 1)",
   "icon": "leaf-outline",
-  "texts": [
-    "Clinker Factor: Reduced from 83.5% to 71% (−12%) in 4 years",
-    "EcoPlant Products: Growth from 11% (2024) to 25% target (2030)",
-    "TSR: Increased from 11% to 35% in 4 years",
-    "AF Consumption: 425 kt (2024), targeting 550 kt (2025)"
-  ]
+"texts": [
+  "Clinker Factor: Reduced from 83.2% to 71.3% (−12%) by 2025",
+  "EcoPlant Products: Growing from 11% (2024) to 25% target by 2030",
+  "TSR: Increased from 11% (2021) to 35% target by 2025",
+  "AF Consumption: 425 kt (2024), targeting 550 kt by 2025"
+]
 },
 
 {
@@ -59,7 +59,6 @@ didYouKnow: { title: string; icon: string; texts: string[] }[] = [
     "icon": "people-circle-outline",
 "texts": [
   "Bird feeding initiative for migratory birds – The birds you see in the banner above are locally known as Abo Erdan, lovingly nicknamed the farmer's friend!",
-  "There is a chicken and duck farm to promote biodiversity on site.",
   "We dont use any fresh water in our Sokhna plant",
   "HSE Programs in Focus",
   "Commitment to Human Rights"
@@ -146,8 +145,6 @@ geocycleScenes = [
   
 ];
 
-
 currentImageIndex = 0;
-
 
 }
