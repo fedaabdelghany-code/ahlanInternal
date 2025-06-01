@@ -134,24 +134,7 @@
   text-align: center;
 }
 
-/* Make the currency inner wrapper match the same 3‑row fill */
-.highlight-content .currency-display {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-}
 
-/* TOP ROW: icon or “1 USD” */
-
-.currency-label.top {
-  font-size: 0.9rem;
-  line-height: 1;
-  margin: 0;
-  color: #0074a6;
-}
 .weather-icon {
   width: 2rem;
   height: 2rem;
@@ -159,15 +142,8 @@
   object-fit: contain;
 }
 
-/* MIDDLE ROW: big, bold value */
 
-.currency-value {
-  font-size: 1.75rem;
-  font-weight: bold;
-  margin: 0;
-  color: #94c12e;
-  line-height: 1.1;
-}
+
 
 .weather-temp {
   font-size: 1.75rem;
@@ -177,14 +153,6 @@
   line-height: 1.1;
 }
 
-
-/* BOTTOM ROW: small descriptor */
-.currency-label.bottom {
-  font-size: 0.9rem;
-  margin: 0;
-  color: #0074a6;
-  line-height: 1;
-}
 
 .weather-info {
     font-size: 0.9rem;
@@ -321,30 +289,29 @@
 }
 
 .safety-card {
-  margin: 16px;
-  padding: 10px;
+  margin: 12px;
+  padding: 8px 8px;
   text-align: center;
   background-color: #f9f9f9;
   border-radius: 8px;
-}
-
-.safety-card h3 {
-  color: #1d4370;
-  font-size: 1.2rem;
-  margin-bottom: 4px;
-}
-
-.safety-card p {
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 0.85rem;
 }
 
 .safety-card a {
   color: #0074a6;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 500;
+  font-size: 0.8rem;
+  font-weight: 400;
 }
 
 .safety-card a:hover {
   text-decoration: underline;
+}
+.safety-icon {
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 2px;
+  filter: brightness(0) saturate(100%) invert(71%) sepia(54%) saturate(691%) hue-rotate(33deg) brightness(97%) contrast(88%);
 }

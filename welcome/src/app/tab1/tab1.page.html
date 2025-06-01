@@ -36,23 +36,22 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-card *ngIf="safetyInductionCompleted !== null" class="safety-card">
-      <ion-card-content>
-        <h3>Safety Induction</h3>
-        <p *ngIf="safetyInductionCompleted === false">
-          Welcome! To ensure a safe and smooth visit<br>
-          <a [href]="safetyInductionLink" target="_blank">Click here to complete your safety induction</a>.
-        </p>
-        <p *ngIf="safetyInductionCompleted === true">
-          Great job! You’ve successfully completed your safety induction. <br>
-          <a [href]="safetyInductionLink" target="_blank">Access your visitor permit here</a>.
-        </p>
-      </ion-card-content>
-    </ion-card>
+<ion-card *ngIf="safetyInductionCompleted !== null" class="safety-card">
+  <ion-card-content>
+    <img src="assets/safety.png" alt="Safety Icon" class="safety-icon" />
+    <p *ngIf="safetyInductionCompleted === false">
+      <a [href]="safetyInductionLink" target="_blank">Safety Induction</a>
+    </p>
+    <p *ngIf="safetyInductionCompleted === true">
+      <a [href]="safetyInductionLink" target="_blank">View Permit</a>
+    </p>
+  </ion-card-content>
+</ion-card>
 
-<p *ngIf="safetyInductionCompleted === null" class="error-message">
+
+<!-- <p *ngIf="safetyInductionCompleted === null" class="error-message">
   Unable to fetch your safety induction status. Please try again later.
-</p>
+</p> -->
 
   <ion-card class="highlight-card local-card local-card-currency">
       <ion-card-content class="highlight-content">

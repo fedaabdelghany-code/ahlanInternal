@@ -6,7 +6,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { firstValueFrom, take } from 'rxjs';
 // import { OneSignalService } from '../one-signal.service';
 import firebase from 'firebase/compat/app';
-import { hsefirebaseConfig } from '../../environments/environment';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-tab1',
@@ -466,6 +466,7 @@ async checkSafetyInductionStatus() {
   // Check if the HSE app is already initialized
   let hseApp;
   if (!firebase.apps.some(app => app.name === 'HSEApp')) {
+    const hsefirebaseConfig = environment.hsefirebaseConfig;
     hseApp = firebase.initializeApp(hsefirebaseConfig, 'HSEApp');
   } else {
     hseApp = firebase.app('HSEApp');
