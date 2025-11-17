@@ -23,15 +23,20 @@ export class LoginPage implements OnInit {
 
   async ngOnInit() {
     // Handle redirect result when user returns from Google sign-in
+    // This is handled in app.component.ts to avoid race conditions
+    // Keeping this here as a fallback
     try {
       const result = await this.afAuth.getRedirectResult();
       if (result.user) {
         // User successfully signed in, navigate to main app
+        // Using replaceUrl to prevent back button issues
         this.router.navigateByUrl('tabs/tab1', { replaceUrl: true });
       }
     } catch (error: any) {
       // Handle any errors from the redirect
-      this.handleAuthError(error);
+      if (error.code) {
+        this.handleAuthError(error);
+      }
     }
   }
 

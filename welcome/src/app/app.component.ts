@@ -115,11 +115,24 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl('/splash-screen');
     await this.delay(2000);
 
+    // First, check if we're returning from a redirect
+    try {
+      const result = await this.afAuth.getRedirectResult();
+      if (result.user) {
+        // User just signed in via redirect, navigate to tabs
+        this.router.navigateByUrl('/tabs', { replaceUrl: true });
+        return; // Exit early, don't set up the authState subscription yet
+      }
+    } catch (error) {
+      console.error('Error getting redirect result:', error);
+    }
+
+    // Now subscribe to auth state changes
     this.afAuth.authState.subscribe(user => {
       if (user) {
-        this.router.navigateByUrl('/tabs');
+        this.router.navigateByUrl('/tabs', { replaceUrl: true });
       } else {
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/login', { replaceUrl: true });
       }
     });
   }
