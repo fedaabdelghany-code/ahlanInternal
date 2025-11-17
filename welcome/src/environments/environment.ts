@@ -10,12 +10,13 @@ export const environment = {
     measurementId: "G-RTEGXQMHWK"
   },
   hsefirebaseConfig: {
-    apiKey: "AIzaSyC74fj8Z10HTHuVYeivhiZyrEVckVoN9Eg",
-    authDomain: "hse-onboarding-2.firebaseapp.com",
-    projectId: "hse-onboarding-2",
-    storageBucket: "hse-onboarding-2.firebasestorage.app",
-    messagingSenderId: "444755403252",
-    appId: "1:444755403252:web:326f7c037d341ed9e559a1",
-    measurementId: "G-J9PM2MPNHJ"
+  apiKey: "AIzaSyAhq-FgcGDV9I6V29GouM0W23AOfNr41sw",
+  authDomain: "mea-hseegyptonboarding-prod.firebaseapp.com",
+  databaseURL: "https://mea-hseegyptonboarding-prod-default-rtdb.firebaseio.com",
+  projectId: "mea-hseegyptonboarding-prod",
+  storageBucket: "mea-hseegyptonboarding-prod.firebasestorage.app",
+  messagingSenderId: "332004340544",
+  appId: "1:332004340544:web:f30fec6f2934f6d81780a5",
+  measurementId: "G-YW3LMNTMX8"
   }
 };

@@ -7,25 +7,23 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content class="dashboard-content">
 
-<!-- Hero Section -->
-<div class="greeting-hero">
-  <img
-    *ngFor="let image of images; let i = index"
-    [src]="image.src"
-    [alt]="image.alt"
-    class="pyramids-image"
-    [ngClass]="{ 'active': i === currentImageIndex }"
-  />
-  <div class="image-darken-layer"></div>
-  <div class="greeting-overlay">
-<h2>{{ getGreetingByCountry(country) }}, {{firstName}}!</h2>
+  <!-- Hero Section -->
+  <div class="greeting-hero">
+    <img
+      *ngFor="let image of images; let i = index"
+      [src]="image.src"
+      [alt]="image.alt"
+      class="pyramids-image"
+      [ngClass]="{ 'active': i === currentImageIndex }"
+    />
+    <div class="image-darken-layer"></div>
+    <div class="greeting-overlay">
+      <h2>{{ getGreetingByCountry(country) }}, {{firstName}}!</h2>
+    </div>
   </div>
 
-
-</div>
   <!-- Row for Weather and Currency Cards -->
   <div class="card-row">
     <ion-card class="weather-card">
@@ -36,101 +34,79 @@
       </ion-card-content>
     </ion-card>
 
-<ion-card *ngIf="safetyInductionCompleted !== null" class="safety-card">
-  <ion-card-content>
-    <img src="assets/safety.png" alt="Safety Icon" class="safety-icon" />
-    <p *ngIf="safetyInductionCompleted === false">
-      <a [href]="safetyInductionLink" target="_blank">Safety Induction</a>
-    </p>
-    <p *ngIf="safetyInductionCompleted === true">
-      <a [href]="safetyInductionLink" target="_blank">View Permit</a>
-    </p>
-  </ion-card-content>
-</ion-card>
-
-
-<!-- <p *ngIf="safetyInductionCompleted === null" class="error-message">
-  Unable to fetch your safety induction status. Please try again later.
-</p> -->
-
-  <ion-card class="highlight-card local-card local-card-currency">
-      <ion-card-content class="highlight-content">
-        <!--  <div class="currency-display">
-          <p class="currency-label top">1 CHF</p>
-          <p class="currency-value">{{ exchangeRates['CHF'] | number:'1.2-2' }}</p>
-          <p class="currency-label bottom">EGP</p>
-        </div>-->
-<a href="https://drive.google.com/drive/folders/1wXzMaopgmMhmd7Q-TLrE7uTsOZnNE2Ps" target="_blank" style="text-decoration: none;">
-    <ion-card-content class="highlight-content">
-      <img src="assets/photos.png" alt="Album Cover" style="width: 50%; max-width: 100px; margin: 0 auto; display: block;" />
-    </ion-card-content>
-                  <h3 style="color:#0074a6; margin-top: -10px;" >Photos</h3>
-
-</a>
-
+    <ion-card *ngIf="safetyInductionCompleted !== null" class="safety-card">
+      <ion-card-content>
+        <img src="assets/safety.png" alt="Safety Icon" class="safety-icon" />
+        <p *ngIf="safetyInductionCompleted === false">
+          <a [href]="safetyInductionLink" target="_blank">Safety Induction</a>
+        </p>
+        <p *ngIf="safetyInductionCompleted === true">
+          <a [href]="safetyInductionLink" target="_blank">View Permit</a>
+        </p>
       </ion-card-content>
-
     </ion-card>
 
-
+    <ion-card class="highlight-card local-card local-card-currency">
+      <ion-card-content class="highlight-content">
+        <a href="https://drive.google.com/drive/folders/1wXzMaopgmMhmd7Q-TLrE7uTsOZnNE2Ps" target="_blank" style="text-decoration: none;">
+          <ion-card-content class="highlight-content">
+            <img src="assets/photos.png" alt="Album Cover" style="width: 50%; max-width: 100px; margin: 0 auto; display: block;" />
+          </ion-card-content>
+          <h3 style="color:#0074a6; margin-top: -10px;">Photos</h3>
+        </a>
+      </ion-card-content>
+    </ion-card>
   </div>
 
-<div class="app-intro">
-  <img src="assets/guy.png" alt="Excited Sticker" class="sticker-img" />
-  <div class="speech-bubble">
-    <h5 class="intro-title" style="color: #1d4370">Ahlan!</h5>
-    <p>
-In Arabic, “Ahlan” means “welcome,” and “Ahlan wa sahlan” adds, “may your arrival be easy.” Like the greeting, this app is here to make your visit easy — with quick access to your schedule, local info, and more.
+  <div class="app-intro">
+    <img src="assets/guy.png" alt="Excited Sticker" class="sticker-img" />
+    <div class="speech-bubble">
+      <h5 class="intro-title" style="color: #1d4370">Ahlan!</h5>
+      <p>
+        In Arabic, "Ahlan" means "welcome," and "Ahlan wa sahlan" adds, "may your arrival be easy." Like the greeting, this app is here to make your visit easy with quick access to your schedule, local info, and more.
+      </p>
+    </div>
+  </div>
+
+  <hr class="holcim-gradient-line" />
+
+
+  <!-- Schedule Header -->
+  <div class="schedule-header">
+    <h4>{{ getScheduleHeaderText() }}</h4>
+    <div style="height: 5px;"></div>
+    <p class="schedule-date">
+      {{ selectedDate | date: 'fullDate' }}
     </p>
   </div>
-</div>
 
-      <hr class="holcim-gradient-line" />
-
-<!-- <ion-button *ngIf="showEnableButton" (click)="enableNotifications()">
-  Enable Notifications
-</ion-button>
- -->
-
-<!-- Schedule Header -->
-<div class="schedule-header">
-  <h4>{{ getScheduleHeaderText() }}</h4>
-  <div style="height: 5px;"></div>
-  <p class="schedule-date">
-    {{ selectedDate | date: 'fullDate' }}
-  </p>
-</div>
-
-<!-- Schedule Cards -->
-<div class="schedule-section" *ngIf="scheduleData[selectedDate]?.length; else noEvents">
-  <ion-card
-    *ngFor="let item of scheduleData[selectedDate]; let i = index"
-    [class]="['highlight-card', item.color, expandedIndex === i ? 'expanded' : ''].join(' ')"
-    (click)="toggleCard(i)"
-  >
-    <ion-card-content>
-      <h3>{{ item.title }}</h3>
-      <p>
-        <ion-icon name="time-outline"></ion-icon>
-        {{ item.time }}
-      </p>
-        <!-- <ion-icon
-          [name]="expandedIndex === i ? 'chevron-up-outline' : 'chevron-down-outline'"
-          class="expand-icon">
-        </ion-icon> -->
-      <!-- <div class="expanded-content" *ngIf="expandedIndex === i">
-        <hr>
-        <p>{{ item.description || 'No details available.' }}</p>
-      </div> -->
-    </ion-card-content>
-  </ion-card>
-</div>
-
-
-<ng-template #noEvents>
-  <div class="no-events-container">
-    <img src="assets/explore.png" alt="Holcim Logo" class="explore-img" />
-<p class="no-events-text">All clear today — thank you for dropping by!</p>
+  <!-- Today's Schedule Cards -->
+  <div class="schedule-section" *ngIf="userBatch !== 'NONE' && scheduleData[selectedDate]?.length; else noEvents">
+    <ion-card
+      *ngFor="let item of scheduleData[selectedDate]; let i = index"
+      [class]="['highlight-card', item.color, expandedIndex === i ? 'expanded' : ''].join(' ')"
+      (click)="toggleCard(i)"
+    >
+      <ion-card-content>
+        <h3>{{ item.title }}</h3>
+        <p>
+          <ion-icon name="time-outline"></ion-icon>
+          {{ item.time }}
+        </p>
+        <p *ngIf="item.location && item.location !== 'N/A'">
+          <ion-icon name="location-outline"></ion-icon>
+          {{ item.location }}
+        </p>
+      </ion-card-content>
+    </ion-card>
   </div>
-</ng-template>
 
+  <ng-template #noEvents>
+    <div class="no-events-container">
+      <img src="assets/explore.png" alt="Holcim Logo" class="explore-img" />
+      <p class="no-events-text" *ngIf="userBatch !== 'NONE'">All clear today!</p>
+      <p class="no-events-text" *ngIf="userBatch === 'NONE'">Your email is not registered for this event. Please contact the administrator.</p>
+    </div>
+  </ng-template>
+
+</ion-content>

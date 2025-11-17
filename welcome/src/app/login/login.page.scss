@@ -121,3 +121,37 @@
   width: 100%;
   height: auto;
 }
+
+.google-btn {
+  --background: white;
+  --color: #5f6368;
+  --border-color: #dadce0;
+  --border-width: 1px;
+  margin-bottom: 16px;
+  font-weight: 500;
+  
+  ion-icon {
+    font-size: 20px;
+  }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #dadce0;
+  }
+  
+  span {
+    padding: 0 10px;
+    color: #5f6368;
+    font-size: 14px;
+  }
+}
+
