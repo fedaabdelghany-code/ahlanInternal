@@ -16,17 +16,26 @@
 
   <div class="login-container">
     
-    <!-- Logo Image -->
-    <div class="logo-container">
-      <img src="assets/logoFinal-512.png" alt="Holcim Logo" class="logo-image" />
-    </div>
+    <!-- White Card Container -->
+    <div class="login-card">
+      <!-- Logo Image -->
+      <div class="logo-container">
+        <img src="assets/logoFinal-512.png" alt="Holcim Logo" class="logo-image" />
+      </div>
 
-    <!-- Login Form -->
-    <div class="login-form">
-      <ion-button class="google-btn" expand="block" (click)="signInWithGoogle()">
-        <ion-icon slot="start" name="logo-google"></ion-icon>
-        SIGN IN WITH GOOGLE
-      </ion-button>
+      <!-- App Title -->
+      <h1 class="app-title">Ahlan App</h1>
+      
+      <!-- Welcome Message -->
+      <p class="welcome-message">Welcome! Please sign in to continue</p>
+
+      <!-- Login Form -->
+      <div class="login-form">
+        <ion-button class="google-btn" expand="block" (click)="signInWithGoogle()">
+          <ion-icon slot="start" name="logo-google"></ion-icon>
+          SIGN IN WITH GOOGLE
+        </ion-button>
+      </div>
     </div>
   </div>
 </ion-content>

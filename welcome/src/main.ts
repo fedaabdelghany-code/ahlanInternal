@@ -1,3 +1,6 @@
+// OneSignal initialization moved to index.html
+// Commenting out to avoid double initialization
+/*
 (window as any).OneSignal = (window as any).OneSignal || [];
 (window as any).OneSignal.push(() => {
   (window as any).OneSignal.SERVICE_WORKER_PATH = 'OneSignalSDKWorker.js';
@@ -11,6 +14,7 @@
     },
   });
 });
+*/
 
 
 

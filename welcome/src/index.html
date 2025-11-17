@@ -19,12 +19,19 @@
 <script>
   window.OneSignalDeferred = window.OneSignalDeferred || [];
   OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "757fc4cb-22d1-4c23-8f53-6147e12e755c",
-      notifyButton: {
-        enable: true,
-      },
-    });
+    // Only initialize OneSignal in production or allowed domains
+    const allowedDomains = ['egyptvisit.web.app', 'localhost'];
+    const currentDomain = window.location.hostname;
+    
+    if (allowedDomains.some(domain => currentDomain.includes(domain))) {
+      await OneSignal.init({
+        appId: "757fc4cb-22d1-4c23-8f53-6147e12e755c",
+        allowLocalhostAsSecureOrigin: true, // Allow localhost for testing
+        notifyButton: {
+          enable: true,
+        },
+      });
+    }
   });
 </script>
    <!-- iOS home screen icon -->
