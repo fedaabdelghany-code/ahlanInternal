@@ -18,16 +18,15 @@
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
   window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(function(OneSignal) {
-    OneSignal.init({
-      appId: "4a9a23c3-b08e-40da-b275-7d01565ac7f3",
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "757fc4cb-22d1-4c23-8f53-6147e12e755c",
       notifyButton: {
         enable: true,
       },
     });
   });
 </script>
-
    <!-- iOS home screen icon -->
 <link rel="apple-touch-icon" href="assets/logoFinal.png">
   <meta name="mobile-web-app-capable" content="yes"/>

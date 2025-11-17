@@ -10,8 +10,7 @@ export const environment = {
   appId: "1:676588795200:web:3e1f9b5300c796d1ea36a5",
   measurementId: "G-8JEJ95ZNJL"
   },
-  hsefirebaseConfig: {  
-    apiKey: "AIzaSyAhq-FgcGDV9I6V29GouM0W23AOfNr41sw",
+  hsefirebaseConfig: {  apiKey: "AIzaSyAhq-FgcGDV9I6V29GouM0W23AOfNr41sw",
   authDomain: "mea-hseegyptonboarding-prod.firebaseapp.com",
   databaseURL: "https://mea-hseegyptonboarding-prod-default-rtdb.firebaseio.com",
   projectId: "mea-hseegyptonboarding-prod",

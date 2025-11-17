@@ -1,4 +1,4 @@
-importScripts('https://cdn.onesignal.com/sdks/OneSignalSDKWorker.js');
+importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
 
 self.addEventListener('message', function (event) {
   console.log('[Custom SW] Message received:', event.data);

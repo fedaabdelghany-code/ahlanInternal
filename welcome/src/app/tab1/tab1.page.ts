@@ -116,7 +116,9 @@ export class Tab1Page implements OnInit {
     this.loadExchangeRates();
     await this.loadUserData();
     this.determineBatch();
-    this.checkSafetyInductionStatus();
+  setTimeout(() => {
+    this.listenToSafetyInductionStatus();
+  }, 500); // wait 500ms (or adjust as needed)
   }
 
   determineBatch() {
@@ -183,52 +185,66 @@ export class Tab1Page implements OnInit {
       : this.getFirstNameFromEmail(this.email);
   }
 
-  async checkSafetyInductionStatus() {
-    console.log('[checkSafetyInductionStatus] Checking safety induction status...');
-    console.log('[checkSafetyInductionStatus] Email used for query:', this.email);
+async listenToSafetyInductionStatus() {
+  if (!this.email) return;
 
-    if (!this.email) {
-      console.warn('[checkSafetyInductionStatus] Email is empty. Skipping Firestore query.');
-      this.safetyInductionCompleted = null;
-      return;
-    }
+  const normalizedEmail = this.email.toLowerCase();
 
-    const normalizedEmail = this.email.toLowerCase();
-
-    // Check if the HSE app is already initialized
-    let hseApp;
-    if (!firebase.apps.some(app => app.name === 'HSEApp')) {
-      const hsefirebaseConfig = environment.hsefirebaseConfig;
-      hseApp = firebase.initializeApp(hsefirebaseConfig, 'HSEApp');
-    } else {
-      hseApp = firebase.app('HSEApp');
-    }
-
-    const hseFirestore = hseApp.firestore();
-
-    try {
-      const userDoc = await hseFirestore
-        .collection('userProgress')
-        .where('email', '==', normalizedEmail)
-        .get();
-
-      if (!userDoc.empty) {
-        const userData = userDoc.docs[0].data();
-        this.safetyInductionCompleted = userData['questionnairePassed'];
-        this.safetyInductionLink = this.safetyInductionCompleted
-          ? 'https://mea-hseegyptonboarding-prod.web.app/congratulations.html'
-          : 'https://mea-hseegyptonboarding-prod.web.app/';
-        console.log('[checkSafetyInductionStatus] Status loaded:', this.safetyInductionCompleted);
-      } else {
-        console.warn('[checkSafetyInductionStatus] No user data found for email:', this.email);
-        this.safetyInductionCompleted = false;
-        this.safetyInductionLink = 'https://mea-hseegyptonboarding-prod.web.app/';
-      }
-    } catch (error) {
-      console.error('[checkSafetyInductionStatus] Error fetching safety induction status:', error);
-      this.safetyInductionCompleted = null;
-    }
+  // Initialize HSE Firebase app
+  let hseApp;
+  if (!firebase.apps.some(app => app.name === 'HSEApp')) {
+    hseApp = firebase.initializeApp(environment.hsefirebaseConfig, 'HSEApp');
+  } else {
+    hseApp = firebase.app('HSEApp');
   }
+
+  const hseFirestore = hseApp.firestore();
+
+  const updateLink = (docData?: any) => {
+    if (!docData || !docData['questionnairePassed']) {
+      // User doesn't exist or questionnaire not passed
+      this.safetyInductionCompleted = false;
+      this.safetyInductionLink = 'https://mea-hseegyptonboarding-prod.web.app/';
+    } else {
+      // User exists and questionnaire passed
+      this.safetyInductionCompleted = true;
+      this.safetyInductionLink = 'https://mea-hseegyptonboarding-prod.web.app/congratulations.html';
+    }
+  };
+
+  // Initial fetch
+  try {
+    const snapshot = await hseFirestore
+      .collection('userProgress')
+      .where('email', '==', normalizedEmail)
+      .get();
+
+    if (!snapshot.empty) {
+      updateLink(snapshot.docs[0].data());
+    } else {
+      // No document found
+      updateLink();
+    }
+  } catch (err) {
+    console.error('[SafetyInduction] Initial fetch error:', err);
+    updateLink(); // fallback to onboarding
+  }
+
+  // Real-time listener
+  hseFirestore
+    .collection('userProgress')
+    .where('email', '==', normalizedEmail)
+    .onSnapshot(
+      snapshot => {
+        if (!snapshot.empty) {
+          updateLink(snapshot.docs[0].data());
+        } else {
+          updateLink(); // no document yet
+        }
+      },
+      error => console.error('[SafetyInduction] Snapshot error:', error)
+    );
+}
 
   getFirstNameFromEmail(email: string): string {
     if (!email) return '';

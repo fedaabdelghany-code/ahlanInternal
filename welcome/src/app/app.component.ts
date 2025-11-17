@@ -35,12 +35,14 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     this.initApp();
     this.checkInstallSupport();
     this.handleBeforeInstallPrompt();
     this.checkForAppUpdates();
     // this.initializeOneSignal(); // ✅ Initialize OneSignal here
     console.log('[PWA] Running in standalone?', this.isRunningStandalone);
+    
   }
 
   checkForAppUpdates() {
