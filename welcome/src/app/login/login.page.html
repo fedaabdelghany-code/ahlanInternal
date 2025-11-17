@@ -23,18 +23,9 @@
 
     <!-- Login Form -->
     <div class="login-form">
-      <ion-item class="input-item">
-        <ion-label position="floating">Email</ion-label>
-        <ion-input [(ngModel)]="email" type="email"></ion-input>
-      </ion-item>
-
-      <ion-item class="input-item">
-        <ion-label position="floating">Password</ion-label>
-        <ion-input [(ngModel)]="password" type="password"></ion-input>
-      </ion-item>
-
-      <ion-button class="login-btn" expand="block" (click)="login()">
-        Login
+      <ion-button class="google-btn" expand="block" (click)="signInWithGoogle()">
+        <ion-icon slot="start" name="logo-google"></ion-icon>
+        SIGN IN WITH GOOGLE
       </ion-button>
     </div>
   </div>

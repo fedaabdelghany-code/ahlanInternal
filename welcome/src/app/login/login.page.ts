@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { IonicModule, LoadingController, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import firebase from 'firebase/compat/app';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,6 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./login.page.scss']
 })
 export class LoginPage {
-  email = '';
-  password = '';
-
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
@@ -23,18 +21,21 @@ export class LoginPage {
     private toastCtrl: ToastController
   ) {}
 
-  async login() {
-const loading = await this.loadingCtrl.create({
-  spinner: 'crescent',
-  cssClass: 'custom-loading',
-  showBackdrop: false,
-  translucent: true,
-});
+  async signInWithGoogle() {
+    const loading = await this.loadingCtrl.create({
+      spinner: 'crescent',
+      cssClass: 'custom-loading',
+      showBackdrop: false,
+      translucent: true,
+    });
 
     await loading.present();
 
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+
     this.afAuth
-      .signInWithEmailAndPassword(this.email, this.password)
+      .signInWithPopup(provider)
       .then(() => {
         loading.dismiss();
         this.router.navigateByUrl('tabs/tab1', { replaceUrl: true });
@@ -42,19 +43,16 @@ const loading = await this.loadingCtrl.create({
       .catch(async (error) => {
         loading.dismiss();
 
-        let message = 'An unexpected error occurred. Please try again.';
+        let message = 'Unable to sign in with Google. Please try again.';
         switch (error.code) {
-          case 'auth/invalid-email':
-            message = 'The email address is invalid.';
+          case 'auth/popup-closed-by-user':
+            message = 'The sign-in popup was closed before completing.';
             break;
-          case 'auth/user-disabled':
-            message = 'This account has been disabled.';
+          case 'auth/cancelled-popup-request':
+            message = 'Multiple sign-in attempts detected. Please try again.';
             break;
-          case 'auth/user-not-found':
-            message = 'No user found with this email.';
-            break;
-          case 'auth/wrong-password':
-            message = 'Incorrect password.';
+          case 'auth/network-request-failed':
+            message = 'Network error. Check your connection and try again.';
             break;
         }
 

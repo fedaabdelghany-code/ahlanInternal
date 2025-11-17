@@ -123,15 +123,20 @@
 }
 
 .google-btn {
-  --background: white;
-  --color: #5f6368;
-  --border-color: #dadce0;
-  --border-width: 1px;
-  margin-bottom: 16px;
-  font-weight: 500;
-  
+  margin-top: 12px;
+  --background: #4285f4;
+  --background-hover: #357ae8;
+  --background-activated: #357ae8;
+  --color: #ffffff;
+  --border-radius: 12px;
+  --box-shadow: 0 6px 16px rgba(66, 133, 244, 0.35);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
   ion-icon {
     font-size: 20px;
+    color: #ffffff;
   }
 }
 
