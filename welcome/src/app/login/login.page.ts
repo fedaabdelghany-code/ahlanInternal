@@ -22,22 +22,7 @@ export class LoginPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    // Handle redirect result when user returns from Google sign-in
-    // This is handled in app.component.ts to avoid race conditions
-    // Keeping this here as a fallback
-    try {
-      const result = await this.afAuth.getRedirectResult();
-      if (result.user) {
-        // User successfully signed in, navigate to main app
-        // Using replaceUrl to prevent back button issues
-        this.router.navigateByUrl('tabs/tab1', { replaceUrl: true });
-      }
-    } catch (error: any) {
-      // Handle any errors from the redirect
-      if (error.code) {
-        this.handleAuthError(error);
-      }
-    }
+    // Redirect result handling is centralized in app.component.ts.
   }
 
   async signInWithGoogle() {
@@ -53,20 +38,44 @@ export class LoginPage implements OnInit {
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
 
+    let redirectStarted = false;
+
     try {
-      // Use redirect instead of popup for better Safari and mobile compatibility
-      await this.afAuth.signInWithRedirect(provider);
-      // Note: The page will redirect away, so loading won't be dismissed here
-      // It will be handled when the user returns
+      // Force persistent login across app reloads/redirects.
+      await this.afAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+
+      try {
+        const result = await this.afAuth.signInWithPopup(provider);
+        if (result.user) {
+          await this.router.navigateByUrl('/tabs', { replaceUrl: true });
+        }
+        return;
+      } catch (popupError: any) {
+        const code = popupError?.code;
+        const canFallbackToRedirect =
+          code === 'auth/popup-blocked' ||
+          code === 'auth/operation-not-supported-in-this-environment';
+
+        if (canFallbackToRedirect) {
+          redirectStarted = true;
+          await this.afAuth.signInWithRedirect(provider);
+          return;
+        }
+
+        throw popupError;
+      }
     } catch (error: any) {
-      loading.dismiss();
-      this.handleAuthError(error);
+      await this.handleAuthError(error);
+    } finally {
+      if (!redirectStarted) {
+        await loading.dismiss();
+      }
     }
   }
 
   private async handleAuthError(error: any) {
     let message = 'Unable to sign in with Google. Please try again.';
-    
+
     if (error.code) {
       switch (error.code) {
         case 'auth/popup-closed-by-user':

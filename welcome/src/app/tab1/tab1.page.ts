@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { firstValueFrom, take } from 'rxjs';
 import firebase from 'firebase/compat/app';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -31,32 +32,11 @@ export class Tab1Page implements OnInit {
 
   // Email batch definitions
   icEmails = [
-    'mounir.ajaha@lafargeholcim.com',
-    'fatima-zahra.elalami@lafargeholcim.com',
-    'yulia.zhelobaeva@holcim.com',
-    'amina.khelfa@lafarge.com',
-    'fahd.bakalem@lafarge.com',
-    'abdelhadi.lardjane@lafarge.com',
-    'yuan-yuan.zhang@holcim.com',
-    'iqra.ashraf@lafargeholcim.com',
-    'mukesh.bhojwani@holcim.com',
-    'neha.padaval@holcim.com',
-    'abdallah.khashashneh@lafarge.com',
-    'shvan.migdad@lafarge.com',
-    'tereze.kandah@lafarge.com',
-    'preeti.rohera@holcim.com',
-    'amr.elmouafy@lafarge.com',
-    'adannaya.duru@lafarge.com',
-    'mohammad.nofal@lafarge.com',
     'feda.abdelghany@lafarge.com',
   ];
 
   financeEmails = [
-'steffen.kindler@holcim.com',
-'rajesh.surana@holcim.com',
-'madeleine.you@holcim.com',        
-'emily.elias@lafarge.com',
-
+  'emily.elias@lafarge.com'
 
   ];
 
@@ -102,23 +82,37 @@ export class Tab1Page implements OnInit {
   ];
 
   currentImageIndex = 0;
+  private safetyInductionUnsubscribe?: () => void;
 
   constructor(
     private weatherService: WeatherService,
     private exchangeService: ExchangeService,
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
+    private router: Router,
   ) {}
 
   async ngOnInit() {
     console.log('[ngOnInit] Initializing...');
+    const isAuthenticated = await this.loadUserData();
+    if (!isAuthenticated) {
+      await this.router.navigateByUrl('/login', { replaceUrl: true });
+      return;
+    }
+
     this.loadWeather();
     this.loadExchangeRates();
-    await this.loadUserData();
     this.determineBatch();
-  setTimeout(() => {
-    this.listenToSafetyInductionStatus();
-  }, 500); // wait 500ms (or adjust as needed)
+
+    // Query HSE progress only for users we recognize in configured batches.
+    if (this.userBatch !== 'NONE') {
+      setTimeout(() => {
+        this.listenToSafetyInductionStatus();
+      }, 500);
+    } else {
+      this.safetyInductionCompleted = false;
+      this.safetyInductionLink = 'https://mea-hseegyptonboarding-prod.web.app/';
+    }
   }
 
   determineBatch() {
@@ -170,11 +164,12 @@ export class Tab1Page implements OnInit {
     });
   }
 
-  async loadUserData(): Promise<void> {
+  async loadUserData(): Promise<boolean> {
     const user = await firstValueFrom(this.afAuth.authState.pipe(take(1)));
     if (!user) {
       this.firstName = 'Visitor';
-      return;
+      this.email = '';
+      return false;
     }
 
     this.email = user.email ?? '';
@@ -183,6 +178,8 @@ export class Tab1Page implements OnInit {
     this.firstName = this.email.toLowerCase() === 'y.srinivasarao@lafarge.com'
       ? 'Yadagani'
       : this.getFirstNameFromEmail(this.email);
+
+    return true;
   }
 
 async listenToSafetyInductionStatus() {
@@ -226,12 +223,18 @@ async listenToSafetyInductionStatus() {
       updateLink();
     }
   } catch (err) {
-    console.error('[SafetyInduction] Initial fetch error:', err);
+    const code = (err as any)?.code;
+    if (code === 'permission-denied' || code === 'firestore/permission-denied') {
+      console.warn('[SafetyInduction] Access denied for userProgress; using default onboarding link.');
+    } else {
+      console.error('[SafetyInduction] Initial fetch error:', err);
+    }
     updateLink(); // fallback to onboarding
+    return;
   }
 
   // Real-time listener
-  hseFirestore
+  this.safetyInductionUnsubscribe = hseFirestore
     .collection('userProgress')
     .where('email', '==', normalizedEmail)
     .onSnapshot(
@@ -242,8 +245,28 @@ async listenToSafetyInductionStatus() {
           updateLink(); // no document yet
         }
       },
-      error => console.error('[SafetyInduction] Snapshot error:', error)
+      error => {
+        const code = (error as any)?.code;
+        if (code === 'permission-denied' || code === 'firestore/permission-denied') {
+          console.warn('[SafetyInduction] Live updates disabled due to permission rules.');
+          updateLink();
+          if (this.safetyInductionUnsubscribe) {
+            this.safetyInductionUnsubscribe();
+            this.safetyInductionUnsubscribe = undefined;
+          }
+          return;
+        }
+
+        console.error('[SafetyInduction] Snapshot error:', error);
+      }
     );
+}
+
+ngOnDestroy() {
+  if (this.safetyInductionUnsubscribe) {
+    this.safetyInductionUnsubscribe();
+    this.safetyInductionUnsubscribe = undefined;
+  }
 }
 
   getFirstNameFromEmail(email: string): string {
@@ -289,7 +312,7 @@ async listenToSafetyInductionStatus() {
       case '2025-11-17':
         return 'Day 0 – Monday, November 17, 2025: Arrival';
       case '2025-11-18':
-        return this.userBatch === 'IC' 
+        return this.userBatch === 'IC'
           ? 'Day 1 – Tuesday, November 18, 2025: Internal Control Meeting'
           : 'Day 1 – Tuesday, November 18, 2025: Sokhna Plant Visit';
       case '2025-11-19':
@@ -305,7 +328,7 @@ async listenToSafetyInductionStatus() {
     }
   }
 
-  
+
   // IC Schedule Data
   icScheduleData: { [date: string]: {
     speaker: string,

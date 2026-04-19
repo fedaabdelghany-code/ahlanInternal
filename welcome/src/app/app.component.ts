@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { MenuController, PopoverController } from '@ionic/angular';
 import { ContactPopoverComponent } from './contact-popover/contact-popover.component';
 import { SwUpdate } from '@angular/service-worker';
+import { distinctUntilChanged, skip } from 'rxjs';
 
 declare global {
   interface Window {
@@ -42,7 +43,7 @@ export class AppComponent implements OnInit {
     this.checkForAppUpdates();
     // this.initializeOneSignal(); // ✅ Initialize OneSignal here
     console.log('[PWA] Running in standalone?', this.isRunningStandalone);
-    
+
   }
 
   checkForAppUpdates() {
@@ -115,20 +116,26 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl('/splash-screen');
     await this.delay(2000);
 
-    // First, check if we're returning from a redirect
+    // Process redirect result once, then rely on authState.
+    let redirectUser: any = null;
     try {
-      const result = await this.afAuth.getRedirectResult();
-      if (result.user) {
-        // User just signed in via redirect, navigate to tabs
-        this.router.navigateByUrl('/tabs', { replaceUrl: true });
-        return; // Exit early, don't set up the authState subscription yet
-      }
+      const redirectResult = await this.afAuth.getRedirectResult();
+      redirectUser = redirectResult?.user ?? null;
     } catch (error) {
       console.error('Error getting redirect result:', error);
     }
 
-    // Now subscribe to auth state changes
-    this.afAuth.authState.subscribe(user => {
+    const currentUser = redirectUser ?? await this.afAuth.currentUser;
+    if (currentUser) {
+      this.router.navigateByUrl('/tabs', { replaceUrl: true });
+    } else {
+      this.router.navigateByUrl('/login', { replaceUrl: true });
+    }
+
+    this.afAuth.authState.pipe(
+      distinctUntilChanged((prev, curr) => prev?.uid === curr?.uid),
+      skip(1)
+    ).subscribe(user => {
       if (user) {
         this.router.navigateByUrl('/tabs', { replaceUrl: true });
       } else {

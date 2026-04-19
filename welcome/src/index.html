@@ -19,18 +19,22 @@
 <script>
   window.OneSignalDeferred = window.OneSignalDeferred || [];
   OneSignalDeferred.push(async function(OneSignal) {
-    // Only initialize OneSignal in production or allowed domains
-    const allowedDomains = ['egyptvisit.web.app', 'localhost'];
+    // Initialize OneSignal only on the production host configured in OneSignal.
+    // This prevents local dev from throwing domain restriction errors.
+    const allowedDomains = ['egyptvisit.web.app'];
     const currentDomain = window.location.hostname;
-    
+
     if (allowedDomains.some(domain => currentDomain.includes(domain))) {
-      await OneSignal.init({
-        appId: "757fc4cb-22d1-4c23-8f53-6147e12e755c",
-        allowLocalhostAsSecureOrigin: true, // Allow localhost for testing
-        notifyButton: {
-          enable: true,
-        },
-      });
+      try {
+        await OneSignal.init({
+          appId: "757fc4cb-22d1-4c23-8f53-6147e12e755c",
+          notifyButton: {
+            enable: true,
+          },
+        });
+      } catch (err) {
+        console.warn('OneSignal init skipped:', err);
+      }
     }
   });
 </script>
