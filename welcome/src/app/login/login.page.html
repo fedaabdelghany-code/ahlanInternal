@@ -7,15 +7,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content 
-  class="login-page" 
-  [fullscreen]="true"
-  scrollY="true" 
+<ion-content
+  class="login-page"
+  [fullscreen]="false"
+  [scrollY]="false"
   keyboardResizes="body"
 >
 
   <div class="login-container">
-    
+
     <!-- White Card Container -->
     <div class="login-card">
       <!-- Logo Image -->
@@ -25,17 +25,32 @@
 
       <!-- App Title -->
       <h1 class="app-title">Ahlan App</h1>
-      
+
       <!-- Welcome Message -->
       <p class="welcome-message">Welcome! Please sign in to continue</p>
 
       <!-- Login Form -->
       <div class="login-form">
         <ion-button class="google-btn" expand="block" (click)="signInWithGoogle()">
-          <ion-icon slot="start" name="logo-google"></ion-icon>
-          SIGN IN WITH GOOGLE
+          <span class="google-icon" slot="start" aria-hidden="true">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
+              <path fill="#FBBC05" d="M12 10.2v3.9h5.4c-.2 1.2-1.4 3.6-5.4 3.6-3.2 0-5.9-2.7-5.9-6s2.7-6 5.9-6c1.8 0 3 .8 3.7 1.4l2.5-2.4C16.7 3.3 14.6 2.5 12 2.5 6.8 2.5 2.6 6.8 2.6 12s4.2 9.5 9.4 9.5c5.4 0 8.9-3.8 8.9-9.1 0-.6-.1-1.1-.1-1.6H12z"/>
+              <path fill="#34A853" d="M12 21.5c2.5 0 4.6-.8 6.2-2.2l-2.9-2.4c-.8.6-1.9 1.1-3.3 1.1-2.8 0-5.1-1.9-5.9-4.5l-3.1 2.4c1.5 3.1 4.6 5.6 9 5.6z"/>
+              <path fill="#EA4335" d="M3.7 7.6l3.2 2.3c.8-2.2 2.9-3.8 5.1-3.8 1.8 0 3 .8 3.7 1.4l2.5-2.4C16.7 3.3 14.6 2.5 12 2.5c-3.6 0-6.8 2-8.3 5.1z"/>
+              <path fill="#4285F4" d="M20.9 12.4c0-.6-.1-1.1-.1-1.6H12v3.9h5.4c-.3 1.4-1.1 2.5-2.1 3.2l2.9 2.4c1.7-1.6 2.7-4 2.7-7.9z"/>
+            </svg>
+          </span>
+          Sign in with Google
         </ion-button>
       </div>
     </div>
   </div>
+
+  <footer class="login-footer">
+    <div class="footer-content">
+      <span class="footer-copyright">© 2026 Holcim. All rights reserved.</span>
+      <span class="footer-divider">|</span>
+      <span class="footer-credit">Developed by Egypt Digital Team</span>
+    </div>
+  </footer>
 </ion-content>
