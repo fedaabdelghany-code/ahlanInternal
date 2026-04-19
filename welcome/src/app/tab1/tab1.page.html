@@ -34,15 +34,13 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-card *ngIf="safetyInductionCompleted !== null" class="safety-card">
-      <ion-card-content>
+    <ion-card class="safety-card" (click)="openSafetyInductionModal()">
+      <ion-card-content class="safety-content">
         <img src="assets/safety.png" alt="Safety Icon" class="safety-icon" />
-        <p *ngIf="safetyInductionCompleted === false">
-          <a [href]="safetyInductionLink" target="_blank">Safety Induction</a>
-        </p>
-        <p *ngIf="safetyInductionCompleted === true">
-          <a [href]="safetyInductionLink" target="_blank">View Permit</a>
-        </p>
+        <div class="safety-text-block">
+          <h3>Safety Induction</h3>
+          <p>{{ completedInductionsCount }} of {{ totalInductionsRequired }} completed</p>
+        </div>
       </ion-card-content>
     </ion-card>
 

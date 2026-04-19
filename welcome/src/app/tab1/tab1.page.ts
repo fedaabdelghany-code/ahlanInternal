@@ -7,6 +7,8 @@ import { firstValueFrom, take } from 'rxjs';
 import firebase from 'firebase/compat/app';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { SafetyInductionModalComponent } from './safety-induction-modal/safety-induction-modal.component';
 
 @Component({
   selector: 'app-tab1',
@@ -24,9 +26,15 @@ export class Tab1Page implements OnInit {
   email: string = '';
   showEnableButton = false;
   showPrompt= false;
-  safetyInductionCompleted: boolean | null = null;
-  safetyInductionLink: string = '';
   userBatch: 'IC' | 'FINANCE' | 'NONE' = 'NONE';
+
+  // Dual-site safety induction tracking
+  safetyInductions = {
+    sokhnaplant: { completed: false, link: 'https://mea-hseegyptonboarding-prod.web.app/sokhnaplant' },
+    rmx: { completed: false, link: 'https://mea-hseegyptonboarding-prod.web.app/RMX' }
+  };
+  totalInductionsRequired = 2;
+  completedInductionsCount: number = 0;
 
   selectedDate: string = this.formatDate(new Date());
 
@@ -90,6 +98,7 @@ export class Tab1Page implements OnInit {
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
     private router: Router,
+    private modalController: ModalController
   ) {}
 
   async ngOnInit() {
@@ -104,15 +113,11 @@ export class Tab1Page implements OnInit {
     this.loadExchangeRates();
     this.determineBatch();
 
-    // Query HSE progress only for users we recognize in configured batches.
-    if (this.userBatch !== 'NONE') {
-      setTimeout(() => {
-        this.listenToSafetyInductionStatus();
-      }, 500);
-    } else {
-      this.safetyInductionCompleted = false;
-      this.safetyInductionLink = 'https://mea-hseegyptonboarding-prod.web.app/';
-    }
+    // Always query HSE progress for authenticated users.
+    // Batch assignment controls schedule visibility only.
+    setTimeout(() => {
+      this.listenToSafetyInductionStatus();
+    }, 500);
   }
 
   determineBatch() {
@@ -182,85 +187,93 @@ export class Tab1Page implements OnInit {
     return true;
   }
 
-async listenToSafetyInductionStatus() {
-  if (!this.email) return;
+  async listenToSafetyInductionStatus() {
+    if (!this.email) return;
 
-  const normalizedEmail = this.email.toLowerCase();
+    const normalizedEmail = this.email.toLowerCase();
+    const emailVariants = Array.from(new Set([this.email, normalizedEmail]));
 
-  // Initialize HSE Firebase app
-  let hseApp;
-  if (!firebase.apps.some(app => app.name === 'HSEApp')) {
-    hseApp = firebase.initializeApp(environment.hsefirebaseConfig, 'HSEApp');
-  } else {
-    hseApp = firebase.app('HSEApp');
-  }
-
-  const hseFirestore = hseApp.firestore();
-
-  const updateLink = (docData?: any) => {
-    if (!docData || !docData['questionnairePassed']) {
-      // User doesn't exist or questionnaire not passed
-      this.safetyInductionCompleted = false;
-      this.safetyInductionLink = 'https://mea-hseegyptonboarding-prod.web.app/';
+    // Initialize HSE Firebase app
+    let hseApp;
+    if (!firebase.apps.some(app => app.name === 'HSEApp')) {
+      hseApp = firebase.initializeApp(environment.hsefirebaseConfig, 'HSEApp');
     } else {
-      // User exists and questionnaire passed
-      this.safetyInductionCompleted = true;
-      this.safetyInductionLink = 'https://mea-hseegyptonboarding-prod.web.app/congratulations.html';
+      hseApp = firebase.app('HSEApp');
     }
-  };
 
-  // Initial fetch
-  try {
-    const snapshot = await hseFirestore
-      .collection('userProgress')
-      .where('email', '==', normalizedEmail)
-      .get();
+    const hseFirestore = hseApp.firestore();
 
-    if (!snapshot.empty) {
-      updateLink(snapshot.docs[0].data());
-    } else {
-      // No document found
-      updateLink();
-    }
-  } catch (err) {
-    const code = (err as any)?.code;
-    if (code === 'permission-denied' || code === 'firestore/permission-denied') {
-      console.warn('[SafetyInduction] Access denied for userProgress; using default onboarding link.');
-    } else {
-      console.error('[SafetyInduction] Initial fetch error:', err);
-    }
-    updateLink(); // fallback to onboarding
-    return;
-  }
+    const updateInductionStatus = (docData?: any) => {
+      if (!docData) {
+        // User doesn't exist yet
+        this.safetyInductions.sokhnaplant.completed = false;
+        this.safetyInductions.rmx.completed = false;
+      } else {
+        // Support both legacy and current key naming from HSE project.
+        const sokhnaPlantData = docData['sokhnaPlant'] || docData['sokhnaplant'] || {};
+        const rmxData = docData['RMX'] || docData['rmx'] || {};
 
-  // Real-time listener
-  this.safetyInductionUnsubscribe = hseFirestore
-    .collection('userProgress')
-    .where('email', '==', normalizedEmail)
-    .onSnapshot(
-      snapshot => {
-        if (!snapshot.empty) {
-          updateLink(snapshot.docs[0].data());
-        } else {
-          updateLink(); // no document yet
-        }
-      },
-      error => {
-        const code = (error as any)?.code;
-        if (code === 'permission-denied' || code === 'firestore/permission-denied') {
-          console.warn('[SafetyInduction] Live updates disabled due to permission rules.');
-          updateLink();
-          if (this.safetyInductionUnsubscribe) {
-            this.safetyInductionUnsubscribe();
-            this.safetyInductionUnsubscribe = undefined;
-          }
-          return;
-        }
-
-        console.error('[SafetyInduction] Snapshot error:', error);
+        this.safetyInductions.sokhnaplant.completed = sokhnaPlantData.questionnairePassed === true;
+        this.safetyInductions.rmx.completed = rmxData.questionnairePassed === true;
       }
-    );
-}
+
+      // Update count of completed inductions
+      this.completedInductionsCount = Object.values(this.safetyInductions).filter(s => s.completed).length;
+      console.log('[SafetyInduction] Updated status - Sokhna:', this.safetyInductions.sokhnaplant.completed, 'RMX:', this.safetyInductions.rmx.completed, 'Total:', this.completedInductionsCount);
+    };
+
+    const userProgressCollection = hseFirestore.collection('userProgress');
+    const baseQuery =
+      emailVariants.length > 1
+        ? userProgressCollection.where('email', 'in', emailVariants)
+        : userProgressCollection.where('email', '==', normalizedEmail);
+
+    // Initial fetch
+    try {
+      const snapshot = await baseQuery.get();
+
+      if (!snapshot.empty) {
+        updateInductionStatus(snapshot.docs[0].data());
+      } else {
+        // No document found
+        updateInductionStatus();
+      }
+    } catch (err) {
+      const code = (err as any)?.code;
+      if (code === 'permission-denied' || code === 'firestore/permission-denied') {
+        console.warn('[SafetyInduction] Access denied for userProgress; using default onboarding link.');
+      } else {
+        console.error('[SafetyInduction] Initial fetch error:', err);
+      }
+      updateInductionStatus(); // fallback to incomplete
+      return;
+    }
+
+    // Real-time listener
+    this.safetyInductionUnsubscribe = baseQuery.onSnapshot(
+        snapshot => {
+          if (!snapshot.empty) {
+            updateInductionStatus(snapshot.docs[0].data());
+          } else {
+            updateInductionStatus(); // no document yet
+          }
+        },
+        error => {
+          const code = (error as any)?.code;
+          if (code === 'permission-denied' || code === 'firestore/permission-denied') {
+            console.warn('[SafetyInduction] Live updates disabled due to permission rules.');
+            updateInductionStatus();
+            if (this.safetyInductionUnsubscribe) {
+              this.safetyInductionUnsubscribe();
+              this.safetyInductionUnsubscribe = undefined;
+            }
+            return;
+          }
+
+          console.error('[SafetyInduction] Snapshot error:', error);
+        }
+      );
+  }
 
 ngOnDestroy() {
   if (this.safetyInductionUnsubscribe) {
@@ -268,6 +281,102 @@ ngOnDestroy() {
     this.safetyInductionUnsubscribe = undefined;
   }
 }
+
+  /**
+   * Get dynamic button text based on induction completion status
+   */
+  getSafetyInductionButtonText(): string {
+    if (this.completedInductionsCount === this.totalInductionsRequired) {
+      return 'View Completed';
+    }
+
+    if (!this.safetyInductions.sokhnaplant.completed) {
+      return 'Start Sokhna Plant';
+    }
+
+    if (!this.safetyInductions.rmx.completed) {
+      return 'Continue RMX';
+    }
+
+    return 'Start Sokhna Plant';
+  }
+
+  /**
+   * Get the next incomplete induction site
+   */
+  getNextIncompleteInduction(): 'sokhnaplant' | 'rmx' | null {
+    if (!this.safetyInductions.sokhnaplant.completed) {
+      return 'sokhnaplant';
+    }
+    if (!this.safetyInductions.rmx.completed) {
+      return 'rmx';
+    }
+    return null;
+  }
+
+  /**
+   * Get the appropriate link based on induction state
+   */
+  getSafetyInductionLink(): string {
+    const nextIncomplete = this.getNextIncompleteInduction();
+
+    if (this.completedInductionsCount === this.totalInductionsRequired) {
+      // Both completed - show congratulations for the last one completed
+      return this.safetyInductions.rmx.completed
+        ? 'https://mea-hseegyptonboarding-prod.web.app/RMX/congratulations.html'
+        : 'https://mea-hseegyptonboarding-prod.web.app/sokhnaplant/congratulations.html';
+    }
+
+    if (nextIncomplete === 'sokhnaplant') {
+      return this.safetyInductions.sokhnaplant.link;
+    }
+
+    if (nextIncomplete === 'rmx') {
+      return this.safetyInductions.rmx.link;
+    }
+
+    return 'https://mea-hseegyptonboarding-prod.web.app/';
+  }
+
+  /**
+   * Open modal to show induction details and progress
+   */
+  async openSafetyInductionModal() {
+    const modal = await this.modalController.create({
+      component: SafetyInductionModalComponent,
+      componentProps: {
+        safetyInductions: this.safetyInductions,
+        completedCount: this.completedInductionsCount,
+        totalRequired: this.totalInductionsRequired
+      },
+      cssClass: 'safety-induction-modal'
+    });
+
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+
+    // If user clicked a site button, navigate to it
+    if (data?.site) {
+      const link = data.site === 'sokhnaplant'
+        ? this.safetyInductions.sokhnaplant.link
+        : this.safetyInductions.rmx.link;
+      window.open(link, '_blank');
+    }
+  }
+
+  /**
+   * Handle safety induction card click
+   */
+  async onSafetyInductionCardClick() {
+    if (this.completedInductionsCount === this.totalInductionsRequired) {
+      // Both completed - open modal to show progress
+      await this.openSafetyInductionModal();
+    } else {
+      // Navigate to next incomplete induction
+      const link = this.getSafetyInductionLink();
+      window.open(link, '_blank');
+    }
+  }
 
   getFirstNameFromEmail(email: string): string {
     if (!email) return '';

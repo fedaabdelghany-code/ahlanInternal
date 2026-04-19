@@ -1,4 +1,4 @@
-/* Hero Section */
+﻿/* Hero Section */
 .greeting-hero {
   position: relative;
   width: 100%;
@@ -121,7 +121,7 @@
   }
 }
 
-/* 3‑row flex layout for both cards */
+/* 3ÔÇærow flex layout for both cards */
 .weather-content,
 .highlight-content {
   display: flex;
@@ -292,28 +292,58 @@
 
 .safety-card {
   margin: 12px;
-  padding: 8px 8px;
-  text-align: center;
+  padding: 10px 12px;
+  border-radius: 12px;
   background-color: #f9f9f9;
-  border-radius: 8px;
-  font-size: 0.85rem;
+  border: 1px solid #dbe7ef;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.safety-card a {
-  color: #0074a6;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.8rem;
-  font-weight: 400;
+.safety-card:active {
+  transform: translateY(1px);
 }
 
-.safety-card a:hover {
-  text-decoration: underline;
+.safety-card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
-.safety-icon {
+
+.safety-content {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  width: 40px;
-  height: 40px;
-  margin-bottom: 2px;
+  justify-content: center;
+  gap: 8px;
+  min-height: 90px;
+}
+
+.safety-icon {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  margin: 0;
   filter: brightness(0) saturate(100%) invert(71%) sepia(54%) saturate(691%) hue-rotate(33deg) brightness(97%) contrast(88%);
+
+}
+
+.safety-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  align-items: center;
+  text-align: center;
+}
+
+.safety-text-block h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1d4370;
+}
+
+.safety-text-block p {
+  margin: 0;
+  font-size: 0.84rem;
+  color: #5d6b75;
 }
