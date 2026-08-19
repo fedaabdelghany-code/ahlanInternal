@@ -4,47 +4,57 @@
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
     <ion-title class="custom-title">Sokhna Plant Companion</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="info-btn">
+        <ion-icon name="information-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="dashboard-content">
 
-  <!-- Short Intro -->
-  <ion-card class="intro-card ion-margin-vertical">
-    <ion-card-content class="ion-text-center">
-      <h2 class="intro-title">Welcome to Egypt!</h2>
-      <p class="intro-description">
-        Your curated itinerary blends business with discovery for a seamless experience.
-      </p>
-    </ion-card-content>
-  </ion-card>
+  <!-- Holcim Dark Navy Hero Banner Card -->
+  <div class="hero-banner-card">
+    <span class="badge-month">August 2026</span>
+    <h1 class="hero-main-title">Your Egypt Visit</h1>
+    <p class="hero-sub-text">5 days · Sokhna · Cairo </p>
+  </div>
 
-  <!-- Dynamic Itinerary Section -->
-  <section class="itinerary-section" *ngIf="userBatch !== 'NONE'">
-    <h2 class="section-title" style="color: #1d4370">Your Visit Itinerary</h2>
-    <div class="itinerary-cards">
+  <!-- Dynamic Timeline Itinerary Section -->
+  <section class="itinerary-timeline-section" *ngIf="userBatch !== 'NONE'">
+    <div class="timeline-container">
 
       <!-- Loop through schedule dates -->
       <ng-container *ngFor="let date of scheduleDates">
-        <!-- Day Header Card -->
-        <ion-card class="day-header-card">
-          <ion-card-header>
-            <ion-card-title>{{ getDayTitle(date) }}</ion-card-title>
-          </ion-card-header>
-        </ion-card>
+        <!-- Day Title Header -->
+        <h2 class="timeline-day-title">{{ getDayTitle(date) }}</h2>
 
-        <!-- Events for this day -->
-        <ion-card 
-          *ngFor="let event of scheduleData[date]" 
-          class="itinerary-card"
-          [ngClass]="event.color">
-          <ion-card-header>
-            <ion-card-title>{{ event.title }}</ion-card-title>
-            <ion-card-subtitle>
-              <ion-icon name="time-outline"></ion-icon> {{ event.time }}
-            </ion-card-subtitle>
-          </ion-card-header>
-        </ion-card>
+        <!-- Events list for this day -->
+        <div class="timeline-events-list">
+          <div *ngFor="let event of scheduleData[date]; let i = index; let isLast = last" class="timeline-item"
+            [class.highlighted]="i === 0 || event.color === 'schedule-blue' || event.color === 'schedule-darkBlue'">
+
+            <!-- Left Timeline Track with Circle Node -->
+            <div class="timeline-track">
+              <div class="timeline-node"></div>
+              <div class="timeline-line" *ngIf="!isLast"></div>
+            </div>
+
+            <!-- Event Details -->
+            <div class="timeline-content">
+              <div class="event-time-row">
+                <ion-icon name="time-outline" class="clock-icon"></ion-icon>
+                <span class="event-time-text">{{ event.time }}</span>
+              </div>
+              <h3 class="event-title-text">{{ event.title }}</h3>
+              <p *ngIf="event.description" class="event-description-text">
+                {{ event.description }}
+              </p>
+            </div>
+
+          </div>
+        </div>
       </ng-container>
 
       <p class="footer-text">
@@ -54,5 +64,11 @@
     </div>
   </section>
 
+  <!-- Empty State for Unregistered Users -->
+  <div class="empty-state-container" *ngIf="userBatch === 'NONE'">
+    <img src="assets/explore.png" alt="Holcim Logo" class="explore-img" />
+    <p class="no-events-text">Your email is not registered for this event itinerary. Please contact the administrator.
+    </p>
+  </div>
 
 </ion-content>

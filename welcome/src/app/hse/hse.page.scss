@@ -90,41 +90,83 @@ ion-button {
   to { opacity: 1; transform: scaleY(1); }
 }
 
-.didyou-card.expanded {
-  max-height: 1200px; /* taller only when expanded */
+.section-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #031a38;
+  margin: 24px 16px 14px 16px;
 }
 
+.scroll-wrapper {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.highlight-box,
 .didyou-card {
+  background: #031a38 !important; /* Holcim Deep Navy */
+  color: #ffffff !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 14px rgba(3, 26, 56, 0.15);
+  margin: 0 !important;
+  padding: 4px;
+  text-align: center;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
-  max-height: 170px;
 
-  .dyk-title {
-    font-weight: bold;
-    font-size: 1rem;
+  ion-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 16px 12px !important;
+  }
+
+  ion-icon {
+    color: #ffffff !important;
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+  }
+
+  h4, .highlight-title, .dyk-title {
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin: 4px 0 6px 0;
+    text-align: center;
+  }
+
+  p {
+    color: #94a3b8 !important;
+    font-size: 0.8rem;
+    line-height: 1.35;
+    margin: 0;
+    text-align: center;
   }
 
   .expand-icon {
-    float: right;
-    margin-top: 0.4rem;
-    font-size: 1.2rem;
+    color: #ffffff !important;
+    margin-top: 6px;
   }
 
   .expanded-content {
-    margin-top: 0.3rem;
-    transition: max-height 0.3s ease;
-    overflow-y: auto;
+    margin-top: 0.5rem;
+    width: 100%;
 
+    hr {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
   }
 
   .subpoint {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff !important;
     padding: 0.75rem;
     margin: 0.5rem 0;
     border-radius: 8px;
-    font-size: 0.95rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    color: #1d4370;
+    font-size: 0.85rem;
+    text-align: left;
   }
 }
 .did-you-know-section .dyk-img {

@@ -1,3 +1,15 @@
+.section-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #031a38;
+  margin: 24px 16px 14px 16px;
+}
+
+.scroll-wrapper {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
 .map-section-outer {
   padding: 0 16px; /* ✅ Adds left and right padding only */
 
@@ -102,17 +114,51 @@
 // }
 
 
-.highlight-box {
-  min-width: 220px;
-  border-radius: 16px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  max-height: 170px;
-}
-.highlight-icon {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 0.5rem;
-  filter: brightness(0) saturate(100%) invert(25%) sepia(42%) saturate(1030%) hue-rotate(172deg) brightness(95%) contrast(95%);
+.highlight-box,
+.didyou-card {
+  background: #031a38 !important; /* Holcim Deep Navy */
+  color: #ffffff !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 14px rgba(3, 26, 56, 0.15);
+  margin: 0 !important;
+  padding: 4px;
+  text-align: center;
+
+  ion-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 16px 12px !important;
+  }
+
+  ion-icon {
+    color: #ffffff !important;
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+  }
+
+  h4, .dyk-title {
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin: 4px 0 6px 0;
+    text-align: center;
+  }
+
+  p {
+    color: #94a3b8 !important;
+    font-size: 0.8rem;
+    line-height: 1.35;
+    margin: 0;
+    text-align: center;
+  }
+
+  .expand-icon {
+    color: #ffffff !important;
+    margin-top: 6px;
+  }
 }
 
 .greeting-hero {

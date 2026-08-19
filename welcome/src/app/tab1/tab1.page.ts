@@ -26,7 +26,7 @@ export class Tab1Page implements OnInit {
   email: string = '';
   showEnableButton = false;
   showPrompt= false;
-  userBatch: 'IC' | 'FINANCE' | 'NONE' = 'NONE';
+  userBatch: 'LD' | 'FINANCE' | 'NONE' = 'NONE';
 
   // Dual-site safety induction tracking
   safetyInductions = {
@@ -39,13 +39,35 @@ export class Tab1Page implements OnInit {
   selectedDate: string = this.formatDate(new Date());
 
   // Email batch definitions
-  icEmails = [
-    'feda.abdelghany@lafarge.com',
+  ldEmails = [
+    'imadeddine.charif@lafarge.com',
+    'brahim.amir@lafarge.com',
+    'mostafa.aissaoui@lafarge.com',
+    'simon.ndo@holcim.com',
+    'boris.yebga@holcim.com',
+    'haifu.wu@holcim.com',
+    'kezhen.yu@holcim.com',
+    'ahmed.yossry@lafarge.com',
+    'badawy.ahmed@lafarge.com',
+    'amr.attia@lafarge.com',
+    'rezhin.taimoor@lafarge.com',
+    'lava.mohamed@lafarge.com',
+    'renefabrice.djenontin@holcim.com',
+    'abdelfattah.aitbzou@lafargeholcim.com',
+    'amine.mnaouer@lafargeholcim.com',
+    'mohamed.fanane@lafargeholcim.com',
+    'ameeruddin.mohammad@holcim.com',
+    'samir.hasan-zade@holcim.com',
+    'kalai.mariappan@holcim.com',
+    'francis.echavez@holcim.com',
+    'ali.farouq.ext@holcim.com',
+    'habib.botros@holcim.com',
+    'handeer.hamada@holcim.com',
+    'alielsafty343@gmail.com'
   ];
 
   financeEmails = [
-  'emily.elias@lafarge.com'
-
+    'emily.elias@lafarge.com'
   ];
 
   formatDate(date: Date): string {
@@ -56,8 +78,8 @@ export class Tab1Page implements OnInit {
   }
 
   getScheduleHeaderText(): string {
-    if (this.userBatch === 'IC') {
-      return "IC Workshop Schedule";
+    if (this.userBatch === 'LD') {
+      return "L&D Workshop Schedule";
     } else if (this.userBatch === 'FINANCE') {
       return "Egypt Visit Schedule";
     }
@@ -71,8 +93,8 @@ export class Tab1Page implements OnInit {
   country = this.emailCountryMap[this.email] || 'Egypt';
   // Get the appropriate schedule based on user batch
   get scheduleData() {
-    if (this.userBatch === 'IC') {
-      return this.icScheduleData;
+    if (this.userBatch === 'LD') {
+      return this.ldScheduleData;
     } else if (this.userBatch === 'FINANCE') {
       return this.financeScheduleData;
     }
@@ -122,8 +144,8 @@ export class Tab1Page implements OnInit {
 
   determineBatch() {
     const normalizedEmail = this.email.toLowerCase();
-    if (this.icEmails.map(e => e.toLowerCase()).includes(normalizedEmail)) {
-      this.userBatch = 'IC';
+    if (this.ldEmails.map(e => e.toLowerCase()).includes(normalizedEmail)) {
+      this.userBatch = 'LD';
     } else if (this.financeEmails.map(e => e.toLowerCase()).includes(normalizedEmail)) {
       this.userBatch = 'FINANCE';
     } else {
@@ -418,28 +440,34 @@ ngOnDestroy() {
 
   getDayTitle(date: string): string {
     switch(date) {
-      case '2025-11-17':
-        return 'Day 0 – Monday, November 17, 2025: Arrival';
-      case '2025-11-18':
-        return this.userBatch === 'IC'
-          ? 'Day 1 – Tuesday, November 18, 2025: Internal Control Meeting'
-          : 'Day 1 – Tuesday, November 18, 2025: Sokhna Plant Visit';
-      case '2025-11-19':
-        return this.userBatch === 'IC'
-          ? 'Day 2 – Wednesday, November 19, 2025: SOK Plant & GEM Tour'
-          : 'Day 2 – Wednesday, November 19, 2025: RMX & Customer Visit';
-      case '2025-11-20':
-        return 'Day 3 – Thursday, November 20, 2025: Meeting with HSBC & SCB & Visit Wrap';
-      case '2025-11-21':
-        return 'Day 4 – Friday, November 21, 2025: Departure';
+      case '2026-08-23':
+        return this.userBatch === 'LD'
+          ? 'Day 1 – Sunday, August 23, 2026: Orientation & Leadership Kick-Off'
+          : 'Day 1 – Sunday, August 23, 2026: Arrival';
+      case '2026-08-24':
+        return this.userBatch === 'LD'
+          ? 'Day 2 – Monday, August 24, 2026: Sokhna Plant Visit & Digital Journey'
+          : 'Day 2 – Monday, August 24, 2026: Plant Visit';
+      case '2026-08-25':
+        return this.userBatch === 'LD'
+          ? 'Day 3 – Tuesday, August 25, 2026: NextGen Leadership & Team Effectiveness'
+          : 'Day 3 – Tuesday, August 25, 2026: Workshop';
+      case '2026-08-26':
+        return this.userBatch === 'LD'
+          ? 'Day 4 – Wednesday, August 26, 2026: Leading NextGen Performance & Coaching'
+          : 'Day 4 – Wednesday, August 26, 2026: Workshop';
+      case '2026-08-27':
+        return this.userBatch === 'LD'
+          ? 'Day 5 – Thursday, August 27, 2026: Vision Presentations, Feedback & Closure'
+          : 'Day 5 – Thursday, August 27, 2026: Closure';
       default:
         return date;
     }
   }
 
 
-  // IC Schedule Data
-  icScheduleData: { [date: string]: {
+  // L&D Schedule Data (AMEA NextGen Plant Manager Program - Cohort 2)
+  ldScheduleData: { [date: string]: {
     speaker: string,
     description: string,
     time: string;
@@ -447,240 +475,230 @@ ngOnDestroy() {
     location: string;
     color: string;
   }[] } = {
-    "2025-11-18": [
+    "2026-08-23": [
       {
-        "time": "07:30 - 07:50",
-        "title": "Coffee Break",
-        "location": "JW Marriott Meeting Room",
-        "color": "schedule-grey",
-        "speaker": "N/A",
-        "description": "Morning refreshments."
+        "time": "08:00 - 08:30",
+        "title": "Welcome, Agenda & Expectation Setting",
+        "location": "Hotel Meeting Room",
+        "color": "schedule-blue",
+        "speaker": "Rohit Singh / Mounia",
+        "description": "Opening kick-off session and agenda walkthrough."
       },
       {
-        "time": "07:50 - 08:00",
-        "title": "Safety Induction",
-        "location": "JW Marriott Meeting Room",
+        "time": "08:30 - 09:30",
+        "title": "Cement Manufacturing Strategy & Performance",
+        "location": "Hotel Meeting Room",
         "color": "schedule-darkBlue",
-        "speaker": "HSE Team",
-        "description": "Safety briefing and induction."
+        "speaker": "Najib Ribi",
+        "description": "Overview of manufacturing strategy and operational performance."
       },
       {
-        "time": "08:00 - 08:15",
-        "title": "Steffen KINDLER Speech",
-        "location": "JW Marriott Meeting Room",
-        "color": "schedule-blue",
-        "speaker": "Steffen Kindler",
-        "description": "Opening speech by Steffen Kindler."
-      },
-      {
-        "time": "08:15 - 08:30",
-        "title": "Rajesh SURANA Speech",
-        "location": "JW Marriott Meeting Room",
-        "color": "schedule-blue",
-        "speaker": "Rajesh Surana",
-        "description": "Speech by Rajesh Surana."
-      },
-      {
-        "time": "08:30 - 08:45",
-        "title": "Egypt CEO Speech",
-        "location": "JW Marriott Meeting Room",
-        "color": "schedule-blue",
-        "speaker": "Egypt CEO",
-        "description": "Address by the Egypt CEO."
-      },
-      {
-        "time": "08:45 - 09:30",
-        "title": "Regional Head of IC Speech – 2025 Initiatives/Achievements",
-        "location": "JW Marriott Meeting Room",
-        "color": "schedule-darkBlue",
-        "speaker": "Regional Head of IC",
-        "description": "Presentation on 2025 Internal Control initiatives and achievements."
-      },
-      {
-        "time": "09:30 - 09:50",
-        "title": "Coffee Break",
-        "location": "JW Marriott Meeting Room",
-        "color": "schedule-grey",
-        "speaker": "N/A",
-        "description": "Short break and refreshments."
-      },
-      {
-        "time": "09:50 - 11:00",
-        "title": "Atilla PARS & Federico EBERHARDT",
-        "location": "JW Marriott Meeting Room",
-        "color": "schedule-blue",
-        "speaker": "Atilla Pars & Federico Eberhardt",
-        "description": "Presentation session."
-      },
-      {
-        "time": "11:00 - 12:00",
-        "title": "MCS 58 - Secure Payment Means",
-        "location": "JW Marriott Meeting Room",
+        "time": "10:00 - 11:30",
+        "title": "Plant Challenges Overview",
+        "location": "Hotel Meeting Room",
         "color": "schedule-orange",
-        "speaker": "IC Team",
-        "description": "Discussion on secure payment means control."
+        "speaker": "Participants",
+        "description": "Participant introductions and overview of plant challenges."
       },
       {
-        "time": "12:00 - 12:30",
-        "title": "Presenting the Action Plan",
-        "location": "JW Marriott Meeting Room",
+        "time": "11:30 - 12:30",
+        "title": "People Strategy & Way Forward",
+        "location": "Hotel Meeting Room",
         "color": "schedule-blue",
-        "speaker": "IC Team",
-        "description": "Action plan presentation and review."
+        "speaker": "B K Mishra",
+        "description": "Strategic direction for people management and future roadmap."
       },
       {
-        "time": "12:30 - 13:15",
-        "title": "Lunch",
-        "location": "JW Marriott Meeting Room",
+        "time": "12:30 - 13:30",
+        "title": "Lunch Break",
+        "location": "Hotel Restaurant",
         "color": "schedule-grey",
         "speaker": "N/A",
-        "description": "Lunch break."
+        "description": "Midday lunch break."
       },
       {
-        "time": "13:15 - 14:15",
-        "title": "MCS 12 User Access Review/Cross SOD & MCS 34/35 Inventory/Cross SOD - TIS to ERP",
-        "location": "JW Marriott Meeting Room",
-        "color": "schedule-orange",
-        "speaker": "IC Team",
-        "description": "Review of user access controls and inventory management systems."
-      },
-      {
-        "time": "14:15 - 15:00",
-        "title": "Presenting the Action Plan + Q&A/Comments",
-        "location": "JW Marriott Meeting Room",
-        "color": "schedule-blue",
-        "speaker": "IC Team",
-        "description": "Action plan presentation with Q&A session."
-      },
-      {
-        "time": "15:00 - 15:15",
-        "title": "Short Break",
-        "location": "JW Marriott Meeting Room",
-        "color": "schedule-grey",
-        "speaker": "N/A",
-        "description": "Quick refreshment break."
-      },
-      {
-        "time": "15:15 - 16:15",
-        "title": "MCS 57 - Cash Collection & Cash Deposit",
-        "location": "JW Marriott Meeting Room",
-        "color": "schedule-orange",
-        "speaker": "IC Team",
-        "description": "Discussion on cash collection without Group treasury approval and cash deposit controls."
-      },
-      {
-        "time": "16:15 - 17:00",
-        "title": "Action Plan Presentation + Q&A/Comments",
-        "location": "JW Marriott Meeting Room",
-        "color": "schedule-blue",
-        "speaker": "IC Team",
-        "description": "Final action plan presentation with questions and comments."
-      },
-      {
-        "time": "17:00 - 18:00",
-        "title": "Transfer to Restaurant",
-        "location": "Cairo",
-        "color": "schedule-grey",
-        "speaker": "N/A",
-        "description": "Transportation to dinner venue."
+        "time": "13:30 - 16:30",
+        "title": "GALLUP: Kick Off Leadership Session",
+        "location": "Hotel Meeting Room",
+        "color": "schedule-purple",
+        "speaker": "Gallup Trainer",
+        "description": "CliftonStrengths 34 Results:\n• Breakdown of the Report & Getting the Most Out of It\n• Putting a Name to your strengths & Claiming Your Power and Edge\n• Aiming your strengths at Plant Leadership"
       },
       {
         "time": "18:00 - 21:00",
-        "title": "Dinner by the Nile",
-        "location": "Nile River Restaurant",
+        "title": "Outdoor Activity & Official Dinner 1",
+        "location": "Venue TBD",
         "color": "schedule-green",
         "speaker": "N/A",
-        "description": "Dinner at a restaurant by the Nile."
-      },
-      {
-        "time": "21:00 - 22:00",
-        "title": "Transfer to Hotel",
-        "location": "Cairo",
-        "color": "schedule-grey",
-        "speaker": "N/A",
-        "description": "Return transfer to JW Marriott Hotel."
+        "description": "Team bonding outdoor activity followed by official dinner."
       }
     ],
-    "2025-11-19": [
+    "2026-08-24": [
       {
-        "time": "07:30 - 08:45",
-        "title": "Transfer from JW to SOK Plant",
-        "location": "Cairo to Sokhna",
+        "time": "08:00 - 09:30",
+        "title": "Travel to Sokhna Plant & RMX Visit",
+        "location": "Sokhna / RMX",
         "color": "schedule-grey",
-        "speaker": "N/A",
-        "description": "Morning transfer to Sokhna Plant."
+        "speaker": "Local Team",
+        "description": "Departure to Sokhna Plant with RMX Plant Visit included."
       },
       {
-        "time": "08:45 - 09:00",
-        "title": "Refreshments",
-        "location": "SOK Plant",
-        "color": "schedule-grey",
-        "speaker": "N/A",
-        "description": "Welcome refreshments at the plant."
+        "time": "09:30 - 10:00",
+        "title": "Welcome to Sokhna Plant",
+        "location": "Sokhna Plant",
+        "color": "schedule-darkBlue",
+        "speaker": "Local Team",
+        "description": "Welcome session at Sokhna Plant by local leadership."
       },
       {
-        "time": "09:00 - 10:00",
-        "title": "Countries' Best Practices & Upcoming Projects",
-        "location": "SOK Plant",
+        "time": "10:00 - 11:30",
+        "title": "Plant Challenge Progress Review",
+        "location": "Sokhna Plant",
+        "color": "schedule-orange",
+        "speaker": "Participants",
+        "description": "4 participant presentations (20 minutes per participant)."
+      },
+      {
+        "time": "11:30 - 12:30",
+        "title": "Egypt Team Best Practices & Digital Journey",
+        "location": "Sokhna Plant",
         "color": "schedule-blue",
-        "speaker": "Regional Teams",
-        "description": "Presentation on international best practices and future projects."
+        "speaker": "Egypt Local Team",
+        "description": "Focusing on Digital Topics and Industrial Director Journey."
       },
       {
-        "time": "10:00 - 11:00",
-        "title": "Wrap Up - Q&A",
-        "location": "SOK Plant",
-        "color": "schedule-darkBlue",
-        "speaker": "IC Leadership",
-        "description": "Summary session with questions and answers."
-      },
-      {
-        "time": "11:00 - 11:30",
-        "title": "Refreshments – PPEs",
-        "location": "SOK Plant",
+        "time": "12:30 - 13:30",
+        "title": "Lunch Break",
+        "location": "Sokhna Plant",
         "color": "schedule-grey",
         "speaker": "N/A",
-        "description": "Break and preparation with personal protective equipment."
+        "description": "Lunch break at Sokhna Plant."
       },
       {
-        "time": "11:30 - 13:00",
-        "title": "Plant Tour",
-        "location": "SOK Plant",
+        "time": "13:30 - 17:00",
+        "title": "Sokhna Plant Tour & Operational Visit",
+        "location": "Sokhna Plant",
         "color": "schedule-darkBlue",
-        "speaker": "Plant Operations",
-        "description": "Comprehensive tour of the Sokhna Plant facilities."
+        "speaker": "Local Team",
+        "description": "Comprehensive guided tour of Sokhna Plant facilities."
+      }
+    ],
+    "2026-08-25": [
+      {
+        "time": "08:00 - 12:30",
+        "title": "GALLUP: Building NextGen Leaders Competence & Capability",
+        "location": "Hotel Meeting Room",
+        "color": "schedule-purple",
+        "speaker": "Gallup Trainer",
+        "description": "• What is great leadership?\n• Connecting CliftonStrengths reports & creating leadership development plans\n• Improving listening skills & receiving/giving feedback\n• Role of Communication in shaping & defining leadership"
       },
       {
-        "time": "13:00 - 14:45",
-        "title": "Transfer to Mena House",
-        "location": "Cairo",
+        "time": "12:30 - 13:30",
+        "title": "Lunch Break",
+        "location": "Hotel Restaurant",
         "color": "schedule-grey",
         "speaker": "N/A",
-        "description": "Transfer from plant to Mena House Hotel."
+        "description": "Midday lunch break."
       },
       {
-        "time": "14:45 - 18:00",
-        "title": "Dinner at Mena House",
-        "location": "Marriott Mena House",
+        "time": "13:30 - 16:00",
+        "title": "GALLUP: Leadership Team Effectiveness",
+        "location": "Hotel Meeting Room",
+        "color": "schedule-blue",
+        "speaker": "Gallup Trainer",
+        "description": "Leading with Holcim Spirit (People, Purpose, Performance):\n• What is required to lead a team to deliver results & drive execution excellence\n• Key learnings from top Plant Managers in Holcim\n• Your Strengths & Leadership Team Effectiveness & Creating a Vision for your Plant"
+      },
+      {
+        "time": "16:00 - 17:30",
+        "title": "Plant Challenge Progress Review",
+        "location": "Hotel Meeting Room",
+        "color": "schedule-orange",
+        "speaker": "Participants",
+        "description": "4 participant presentations (20 minutes per participant)."
+      }
+    ],
+    "2026-08-26": [
+      {
+        "time": "08:00 - 12:30",
+        "title": "GALLUP: Leading NextGen Performance",
+        "location": "Hotel Meeting Room",
+        "color": "schedule-purple",
+        "speaker": "Gallup Trainer",
+        "description": "• Leading the modern workforce & managing your strengths as you lead\n• Becoming a coach & ongoing coaching\n• Coaching conflict & performance-oriented coaching\n• Next steps and commitments"
+      },
+      {
+        "time": "12:30 - 13:30",
+        "title": "Lunch Break",
+        "location": "Hotel Restaurant",
+        "color": "schedule-grey",
+        "speaker": "N/A",
+        "description": "Midday lunch break."
+      },
+      {
+        "time": "13:30 - 16:00",
+        "title": "GALLUP: Coaching Essentials & Practice",
+        "location": "Hotel Meeting Room",
+        "color": "schedule-blue",
+        "speaker": "Gallup Trainer",
+        "description": "• Coaching essentials and practical practice\n• Building a strengths-based team\n• Plant placement practice coaching call (15:15 - 15:45)"
+      },
+      {
+        "time": "16:00 - 17:30",
+        "title": "Plant Challenge Progress Review",
+        "location": "Hotel Meeting Room",
+        "color": "schedule-orange",
+        "speaker": "Participants",
+        "description": "4 participant presentations (20 minutes per participant)."
+      },
+      {
+        "time": "18:00 - 21:00",
+        "title": "Official Dinner 2",
+        "location": "Venue TBD",
         "color": "schedule-green",
         "speaker": "N/A",
-        "description": "Dinner at the historic Mena House by the Pyramids."
+        "description": "Evening official dinner."
+      }
+    ],
+    "2026-08-27": [
+      {
+        "time": "08:00 - 11:30",
+        "title": "GALLUP: Participant Vision Presentations (x16)",
+        "location": "Hotel Meeting Room",
+        "color": "schedule-purple",
+        "speaker": "Gallup Trainer / Panel",
+        "description": "2 or 3 groups of participants presenting visions based on Holcim Plant Scenarios to a panel made up of course observers, Holcim L&D, and Gallup."
       },
       {
-        "time": "18:00 - 18:15",
-        "title": "Transfer from Mena House to Grand Egyptian Museum",
-        "location": "Cairo",
+        "time": "11:30 - 12:30",
+        "title": "GALLUP: Culture of Engagement & Case Study",
+        "location": "Hotel Meeting Room",
+        "color": "schedule-blue",
+        "speaker": "Gallup Trainer",
+        "description": "• Building and Sustaining a Culture of Engagement\n• Holcim Engagement Case Study"
+      },
+      {
+        "time": "12:30 - 13:30",
+        "title": "Lunch Break",
+        "location": "Hotel Restaurant",
         "color": "schedule-grey",
         "speaker": "N/A",
-        "description": "Short transfer to the Grand Egyptian Museum."
+        "description": "Midday lunch break."
       },
       {
-        "time": "18:15 - 20:30",
-        "title": "GEM Tour",
-        "location": "Grand Egyptian Museum",
-        "color": "schedule-purple",
-        "speaker": "N/A",
-        "description": "Guided tour of the Grand Egyptian Museum."
+        "time": "13:30 - 16:00",
+        "title": "Plant Challenge Progress Review",
+        "location": "Hotel Meeting Room",
+        "color": "schedule-orange",
+        "speaker": "Participants",
+        "description": "4 participant presentations (20 minutes per participant)."
+      },
+      {
+        "time": "16:00 - 17:00",
+        "title": "Feedback, Way Forward & Closure",
+        "location": "Hotel Meeting Room",
+        "color": "schedule-darkBlue",
+        "speaker": "Rohit Singh / Mounia",
+        "description": "Program wrap-up, final feedback, and closing remarks."
       }
     ]
   };
@@ -691,6 +709,8 @@ ngOnDestroy() {
     title: string;
     location: string;
     color: string;
+    speaker?: string;
+    description?: string;
   }[] } = {
     "2025-11-17": [
       {
