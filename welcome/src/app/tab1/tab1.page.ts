@@ -397,6 +397,19 @@ ngOnDestroy() {
         return 'Bonjour';
       case 'india':
         return 'Namaste';
+      case 'cameroon':
+      case 'ivory coast':
+        return 'Bonjour';
+      case 'china':
+        return 'Ni Hao';
+      case 'egypt':
+      case 'iraq':
+      case 'qatar':
+        return 'Ahlan';
+      case 'azerbaijan':
+        return 'Salam';
+      case 'philippines':
+        return 'Mabuhay';
       default:
         return 'Ahlan';
     }
@@ -404,7 +417,7 @@ ngOnDestroy() {
 
   getDayTitle(date: string): string {
     switch(date) {
-      case '2026-08-20':
+      case '2026-08-23':
         return this.userBatch === 'LD'
           ? 'Day 1 – Sunday, August 23, 2026: Orientation & Leadership Kick-Off'
           : 'Day 1 – Sunday, August 23, 2026: Arrival';
@@ -439,7 +452,7 @@ ngOnDestroy() {
     location: string;
     color: string;
   }[] } = {
-    "2026-08-20": [
+    "2026-08-23": [
       {
         "time": "08:00 - 08:30",
         "title": "Welcome, Agenda & Expectation Setting",
@@ -465,7 +478,7 @@ ngOnDestroy() {
         "description": "Participant introductions and overview of plant challenges."
       },
       {
-        "time": "11:30 - 12:30",
+        "time": "11:30 - 13:00",
         "title": "People Strategy & Way Forward",
         "location": "Hotel Venue",
         "color": "schedule-blue",
@@ -481,7 +494,7 @@ ngOnDestroy() {
         "description": "Midday lunch break."
       },
       {
-        "time": "13:30 - 17:00",
+        "time": "14:00 - 17:00",
         "title": "GALLUP: Kick Off Leadership Session",
         "location": "Hotel Venue",
         "color": "schedule-purple",
@@ -551,7 +564,7 @@ ngOnDestroy() {
     ],
     "2026-08-25": [
       {
-        "time": "08:00 - 12:30",
+        "time": "08:00 - 13:00",
         "title": "GALLUP: Building NextGen Leaders Competence & Capability",
         "location": "Hotel Venue",
         "color": "schedule-purple",
@@ -567,7 +580,7 @@ ngOnDestroy() {
         "description": "Midday lunch break."
       },
       {
-        "time": "13:30 - 16:00",
+        "time": "14:00 - 16:00",
         "title": "GALLUP: Leadership Team Effectiveness",
         "location": "Hotel Venue",
         "color": "schedule-blue",
@@ -585,7 +598,7 @@ ngOnDestroy() {
     ],
     "2026-08-26": [
       {
-        "time": "08:00 - 12:30",
+        "time": "08:00 - 13:00",
         "title": "GALLUP: Leading NextGen Performance",
         "location": "Hotel Venue",
         "color": "schedule-purple",
@@ -601,7 +614,7 @@ ngOnDestroy() {
         "description": "Midday lunch break."
       },
       {
-        "time": "13:30 - 16:00",
+        "time": "14:00 - 16:00",
         "title": "GALLUP: Coaching Essentials & Practice",
         "location": "Hotel Venue",
         "color": "schedule-blue",
@@ -618,7 +631,7 @@ ngOnDestroy() {
       },
       {
         "time": "18:00 - 21:00",
-        "title": "Official Dinner 2",
+        "title": "Official Dinner ",
         "location": "Venue TBD",
         "color": "schedule-green",
         "speaker": "N/A",
@@ -635,7 +648,7 @@ ngOnDestroy() {
         "description": "2 or 3 groups of participants presenting visions based on Holcim Plant Scenarios to a panel made up of course observers, Holcim L&D, and Gallup."
       },
       {
-        "time": "11:30 - 12:30",
+        "time": "11:30 - 13:00",
         "title": "GALLUP: Culture of Engagement & Case Study",
         "location": "Hotel Venue",
         "color": "schedule-blue",
@@ -651,7 +664,7 @@ ngOnDestroy() {
         "description": "Midday lunch break."
       },
       {
-        "time": "13:30 - 16:00",
+        "time": "14:00 - 16:00",
         "title": "Plant Challenge Progress Review",
         "location": "Hotel Venue",
         "color": "schedule-orange",

@@ -9,8 +9,132 @@
 
 <ion-content class="digital-transformation-content">
   <section class="digital-hero">
-    <ion-icon name="flash-outline" aria-hidden="true"></ion-icon>
-    <h1>Digital Transformation</h1>
-    <p>Explore the digital initiatives shaping how we work, connect, and grow.</p>
+    <img
+      *ngFor="let image of images; let i = index"
+      [src]="image.src"
+      [alt]="image.alt"
+      class="pyramids-image"
+      [ngClass]="{ 'active': i === currentImageIndex }"
+    />
+    <div class="image-darken-layer"></div>
+    <div class="greeting-overlay">
+      <h2>{{ images[currentImageIndex].title }}</h2>
+    </div>
   </section>
+
+  <section class="transformation-intro">
+    <p class="eyebrow">Our Digital Direction</p>
+    <h2>Value and Velocity</h2>
+    <p>We are moving from “exploring” technology to scaling solutions that deliver real value. From the Sokhna plant Digital Twin to the rollout of safety robots, every initiative is designed to make your daily work safer, smarter, and more efficient.</p>
+  </section>
+
+  <section class="program-marker">
+    <p class="eyebrow">Part of the main projects</p>
+    <p>These connected initiatives work together to turn technology into practical value across the business.</p>
+  </section>
+
+  <section class="digital-twin-section">
+
+
+    <article class="app-card digital-twin-card">
+      <div class="app-copy app-title">
+        <h3>Digital Twin</h3>
+      </div>
+      <div class="digital-twin-gallery">
+        <div class="twin-media-item viewer-media-item">
+          <div class="viewer-photo-pair">
+            <img src="assets/viewer.png" alt="Interactive 3D digital twin viewer of the plant" (click)="openImage('assets/viewer.png', 'Interactive 3D digital twin viewer of the plant')" />
+            <img src="assets/layereddata.png" alt="Layered operational data displayed on the digital twin" (click)="openImage('assets/layereddata.png', 'Layered operational data displayed on the digital twin')" />
+          </div>
+          <strong>Digital Twin Viewer</strong>
+        </div>
+        <div class="twin-media-item">
+          <img src="assets/multitenant.png" alt="Multi-tenant digital twin administration dashboard" (click)="openImage('assets/multitenant.png', 'Multi-tenant digital twin administration dashboard')" />
+          <strong>Multi-Tenant Admin Panel</strong>
+        </div>
+        <div class="twin-media-item">
+          <video controls playsinline preload="metadata" src="assets/dt builder.mp4">
+            Your browser does not support embedded video.
+          </video>
+          <strong>Digital Twin Model Builder</strong>
+        </div>
+      </div>
+      <div class="app-copy">
+        <p>The Digital Twin is the visual nerve center for Sokhna plant operations. It combines a 3D model with live data so teams can understand the plant, make faster decisions, and reduce operational friction.</p>
+        <ul class="feature-list">
+          <li><strong>Viewer:</strong> Interactive 3D plant map built on Google Maps and in-house 3D models</li>
+          <li><strong>Layered Data:</strong> Production KPIs, cameras, GPS, high-risk jobs, and safety heat maps with near-real-time BigQuery data</li>
+          <li><strong>Multi-Tenant Admin:</strong> Manage tenants, users, roles, rules, projects, twins, and data sources</li>
+          <li><strong>Builder:</strong> Create 3D site replicas, plan facility layouts, and maintain equipment inventory</li>
+          <li><strong>Safety Intelligence:</strong> AI highlights PPE non-compliance and zone breaches from camera streams</li>
+        </ul>
+      </div>
+    </article>
+
+
+  </section>
+
+  <section class="apps-section">
+
+
+    <article class="app-card app-card-featured">
+      <div class="app-copy app-title">
+        <h3>Expense Claims App</h3>
+      </div>
+      <div class="media-frame">
+        <video controls playsinline preload="metadata" src="assets/expense-claims-app.mp4">
+          Your browser does not support embedded video.
+        </video>
+      </div>
+      <div class="app-copy">
+        <p>The Expense Claims App simplifies the complete expense process in one place: submit claims, track progress, and support transparent auditing with less administrative effort.</p>
+      </div>
+    </article>
+
+    <div class="app-grid">
+      <article class="app-card">
+        <div class="app-copy app-title">
+          <h3>Security Violations Detection</h3>
+        </div>
+        <div class="media-frame">
+          <video controls playsinline preload="metadata"  src="assets/security-violations-detection.mp4">
+            Your browser does not support embedded video.
+          </video>
+        </div>
+        <div class="app-copy">
+          <p>Real-time AI processes live plant camera feeds to identify prohibited access to restricted areas and send timely alerts to the security team.</p>
+        </div>
+      </article>
+
+      <article class="app-card">
+        <div class="app-copy app-title">
+          <h3>Safety Violations Detection</h3>
+        </div>
+        <div class="image-frame">
+          <img src="assets/safety-violations-detection.png" alt="AI safety violations detected by a plant camera" (click)="openImage('assets/safety-violations-detection.png', 'AI safety violations detected by a plant camera')" />
+        </div>
+        <div class="app-copy">
+          <p>In-house, cutting-edge AI solutions detect and monitor safety violations, helping teams respond earlier and strengthen everyday safety across the plant.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <ion-modal [isOpen]="selectedImage !== null" (didDismiss)="closeImage()" class="image-preview-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Image Preview</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeImage()" aria-label="Close image preview">
+              <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <img *ngIf="selectedImage" [src]="selectedImage.src" [alt]="selectedImage.alt" class="preview-image" />
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
       <p>If you have any questions, please contact:</p>
       <p>
         <strong>General Contact:</strong><br>
-        <a href="mailto:emily.elias@lafarge.com">emily.elias&#64;lafarge.com</a><br>
+        <a href="mailto:emily.elias@holcim.com">emily.elias&#64;holcim.com</a><br>
         <a href="tel:+201118003559">+20 111 80035 59</a>
       </p>
       <p>

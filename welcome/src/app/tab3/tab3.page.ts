@@ -47,7 +47,7 @@ export class Tab3Page {
       color: string;
     }[]
   } = {
-    "2026-08-20": [
+    "2026-08-23": [
       {
         "time": "Day 1 – Sunday",
         "title": "Program Start & Gallup Kick-Off",
@@ -56,7 +56,7 @@ export class Tab3Page {
       },
       {
         "time": "Evening",
-        "title": "Outdoor Activity & Official Dinner 1",
+        "title": "Outdoor Activity & Official Dinner ",
         "description": "Team bonding outdoor activity followed by the official opening dinner.",
         "color": "schedule-green"
       }
@@ -92,7 +92,7 @@ export class Tab3Page {
       },
       {
         "time": "Evening",
-        "title": "Official Dinner 2",
+        "title": "Official Dinner ",
         "description": "Official evening dinner with cohort participants.",
         "color": "schedule-green"
       }
