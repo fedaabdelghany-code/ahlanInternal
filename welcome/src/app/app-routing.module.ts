@@ -26,7 +26,8 @@ const routes: Routes = [
   {
     path: 'splash-screen',
     loadChildren: () => import('./splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
-  },  {
+  },
+  {
     path: 'feedback',
     loadChildren: () => import('./feedback/feedback.module').then( m => m.FeedbackPageModule)
   },
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'sustainability',
     loadChildren: () => import('./sustainability/sustainability.module').then( m => m.SustainabilityPageModule)
+  },
+  {
+    path: 'digital-transformation',
+    loadChildren: () => import('./digital-transformation/digital-transformation.module').then( m => m.DigitalTransformationPageModule)
   },
   {
     path: 'people',

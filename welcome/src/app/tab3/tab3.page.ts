@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { firstValueFrom, take } from 'rxjs';
+import { ParticipantService } from '../participant.service';
 
 @Component({
   selector: 'app-tab3',
@@ -14,41 +15,10 @@ export class Tab3Page {
   userEmail: string = '';
   userBatch: 'LD' | 'FINANCE' | 'NONE' = 'NONE';
 
-  ldEmails = [
-    'imadeddine.charif@lafarge.com',
-    'brahim.amir@lafarge.com',
-    'mostafa.aissaoui@lafarge.com',
-    'simon.ndo@holcim.com',
-    'boris.yebga@holcim.com',
-    'haifu.wu@holcim.com',
-    'kezhen.yu@holcim.com',
-    'ahmed.yossry@lafarge.com',
-    'badawy.ahmed@lafarge.com',
-    'amr.attia@lafarge.com',
-    'rezhin.taimoor@lafarge.com',
-    'lava.mohamed@lafarge.com',
-    'renefabrice.djenontin@holcim.com',
-    'abdelfattah.aitbzou@lafargeholcim.com',
-    'amine.mnaouer@lafargeholcim.com',
-    'mohamed.fanane@lafargeholcim.com',
-    'ameeruddin.mohammad@holcim.com',
-    'samir.hasan-zade@holcim.com',
-    'kalai.mariappan@holcim.com',
-    'francis.echavez@holcim.com',
-    'ali.farouq.ext@holcim.com',
-    'habib.botros@holcim.com',
-    'handeer.hamada@holcim.com',
-    'alielsafty343@gmail.com'
-  ];
-
-  financeEmails = [
-    'rajesh.sunar@holcim.com',
-    'steffen.kindler@holcim.com',
-    'emily.elias@lafarge.com',
-    'madeleine.you@holcim.com',
-  ];
-
-  constructor(private afAuth: AngularFireAuth) { }
+  constructor(
+    private afAuth: AngularFireAuth,
+    private participantService: ParticipantService
+  ) { }
 
   async ngOnInit() {
     await this.loadUserData();
@@ -63,14 +33,7 @@ export class Tab3Page {
   }
 
   determineBatch() {
-    const normalizedEmail = this.userEmail.toLowerCase();
-    if (this.ldEmails.map(e => e.toLowerCase()).includes(normalizedEmail)) {
-      this.userBatch = 'LD';
-    } else if (this.financeEmails.map(e => e.toLowerCase()).includes(normalizedEmail)) {
-      this.userBatch = 'FINANCE';
-    } else {
-      this.userBatch = 'NONE';
-    }
+    this.userBatch = this.participantService.getBatch(this.userEmail);
     console.log('[determineBatch] User batch:', this.userBatch, 'for email:', this.userEmail);
   }
 
@@ -84,11 +47,11 @@ export class Tab3Page {
       color: string;
     }[]
   } = {
-    "2026-08-23": [
+    "2026-08-20": [
       {
         "time": "Day 1 – Sunday",
         "title": "Program Start & Gallup Kick-Off",
-        "description": "Program starts at 8:00 a.m. in the hotel meeting room. Includes expectation setting, strategy overview, and CliftonStrengths kick-off.",
+        "description": "Program starts at 8:00 a.m. in the Hotel Venue. Includes expectation setting, strategy overview, and CliftonStrengths kick-off.",
         "color": "schedule-blue"
       },
       {

@@ -1,0 +1,28 @@
+.digital-transformation-content {
+  --background: #f4f7f5;
+}
+
+.digital-hero {
+  margin: 24px 16px;
+  padding: 48px 24px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0b5d4f, #168a72);
+  color: #ffffff;
+  text-align: center;
+}
+
+.digital-hero ion-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.digital-hero h1 {
+  margin: 0 0 12px;
+  font-size: 28px;
+}
+
+.digital-hero p {
+  margin: 0 auto;
+  max-width: 420px;
+  line-height: 1.5;
+}

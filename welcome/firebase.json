@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site":"egyptvisit",
+    "site": "mea-ahlan-holcimegypt",
     "public": "www",
     "ignore": [
       "firebase.json",

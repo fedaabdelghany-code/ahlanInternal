@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { SafetyInductionModalComponent } from './safety-induction-modal/safety-induction-modal.component';
+import { ParticipantService } from '../participant.service';
 
 @Component({
   selector: 'app-tab1',
@@ -38,38 +39,6 @@ export class Tab1Page implements OnInit {
 
   selectedDate: string = this.formatDate(new Date());
 
-  // Email batch definitions
-  ldEmails = [
-    'imadeddine.charif@lafarge.com',
-    'brahim.amir@lafarge.com',
-    'mostafa.aissaoui@lafarge.com',
-    'simon.ndo@holcim.com',
-    'boris.yebga@holcim.com',
-    'haifu.wu@holcim.com',
-    'kezhen.yu@holcim.com',
-    'ahmed.yossry@lafarge.com',
-    'badawy.ahmed@lafarge.com',
-    'amr.attia@lafarge.com',
-    'rezhin.taimoor@lafarge.com',
-    'lava.mohamed@lafarge.com',
-    'renefabrice.djenontin@holcim.com',
-    'abdelfattah.aitbzou@lafargeholcim.com',
-    'amine.mnaouer@lafargeholcim.com',
-    'mohamed.fanane@lafargeholcim.com',
-    'ameeruddin.mohammad@holcim.com',
-    'samir.hasan-zade@holcim.com',
-    'kalai.mariappan@holcim.com',
-    'francis.echavez@holcim.com',
-    'ali.farouq.ext@holcim.com',
-    'habib.botros@holcim.com',
-    'handeer.hamada@holcim.com',
-    'alielsafty343@gmail.com'
-  ];
-
-  financeEmails = [
-    'emily.elias@lafarge.com'
-  ];
-
   formatDate(date: Date): string {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -86,11 +55,7 @@ export class Tab1Page implements OnInit {
     return "Today's Schedule";
   }
 
-  private emailCountryMap: { [email: string]: string } = {
-    'carmen.diaz@holcim.com': 'Spain'
-  };
-
-  country = this.emailCountryMap[this.email] || 'Egypt';
+  country = 'Egypt';
   // Get the appropriate schedule based on user batch
   get scheduleData() {
     if (this.userBatch === 'LD') {
@@ -120,7 +85,8 @@ export class Tab1Page implements OnInit {
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
     private router: Router,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private participantService: ParticipantService
   ) {}
 
   async ngOnInit() {
@@ -143,14 +109,7 @@ export class Tab1Page implements OnInit {
   }
 
   determineBatch() {
-    const normalizedEmail = this.email.toLowerCase();
-    if (this.ldEmails.map(e => e.toLowerCase()).includes(normalizedEmail)) {
-      this.userBatch = 'LD';
-    } else if (this.financeEmails.map(e => e.toLowerCase()).includes(normalizedEmail)) {
-      this.userBatch = 'FINANCE';
-    } else {
-      this.userBatch = 'NONE';
-    }
+    this.userBatch = this.participantService.getBatch(this.email);
     console.log('[determineBatch] User batch:', this.userBatch, 'for email:', this.email);
   }
 
@@ -200,11 +159,12 @@ export class Tab1Page implements OnInit {
     }
 
     this.email = user.email ?? '';
-    this.country = this.emailCountryMap[this.email] || 'Egypt';
+    const participant = this.participantService.findByEmail(this.email);
+    this.country = participant?.country || 'Egypt';
 
-    this.firstName = this.email.toLowerCase() === 'y.srinivasarao@lafarge.com'
+    this.firstName = participant?.displayName || (this.email.toLowerCase() === 'y.srinivasarao@lafarge.com'
       ? 'Yadagani'
-      : this.getFirstNameFromEmail(this.email);
+      : this.getFirstNameFromEmail(this.email));
 
     return true;
   }
@@ -433,6 +393,10 @@ ngOnDestroy() {
         return 'Azul';
       case 'spain':
         return 'Hola';
+      case 'france':
+        return 'Bonjour';
+      case 'india':
+        return 'Namaste';
       default:
         return 'Ahlan';
     }
@@ -440,7 +404,7 @@ ngOnDestroy() {
 
   getDayTitle(date: string): string {
     switch(date) {
-      case '2026-08-23':
+      case '2026-08-20':
         return this.userBatch === 'LD'
           ? 'Day 1 – Sunday, August 23, 2026: Orientation & Leadership Kick-Off'
           : 'Day 1 – Sunday, August 23, 2026: Arrival';
@@ -475,27 +439,27 @@ ngOnDestroy() {
     location: string;
     color: string;
   }[] } = {
-    "2026-08-23": [
+    "2026-08-20": [
       {
         "time": "08:00 - 08:30",
         "title": "Welcome, Agenda & Expectation Setting",
-        "location": "Hotel Meeting Room",
+        "location": "Hotel Venue",
         "color": "schedule-blue",
         "speaker": "Rohit Singh / Mounia",
         "description": "Opening kick-off session and agenda walkthrough."
       },
       {
-        "time": "08:30 - 09:30",
+        "time": "08:30 - 10:00",
         "title": "Cement Manufacturing Strategy & Performance",
-        "location": "Hotel Meeting Room",
+        "location": "Hotel Venue",
         "color": "schedule-darkBlue",
         "speaker": "Najib Ribi",
         "description": "Overview of manufacturing strategy and operational performance."
       },
       {
         "time": "10:00 - 11:30",
-        "title": "Plant Challenges Overview",
-        "location": "Hotel Meeting Room",
+        "title": "Plant Challenges ",
+        "location": "Hotel Venue",
         "color": "schedule-orange",
         "speaker": "Participants",
         "description": "Participant introductions and overview of plant challenges."
@@ -503,13 +467,13 @@ ngOnDestroy() {
       {
         "time": "11:30 - 12:30",
         "title": "People Strategy & Way Forward",
-        "location": "Hotel Meeting Room",
+        "location": "Hotel Venue",
         "color": "schedule-blue",
         "speaker": "B K Mishra",
         "description": "Strategic direction for people management and future roadmap."
       },
       {
-        "time": "12:30 - 13:30",
+        "time": "13:00 - 14:00",
         "title": "Lunch Break",
         "location": "Hotel Restaurant",
         "color": "schedule-grey",
@@ -517,16 +481,16 @@ ngOnDestroy() {
         "description": "Midday lunch break."
       },
       {
-        "time": "13:30 - 16:30",
+        "time": "13:30 - 17:00",
         "title": "GALLUP: Kick Off Leadership Session",
-        "location": "Hotel Meeting Room",
+        "location": "Hotel Venue",
         "color": "schedule-purple",
         "speaker": "Gallup Trainer",
         "description": "CliftonStrengths 34 Results:\n• Breakdown of the Report & Getting the Most Out of It\n• Putting a Name to your strengths & Claiming Your Power and Edge\n• Aiming your strengths at Plant Leadership"
       },
       {
         "time": "18:00 - 21:00",
-        "title": "Outdoor Activity & Official Dinner 1",
+        "title": "Outdoor Activity & Official Dinner ",
         "location": "Venue TBD",
         "color": "schedule-green",
         "speaker": "N/A",
@@ -535,39 +499,33 @@ ngOnDestroy() {
     ],
     "2026-08-24": [
       {
-        "time": "08:00 - 09:30",
-        "title": "Travel to Sokhna Plant & RMX Visit",
-        "location": "Sokhna / RMX",
+        "time": "08:00 - 09:00",
+        "title": "Travel to Sokhna Plant",
+        "location": "Sokhna ",
         "color": "schedule-grey",
-        "speaker": "Local Team",
+        "speaker": "N/A",
         "description": "Departure to Sokhna Plant with RMX Plant Visit included."
       },
       {
-        "time": "09:30 - 10:00",
+        "time": "09:00 - 09:30",
         "title": "Welcome to Sokhna Plant",
         "location": "Sokhna Plant",
         "color": "schedule-darkBlue",
-        "speaker": "Local Team",
-        "description": "Welcome session at Sokhna Plant by local leadership."
+        "speaker": "N/A",
+        "description": "Welcome session at Sokhna Plant by Egypt Team."
       },
       {
-        "time": "10:00 - 11:30",
-        "title": "Plant Challenge Progress Review",
+        "time": "09:30 - 13:00",
+        "title": "Sokhna Plant Tour & Operational Visit",
         "location": "Sokhna Plant",
-        "color": "schedule-orange",
-        "speaker": "Participants",
-        "description": "4 participant presentations (20 minutes per participant)."
-      },
+        "color": "schedule-darkBlue",
+        "speaker": "Egypt Team",
+        "description": "Comprehensive guided tour of Sokhna Plant facilities."
+   
+     },
+      
       {
-        "time": "11:30 - 12:30",
-        "title": "Egypt Team Best Practices & Digital Journey",
-        "location": "Sokhna Plant",
-        "color": "schedule-blue",
-        "speaker": "Egypt Local Team",
-        "description": "Focusing on Digital Topics and Industrial Director Journey."
-      },
-      {
-        "time": "12:30 - 13:30",
+        "time": "13:00 - 14:00",
         "title": "Lunch Break",
         "location": "Sokhna Plant",
         "color": "schedule-grey",
@@ -575,25 +533,33 @@ ngOnDestroy() {
         "description": "Lunch break at Sokhna Plant."
       },
       {
-        "time": "13:30 - 17:00",
-        "title": "Sokhna Plant Tour & Operational Visit",
+        "time": "14:00 - 15:30",
+        "title": "Plant Challenge Progress Review",
         "location": "Sokhna Plant",
-        "color": "schedule-darkBlue",
-        "speaker": "Local Team",
-        "description": "Comprehensive guided tour of Sokhna Plant facilities."
-      }
+        "color": "schedule-orange",
+        "speaker": "Participants",
+        "description": "4 participant presentations (20 minutes per participant)."
+     },
+     {
+        "time": "15:30 - 16:30",
+        "title": "Egypt Team Best Practices & Digital Journey",
+        "location": "Sokhna Plant",
+        "color": "schedule-blue",
+        "speaker": "Egypt Local Team",
+        "description": "Focusing on Digital Topics and Industrial Director Journey."
+      },
     ],
     "2026-08-25": [
       {
         "time": "08:00 - 12:30",
         "title": "GALLUP: Building NextGen Leaders Competence & Capability",
-        "location": "Hotel Meeting Room",
+        "location": "Hotel Venue",
         "color": "schedule-purple",
         "speaker": "Gallup Trainer",
-        "description": "• What is great leadership?\n• Connecting CliftonStrengths reports & creating leadership development plans\n• Improving listening skills & receiving/giving feedback\n• Role of Communication in shaping & defining leadership"
+        "description": "• What is great leadership?\n• Connecting CliftonStrengths reports & creating leadership development plans\n• Improving listening skills & receiving/giving feedback\n• Role of Communication in shaping & defining your leadership"
       },
       {
-        "time": "12:30 - 13:30",
+        "time": "13:00 - 14:00",
         "title": "Lunch Break",
         "location": "Hotel Restaurant",
         "color": "schedule-grey",
@@ -603,7 +569,7 @@ ngOnDestroy() {
       {
         "time": "13:30 - 16:00",
         "title": "GALLUP: Leadership Team Effectiveness",
-        "location": "Hotel Meeting Room",
+        "location": "Hotel Venue",
         "color": "schedule-blue",
         "speaker": "Gallup Trainer",
         "description": "Leading with Holcim Spirit (People, Purpose, Performance):\n• What is required to lead a team to deliver results & drive execution excellence\n• Key learnings from top Plant Managers in Holcim\n• Your Strengths & Leadership Team Effectiveness & Creating a Vision for your Plant"
@@ -611,7 +577,7 @@ ngOnDestroy() {
       {
         "time": "16:00 - 17:30",
         "title": "Plant Challenge Progress Review",
-        "location": "Hotel Meeting Room",
+        "location": "Hotel Venue",
         "color": "schedule-orange",
         "speaker": "Participants",
         "description": "4 participant presentations (20 minutes per participant)."
@@ -621,13 +587,13 @@ ngOnDestroy() {
       {
         "time": "08:00 - 12:30",
         "title": "GALLUP: Leading NextGen Performance",
-        "location": "Hotel Meeting Room",
+        "location": "Hotel Venue",
         "color": "schedule-purple",
         "speaker": "Gallup Trainer",
         "description": "• Leading the modern workforce & managing your strengths as you lead\n• Becoming a coach & ongoing coaching\n• Coaching conflict & performance-oriented coaching\n• Next steps and commitments"
       },
       {
-        "time": "12:30 - 13:30",
+        "time": "13:00 - 14:00",
         "title": "Lunch Break",
         "location": "Hotel Restaurant",
         "color": "schedule-grey",
@@ -637,7 +603,7 @@ ngOnDestroy() {
       {
         "time": "13:30 - 16:00",
         "title": "GALLUP: Coaching Essentials & Practice",
-        "location": "Hotel Meeting Room",
+        "location": "Hotel Venue",
         "color": "schedule-blue",
         "speaker": "Gallup Trainer",
         "description": "• Coaching essentials and practical practice\n• Building a strengths-based team\n• Plant placement practice coaching call (15:15 - 15:45)"
@@ -645,7 +611,7 @@ ngOnDestroy() {
       {
         "time": "16:00 - 17:30",
         "title": "Plant Challenge Progress Review",
-        "location": "Hotel Meeting Room",
+        "location": "Hotel Venue",
         "color": "schedule-orange",
         "speaker": "Participants",
         "description": "4 participant presentations (20 minutes per participant)."
@@ -663,7 +629,7 @@ ngOnDestroy() {
       {
         "time": "08:00 - 11:30",
         "title": "GALLUP: Participant Vision Presentations (x16)",
-        "location": "Hotel Meeting Room",
+        "location": "Hotel Venue",
         "color": "schedule-purple",
         "speaker": "Gallup Trainer / Panel",
         "description": "2 or 3 groups of participants presenting visions based on Holcim Plant Scenarios to a panel made up of course observers, Holcim L&D, and Gallup."
@@ -671,13 +637,13 @@ ngOnDestroy() {
       {
         "time": "11:30 - 12:30",
         "title": "GALLUP: Culture of Engagement & Case Study",
-        "location": "Hotel Meeting Room",
+        "location": "Hotel Venue",
         "color": "schedule-blue",
         "speaker": "Gallup Trainer",
         "description": "• Building and Sustaining a Culture of Engagement\n• Holcim Engagement Case Study"
       },
       {
-        "time": "12:30 - 13:30",
+        "time": "13:00 - 14:00",
         "title": "Lunch Break",
         "location": "Hotel Restaurant",
         "color": "schedule-grey",
@@ -687,7 +653,7 @@ ngOnDestroy() {
       {
         "time": "13:30 - 16:00",
         "title": "Plant Challenge Progress Review",
-        "location": "Hotel Meeting Room",
+        "location": "Hotel Venue",
         "color": "schedule-orange",
         "speaker": "Participants",
         "description": "4 participant presentations (20 minutes per participant)."
@@ -695,7 +661,7 @@ ngOnDestroy() {
       {
         "time": "16:00 - 17:00",
         "title": "Feedback, Way Forward & Closure",
-        "location": "Hotel Meeting Room",
+        "location": "Hotel Venue",
         "color": "schedule-darkBlue",
         "speaker": "Rohit Singh / Mounia",
         "description": "Program wrap-up, final feedback, and closing remarks."

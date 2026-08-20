@@ -48,7 +48,7 @@
   font-size: 1rem; /* Scalable font size */
   padding: 0 10px; /* Add side padding to help spacing */
   height: 100%; /* Ensure the container has a height */
-  color: #1d4370;
+  color: var(--holcim-dark-blue);
 }
 
 
@@ -57,8 +57,8 @@
 }
 
 .toolbar-custom {
-  --background: #ffffff !important; /* force white background */
-  --color: #000000 !important;      /* force black text */
+  --background: var(--holcim-white) !important;
+  --color: var(--holcim-dark-blue) !important;
   --padding-start: 0.5em;
   --padding-end: 0.5em;
 }
@@ -90,7 +90,7 @@
 
 
 .dashboard-content {
-  background: #f6f8fa;
+  background: var(--background-color);
 }
 
 // // Hero image section (no padding)

@@ -1,14 +1,13 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-  apiKey: "AIzaSyARzrDFhkNY9seXI51dYLo6WidVSQ0ler8",
-  authDomain: "asgoodasnew-6de90.firebaseapp.com",
-  databaseURL: "https://asgoodasnew-6de90.firebaseio.com",
-  projectId: "asgoodasnew-6de90",
-  storageBucket: "asgoodasnew-6de90.appspot.com",
-  messagingSenderId: "676588795200",
-  appId: "1:676588795200:web:3e1f9b5300c796d1ea36a5",
-  measurementId: "G-8JEJ95ZNJL"
+  apiKey: "AIzaSyAXnLsICQenDbqAuHBduK5eRyV1o7WIBCA",
+  authDomain: "mea-egypt-ahlanapp-prd.firebaseapp.com",
+  projectId: "mea-egypt-ahlanapp-prd",
+  storageBucket: "mea-egypt-ahlanapp-prd.firebasestorage.app",
+  messagingSenderId: "107201585408",
+  appId: "1:107201585408:web:2b42931613ef33fda693e5",
+  measurementId: "G-LCLHRYDEXY"
   },
   hsefirebaseConfig: {  apiKey: "AIzaSyAhq-FgcGDV9I6V29GouM0W23AOfNr41sw",
   authDomain: "mea-hseegyptonboarding-prod.firebaseapp.com",

@@ -46,7 +46,7 @@
 
     <ion-card class="highlight-card local-card local-card-currency">
       <ion-card-content class="highlight-content">
-        <a href="https://drive.google.com/drive/folders/1wXzMaopgmMhmd7Q-TLrE7uTsOZnNE2Ps" target="_blank" style="text-decoration: none;">
+        <a href="https://drive.google.com/drive/u/0/folders/1Puo2oLPE10sYwTwWmxQmTYR5pUKbHdab" target="_blank" style="text-decoration: none;">
           <ion-card-content class="highlight-content">
             <img src="assets/photos.png" alt="Album Cover" style="width: 50%; max-width: 100px; margin: 0 auto; display: block;" />
           </ion-card-content>
@@ -82,7 +82,7 @@
   <div class="schedule-section" *ngIf="userBatch !== 'NONE' && scheduleData[selectedDate]?.length; else noEvents">
     <ion-card
       *ngFor="let item of scheduleData[selectedDate]; let i = index"
-      [class]="['highlight-card', item.color, expandedIndex === i ? 'expanded' : ''].join(' ')"
+      [class]="['highlight-card', 'schedule-card', item.color, expandedIndex === i ? 'expanded' : ''].join(' ')"
       (click)="toggleCard(i)"
     >
       <ion-card-content>
@@ -95,7 +95,7 @@
           <ion-icon name="location-outline"></ion-icon>
           {{ item.location }}
         </p>
-        <p *ngIf="item.description" style="margin-top: 6px; font-size: 0.85em; opacity: 0.9; white-space: pre-line;">
+        <p *ngIf="item.description" class="schedule-description">
           {{ item.description }}
         </p>
       </ion-card-content>

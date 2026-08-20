@@ -1,15 +1,46 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
-/* Force light mode variables */
 :root {
-  --ion-background-color: #ffffff;
-  /* Add more if needed */
+  --holcim-dark-blue: #1D4370;
+  --holcim-bright-green: #94C12E;
+  --holcim-bright-blue: #04BBF1;
+  --holcim-yellow: #FFD100;
+  --holcim-bright-red: #E4002B;
+  --holcim-fuchsia: #E6007E;
+  --holcim-orange: #FF671F;
+  --holcim-dark-red: #9A0039;
+  --holcim-violet: #662483;
+  --holcim-green: #009A44;
+  --holcim-dark-turquoise: #006D68;
+  --holcim-bright-turquoise: #00A499;
+  --holcim-black: #000000;
+  --holcim-white: #FFFFFF;
+  --holcim-dark-gray: #575757;
+  --holcim-bright-gray: #8C8C8C;
+
+  --primary-color: var(--holcim-bright-blue);
+  --secondary-color: var(--holcim-bright-green);
+  --background-color: #f5f6fa;
+  --text-color: var(--holcim-dark-blue);
+  --border-color: #e1e8ed;
+  --accent-color: var(--holcim-bright-turquoise);
+  --error-color: var(--holcim-bright-red);
+  --success-color: var(--holcim-green);
+  --warning-color: var(--holcim-yellow);
+
+  --ion-background-color: var(--holcim-white);
+  --ion-text-color: var(--text-color);
+  --ion-color-primary: var(--holcim-bright-blue);
+  --ion-color-primary-rgb: 4, 187, 241;
+  --ion-color-primary-contrast: var(--holcim-white);
+  --ion-color-secondary: var(--holcim-bright-green);
+  --ion-color-secondary-rgb: 148, 193, 46;
+  --ion-color-secondary-contrast: var(--holcim-white);
 }
 
-/* Optional: completely override dark mode styles */
 @media (prefers-color-scheme: dark) {
   :root {
-    --ion-background-color: #ffffff !important;
-    /* Add other vars you want to lock */
+    --ion-background-color: var(--holcim-white) !important;
+    --ion-text-color: var(--text-color) !important;
   }
 }
