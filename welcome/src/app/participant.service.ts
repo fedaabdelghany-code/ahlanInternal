@@ -50,16 +50,15 @@ export class ParticipantService {
     { email: 'hadeer.hamada@holcim.com', batch: 'LD', country: 'Egypt' },
     { email: 'alielsafty343@gmail.com', batch: 'LD', country: 'Egypt' },
     { email: 'mounia.otarid@holcim.com', batch: 'LD', country: 'Morocco' },
-    { email: 'walaa.maaty@lafarge.com', batch: 'LD', country: 'Egypt' },
-    { email: 'akram.mahmoud@lafarge.com', batch: 'LD', country: 'Egypt' },
-    { email: 'emily.john@lafarge.com', batch: 'LD', country: 'Egypt' },
+    { email: 'walaa.maaty@holcim.com', batch: 'LD', country: 'Egypt' },
+    { email: 'akram.mahmoud@holcim.com', batch: 'LD', country: 'Egypt' },
+    { email: 'emily.elias@holcim.com', batch: 'LD', country: 'Egypt' },
     { email: 'amr.salem@holcim.com', batch: 'LD', country: 'Egypt' },
     { email: 'david.fauvet@holcim.com', batch: 'LD', country: 'France' },
     { email: 'bhogendra.mishra@holcim.com', batch: 'LD', country: 'India', displayName: 'B.K' },
     { email: 'najib.ribi@holcim.com', batch: 'LD', country: 'Morocco' },
     { email: 'rajesh.sunar@holcim.com', batch: 'FINANCE', country: 'Egypt' },
     { email: 'steffen.kindler@holcim.com', batch: 'FINANCE', country: 'Egypt' },
-    { email: 'emily.elias@lafarge.com', batch: 'FINANCE', country: 'Egypt' },
     { email: 'madeleine.you@holcim.com', batch: 'FINANCE', country: 'Egypt' }
   ];
 

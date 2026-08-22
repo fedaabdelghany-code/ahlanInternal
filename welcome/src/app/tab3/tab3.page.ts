@@ -64,8 +64,8 @@ export class Tab3Page {
     "2026-08-24": [
       {
         "time": "Day 2 – Monday",
-        "title": "Sokhna Plant & RMX Visit",
-        "description": "Operational plant tour at Sokhna and RMX facility. Please bring your PPE including safety boots.",
+        "title": "Sokhna Plant ",
+        "description": "Operational plant tour at Sokhna . Please bring your PPE including safety boots.",
         "color": "schedule-darkBlue"
       }
     ],
