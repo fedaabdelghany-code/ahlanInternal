@@ -630,13 +630,20 @@ ngOnDestroy() {
         "description": "4 participant presentations (20 minutes per participant)."
       },
       {
-        "time": "18:00 - 21:00",
-        "title": "Official Dinner ",
-        "location": "Venue TBD",
+        "time": "18:30 - 21:00",
+        "title": "GEM Tour",
+        "location": "Grand Egyptian Museum",
         "color": "schedule-green",
         "speaker": "N/A",
-        "description": "Evening official dinner."
-      }
+        "description": "Guided tour of the Grand Egyptian Museum."
+      }, {
+        "time": "18:30 - 21:00",
+        "title": "Dinner at Ladurée Khufu",
+        "location": "Giza Pyramids",
+        "color": "schedule-green",
+        "speaker": "N/A",
+        "description": "Evening official dinner"
+      },
     ],
     "2026-08-27": [
       {

@@ -37,7 +37,7 @@ import { FilterByNamePipe } from './pipes/filter-by-name.pipe';
     // ✅ Proper Service Worker module setup
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
-      registrationStrategy: 'registerWhenStable:30000',
+      registrationStrategy: 'registerImmediately',
     }),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

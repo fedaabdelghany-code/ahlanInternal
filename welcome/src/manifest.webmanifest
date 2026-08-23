@@ -1,6 +1,6 @@
 {
   "name": "Sokhna Plant Companion",
-  "short_name": "Ahlan Lafarge",
+  "short_name": "Ahlan Holcim",
   "display": "standalone",
   "start_url": "/index.html?homescreen=1",
 "gcm_sender_id": "103953800507"
